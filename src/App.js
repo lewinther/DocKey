@@ -1,9 +1,12 @@
 import './App.css';
 
+import SearchBar from './SearchBar';
+
 function App() {
   return (
     <div className="App">
-      {/* Your content goes here */}
+      <SearchBar onSearch={(term) => console.log(term)} />
+      {/* Other components and content */}
     </div>
   );
 }
