@@ -68,8 +68,16 @@ p {
 	background-color: #1a2e47;
 }
 
-
-
+/* searchbar */
+.search-input {
+    color: #ccc; 
+    font-size: 3vw;
+    font-family: 'Source Sans Variable', sans-serif;
+    border-radius: 10px; 
+    width: 85%;
+    border: 1px solid #ccc; 
+	box-sizing: border-box;
+}
 
 
 
