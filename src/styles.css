@@ -70,8 +70,7 @@ p {
 
 /* searchbar */
 .search-input {
-    color: #ccc; 
-    font-size: 3vw;
+    font-size: 4vw;
     font-family: 'Source Sans Variable', sans-serif;
     border-radius: 10px; 
     width: 85%;
