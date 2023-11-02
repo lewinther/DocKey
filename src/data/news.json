@@ -1,0 +1,16 @@
+[
+    {"newsId": 1,
+    "newsTitle": "Rats",
+    "newsDate": "02/11/2023",
+    "newsTekst": "Something is rotten in the state of Denmark",
+    "newsImg": "../assets/News_HarborPicture.jpg"
+    },
+
+    {"newsId": 2,
+    "newsTitle": "Bugger",
+    "newsDate": "02/11/2023",
+    "newsTekst": "We have multiple difficulties writing code",
+    "newsImg": "../assets/News_HarborPicture.jpg"
+    }
+
+]

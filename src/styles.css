@@ -24,7 +24,7 @@ h3 {
 	font-family: 'Source Sans Variable', sans-serif;
 	font-weight: 400;
 	text-transform: uppercase;
-	padding-left: 1vw;
+	padding-left: 10px;
 }
 
 /* dock number in picture */
@@ -58,16 +58,22 @@ p {
 	font-weight: 800;
 }
 
+/* No underlining in a link */
+.link{
+	text-decoration: none;
+}
+
 /* buttons */
 .BlueButton{
 	background-color: #1D385C;
 	color: #FFFF;
-	border-radius: 10%; 
 	font-family: 'Ubuntu', sans-serif;
 	font-size: 16px;
 	font-weight: 400;
 	width: fit-content;
-	padding: 7px;
+	padding: 7px 10px;
+	display: inline-block;
+	border-radius: 10px;
 }
 
 .BlueButton:hover{
@@ -94,18 +100,19 @@ body{
 }
 
 .news-card-img{
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 160px;
+    max-height: 150px;
     margin-right: auto;
     margin-left: auto;
     margin-top: 15px;
+	margin-bottom: 15px;
 	padding: 10px;
 	border-radius: 15%;
 }
 
-.news-card{
+.news-card-body{
 	width: 300px;
-	padding: 30px;
+	padding: 20px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }

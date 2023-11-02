@@ -15,7 +15,7 @@ export default function Home(){
                 <h3>Check harbor news:</h3>
                 <NewsCardContainer />
                 <h3>Check your inbox:</h3>
-                <Link className="BlueButton" to={`/NewMessage`}>Send new message</Link>
+                <Link Button className="BlueButton link" to={`/NewMessage`}> Send new message </Link>
             </div>
         </Fragment>
     );
