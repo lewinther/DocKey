@@ -6,16 +6,19 @@ import './styles.css'
 
 //Pages import
 import Home from './pages/Home';
+import SendMsg from "./pages/NewMessage";
+import MyInbox from "./pages/MyInbox";
+import NewMessage from "./pages/NewMessage";
 
 export default function App() {
+
   return (
     <BrowserRouter>
-      <section className="body">
         <Routes>
-          <Route index element={<Home />}>
-          </Route>
+          <Route index element={<Home />} />
+          <Route path="Inbox" element={<MyInbox />} />
+          <Route path="NewMessage" element={<NewMessage />} />
         </Routes>
-      </section>
     </BrowserRouter>
   );
 }

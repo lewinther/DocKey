@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 // CSS import
 import "../../src/styles.css";
@@ -14,6 +15,7 @@ export default function Home(){
                 <h3>Check harbor news:</h3>
                 <NewsCardContainer />
                 <h3>Check your inbox:</h3>
+                <Link className="BlueButton" to={`/NewMessage`}>Send new message</Link>
             </div>
         </Fragment>
     );

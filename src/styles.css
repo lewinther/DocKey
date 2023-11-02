@@ -62,14 +62,16 @@ p {
 .BlueButton{
 	background-color: #1D385C;
 	color: #FFFF;
-	border-radius: 20%; /*should be tested */
+	border-radius: 10%; 
 	font-family: 'Ubuntu', sans-serif;
-	font-size: 2vw; /*should be tested */
+	font-size: 16px;
 	font-weight: 400;
+	width: fit-content;
+	padding: 7px;
 }
 
 .BlueButton:hover{
-	background-color: #1a2e47;
+	background-color: #051830;
 }
 
 /* Background picture */
