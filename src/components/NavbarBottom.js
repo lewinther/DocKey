@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import './NavbarBottom.css';
-import IconHome from './svg/IconHome';
-import IconInbox from './svg/IconInbox';
-import IconNewm from './svg/IconNewm';
-import IconProfile from './svg/IconProfile';
+import IconHome from '../assets/IconHome';
+import IconInbox from '../assets/IconInbox';
+import IconNewm from '../assets/IconNewm';
+import IconProfile from '../assets/IconProfile';
 
 function NavbarBottom() {
-    const [activeItem, setActiveItem] = useState("Home"); 
+    // defines which item is active on the navbar 
+    const [activeItem, setActiveItem] = useState("Home"); // has to be aligned with the pages
 
+    // handles the click on a navbar item
     const handleItemClick = (itemName) => {
         setActiveItem(itemName);
-        alert("You clicked " + itemName + "! Action has to be defined")
+        alert("You clicked " + itemName + "! Action has to be defined") // TODO: define action
     };
 
     return (
