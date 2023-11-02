@@ -3,15 +3,16 @@
 /* Welcome Flemming */
 h1 {
 	color: #FFFF;
-	font-size: 8vw;
+	font-size: 30px;
 	font-family: 'Ubuntu', sans-serif;
 	font-weight: 400;
+	text-align: center;
 }
 
 /* buttons */
 h2 { 
 	color: #FFFF;
-	font-size: 6vw;
+	font-size: 16px;
 	font-family: 'Ubuntu', sans-serif;
 	font-weight: 400;
 }
@@ -19,16 +20,17 @@ h2 {
 /* component headline in CAPS */
 h3 { 
 	color: #FFFF;
-	font-size: 6vw;
+	font-size: 16px;
 	font-family: 'Source Sans Variable', sans-serif;
 	font-weight: 400;
 	text-transform: uppercase;
+	padding-left: 1vw;
 }
 
 /* dock number in picture */
 h4 {
 	color: #FFFF;
-	font-size: 7vw;
+	font-size: 20px;
 	font-family: 'Source Sans Variable', sans-serif;
 	font-weight: 400;
 }
@@ -36,15 +38,17 @@ h4 {
 /* date in message */
 h5 {
 	color: #919191;
-	font-size: 4vw;
+	font-size: 11px;
 	font-family: 'Source Sans Variable', sans-serif;
 	font-weight: 400;
+	text-align: right;
+	padding-left: 20px;
 }
 
 /* meta text (in messages etc.) */
 p {
 	color: #000000;
-	font-size: 4vw;
+	font-size: 15px;
 	font-family: 'Source Sans Variable', sans-serif;
 	font-weight: 400;
 }
@@ -60,7 +64,7 @@ p {
 	color: #FFFF;
 	border-radius: 20%; /*should be tested */
 	font-family: 'Ubuntu', sans-serif;
-	font-size: 4vw; /*should be tested */
+	font-size: 2vw; /*should be tested */
 	font-weight: 400;
 }
 
@@ -68,6 +72,50 @@ p {
 	background-color: #1a2e47;
 }
 
+/* Background picture */
+body{
+	background-image: url(assets/Background.jpg);
+	background-repeat:no-repeat;
+	background-position:top;
+	background-size:cover; /*Something funny about the sizing, can't figure it out*/
+}
+
+/* NewsCard and NewsCardContainer formatting */
+.in-line{
+	display: flex;
+	flex-direction: row;
+}
+
+.in-column{
+	display: flex;
+	flex-direction: column;
+}
+
+.news-card-img{
+    max-width: 200px;
+    max-height: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 15px;
+	padding: 10px;
+	border-radius: 15%;
+}
+
+.news-card{
+	width: 300px;
+	padding: 30px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.news-card-container{
+	width: 500px;
+	margin:auto;
+	background-color:rgba(216, 221, 229, 0.847);
+	border-radius: 15px;
+	box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+}
 
 
 

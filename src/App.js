@@ -1,11 +1,21 @@
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+// CSS import
+import './App.css';
+import './styles.css'
+
+//Pages import
+import Home from './pages/Home';
+
+export default function App() {
   return (
-    <div className="App">
-      {/* Your content goes here */}
-    </div>
+    <BrowserRouter>
+      <section className="body">
+        <Routes>
+          <Route index element={<Home />}>
+          </Route>
+        </Routes>
+      </section>
+    </BrowserRouter>
   );
 }
-
-export default App;
