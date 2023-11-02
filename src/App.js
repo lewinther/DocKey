@@ -1,9 +1,10 @@
 import './App.css';
+import NavbarBottom from './NavbarBottom';
 
 function App() {
   return (
     <div className="App">
-      {/* Your content goes here */}
+      <NavbarBottom/>
     </div>
   );
 }
