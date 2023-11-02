@@ -70,13 +70,34 @@ p {
 
 /* searchbar */
 .search-input {
-    font-size: 4vw;
+    font-size: 16px; 
     font-family: 'Source Sans Variable', sans-serif;
-    border-radius: 10px; 
-    width: 85%;
-    border: 1px solid #ccc; 
-	box-sizing: border-box;
+    border-radius: 10px;
+    width: 80%;
+    border: 1px solid #ccc;
+	padding: 2px;
+    
 }
+
+/* Responsive font size adjustments */
+@media (max-width: 600px) { 
+    .search-input {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) { 
+    .search-input {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .search-input {
+        font-size: 16px;
+    }
+}
+
 
 
 
