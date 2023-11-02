@@ -6,7 +6,6 @@ import './styles.css'
 
 //Pages import
 import Home from './pages/Home';
-import SendMsg from "./pages/NewMessage";
 import MyInbox from "./pages/MyInbox";
 import NewMessage from "./pages/NewMessage";
 
