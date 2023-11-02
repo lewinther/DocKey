@@ -1,0 +1,77 @@
+/* Typography */
+
+/* Welcome Flemming */
+h1 {
+	color: #FFFF;
+	font-size: 8vw;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 400;
+}
+
+/* buttons */
+h2 { 
+	color: #FFFF;
+	font-size: 6vw;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 400;
+}
+
+/* component headline in CAPS */
+h3 { 
+	color: #FFFF;
+	font-size: 6vw;
+	font-family: 'Source Sans Variable', sans-serif;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+
+/* dock number in picture */
+h4 {
+	color: #FFFF;
+	font-size: 7vw;
+	font-family: 'Source Sans Variable', sans-serif;
+	font-weight: 400;
+}
+
+/* date in message */
+h5 {
+	color: #919191;
+	font-size: 4vw;
+	font-family: 'Source Sans Variable', sans-serif;
+	font-weight: 400;
+}
+
+/* meta text (in messages etc.) */
+p {
+	color: #000000;
+	font-size: 4vw;
+	font-family: 'Source Sans Variable', sans-serif;
+	font-weight: 400;
+}
+
+/* p in bold */
+.bold {
+	font-weight: 800;
+}
+
+/* buttons */
+.BlueButton{
+	background-color: #1D385C;
+	color: #FFFF;
+	border-radius: 20%; /*should be tested */
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 4vw; /*should be tested */
+	font-weight: 400;
+}
+
+.BlueButton:hover{
+	background-color: #1a2e47;
+}
+
+
+
+
+
+
+
+
