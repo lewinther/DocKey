@@ -23,7 +23,6 @@ h3 {
 	font-size: 14px;
 	font-family: 'Source Sans Variable', sans-serif;
 	font-weight: 400;
-	text-transform: uppercase;
 	padding-left: 10px;
 }
 
@@ -190,7 +189,25 @@ body{
     }
 }
 
-/*Navbar style*/
+/* dock select bar */
+.dock-select-form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 10px;
+  }
+  
+  .dock-select {
+	font-size: 16px;
+	font-family: 'Source Sans Variable', sans-serif;
+	border-radius: 10px;
+	width: 90vw; 
+	border: 1px solid #ccc;
+	padding: 2px;
+	color: #9FAABC;
+  }
+
+  /*Navbar style*/
 .navbar-bottom {
     display: flex;
     justify-content: space-between;
@@ -231,5 +248,40 @@ body{
     fill: #012657;
 }
 
+label {
+	display: block;
+  }
+  
+.new-message-container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 5%;
+	padding-top: 0%;
+	box-sizing: border-box;
+	position: relative;
+	margin: 0 auto; /* Center horizontally */
+}
 
-
+textarea {
+	flex: 1; /* Allow textarea to stretch vertically within the container */
+	width: 90vw; 
+	padding: 10px;
+	border-radius: 10px;
+	margin: 0; /* Reset the margin to prevent overflow */
+	box-sizing: border-box; /* Ensure padding is included in width */
+	min-height: 30vh;
+	overflow-y: scroll;
+	height: 100px;
+	resize: none; /* Remove this if you want the user to resize the textarea */
+	color: #000000;
+	font-size: 15px;
+	font-family: 'Source Sans Variable', sans-serif;
+	font-weight: 400;
+}
+  
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+  }
