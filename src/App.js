@@ -15,7 +15,6 @@ import NewMessage from "./pages/NewMessage";
 import NavbarBottom from './components/NavbarBottom';
 
 
-
 export const NewsContext = createContext<undefined>(
   undefined
 )
@@ -30,8 +29,8 @@ export default function App() {
         <Route path="Inbox" element={<MyInbox />} />
         <Route path="NewMessage" element={<NewMessage />} />
       </Routes>
-    </BrowserRouter><Fragment>
     <NavbarBottom />
-    </Fragment></>
+    </BrowserRouter>
+   </>
   );
 }
