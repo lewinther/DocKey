@@ -13,7 +13,7 @@ export default function NewsCard(props) {
     }, []);
 
     if (!data) {
-        return <div>Loading...</div>
+        return <div><h2 className="load">Loading...</h2></div>
     }
 
     const {newsImg, newsTitle, newsDate, newsTekst} = data;
