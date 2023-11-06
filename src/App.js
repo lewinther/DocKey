@@ -13,7 +13,7 @@ import NewMessage from "./pages/NewMessage";
 
 //Components import
 import NavbarBottom from './components/NavbarBottom';
-import SearchBar from './components/SearchBar';
+
 
 
 export const NewsContext = createContext<undefined>(
