@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Fragment, createContext, useEffect, useState } from "react";
+import { Fragment } from "react";
 
 // CSS import
 import './App.css';
@@ -14,12 +14,6 @@ import Profile from "./pages/Profile";
 
 //Components import
 import NavbarBottom from './components/NavbarBottom';
-
-
-
-export const NewsContext = createContext<undefined>(
-  undefined
-)
 
 export default function App() {
 

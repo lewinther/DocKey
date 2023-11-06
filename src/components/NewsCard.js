@@ -1,25 +1,26 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 
-//import news data
-import data from "../data/news.json"
+export default function NewsCard(props) {
+    const [data, setData] = useState(null);
 
-export default function NewsCard({
-    newsId,
-    newsImg,
-    newsTitle,
-    newsDate,
-    newsTekst,
-}) {
+    useEffect(() => {
+        async function fetchData() {
+            const res = await fetch("../data/news.json");
+            const newsData = await res.json();
+            setData(newsData);
+        }
+        fetchData();
+    }, []);
 
-const getNewsData = async () => {
-    const res = await fetch("../data/news.json");
-    const data = await res.json();
-    return data;
-};
+    if (!data) {
+        return <div>Loading...</div>
+    }
+
+    const {newsImg, newsTitle, newsDate, newsTekst} = data;
 
     return(
         <Fragment>
-            <div className="card" id={newsId}>
+            <div className="card" id={props.newsId}>
             <div className="in-line">
             <img className="news-card-img" src={newsImg} alt={newsTitle + " image"}/>
                 <section className="news-card-body">
