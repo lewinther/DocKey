@@ -14,7 +14,6 @@ function NavbarBottom() {
     // handles the click on a navbar item
     const handleItemClick = (itemName) => {
         setActiveItem(itemName);
-        alert("You clicked " + itemName + "! Action has to be defined") // TODO: define action
     };
 
     return (
