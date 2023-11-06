@@ -13,6 +13,7 @@ import NewMessage from "./pages/NewMessage";
 
 //Components import
 import NavbarBottom from './components/NavbarBottom';
+import SearchBar from './components/SearchBar';
 
 
 export const NewsContext = createContext<undefined>(
@@ -22,7 +23,10 @@ export const NewsContext = createContext<undefined>(
 export default function App() {
 
   return (
-    <><BrowserRouter>
+    <>
+    <h1>Welcome Flemming</h1>
+    <SearchBar />
+    <BrowserRouter>
       <Routes>
         <Route index element={<Home />} />
         <Route path="Inbox" element={<MyInbox />} />
