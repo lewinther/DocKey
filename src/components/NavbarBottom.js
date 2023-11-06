@@ -20,11 +20,11 @@ function NavbarBottom() {
                 <IconHome className="icon" />
                 <p>Home</p>
             </div>
-            <div className={`nav-item ${activeItem === 'Inbox' ? 'active' : ''}`} onClick={() => handleItemClick("Inbox")}>
+            <div className={`nav-item ${activeItem === 'Inbox' ? 'active' : ''}`} onClick={() => handleItemClick("MyInbox")}>
                 <IconInbox className="icon" />
                 <p>Inbox</p>
             </div>
-            <div className={`nav-item ${activeItem === 'News' ? 'active' : ''}`} onClick={() => handleItemClick("News")}>
+            <div className={`nav-item ${activeItem === 'New Message' ? 'active' : ''}`} onClick={() => handleItemClick("NewMessage")}>
                 <IconNewm className="icon" />
                 <p>New</p>
             </div>

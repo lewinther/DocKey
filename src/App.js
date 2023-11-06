@@ -10,6 +10,7 @@ import './styles.css'
 import Home from './pages/Home';
 import MyInbox from "./pages/MyInbox";
 import NewMessage from "./pages/NewMessage";
+import Profile from "./pages/Profile";
 
 //Components import
 import NavbarBottom from './components/NavbarBottom';
@@ -29,9 +30,11 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="Inbox" element={<MyInbox />} />
         <Route path="NewMessage" element={<NewMessage />} />
+        <Route path="Profile" element={<Profile />} />
       </Routes>
-    </BrowserRouter><Fragment>
-    <NavbarBottom />
+    </BrowserRouter>
+    <Fragment>
+      <NavbarBottom />
     </Fragment></>
   );
 }
