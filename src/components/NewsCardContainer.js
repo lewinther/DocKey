@@ -6,7 +6,7 @@ export default function NewsCardContainer(){
 
     return(
         <Fragment>
-            <section className="news-card-container">
+            <section className="news-card-container in-column">
                 <NewsCard />
             </section>
         </Fragment>

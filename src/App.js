@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
 
 // CSS import
 import './App.css';
@@ -8,6 +9,11 @@ import './styles.css'
 import Home from './pages/Home';
 import MyInbox from "./pages/MyInbox";
 import NewMessage from "./pages/NewMessage";
+
+
+export const NewsContext = createContext<undefined>(
+  undefined
+)
 
 export default function App() {
 

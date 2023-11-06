@@ -1,22 +1,32 @@
 import { Fragment } from "react";
 
-import NewsPic from "../assets/News_HarborPicture.jpg";
+export default function NewsCard({
+    newsId,
+    newsImg,
+    newsTitle,
+    newsDate,
+    newsTekst,
+}) {
 
-export default function NewsCard() {
+async function getNewsData(){
+    
+}
 
     return(
         <Fragment>
+            <div className="card" id={newsId}>
             <div className="in-line">
-            <img className="news-card-img" src={NewsPic}/>
-                <section className="news-card">
+            <img className="news-card-img" src={newsImg} alt={newsTitle + " image"}/>
+                <section className="news-card-body">
                     <div className="in-line">
-                        <p className="bold">Dock renovations</p> 
-                        <h5>11-02-2023</h5>
+                        <p className="bold" id="newsTitle">{newsTitle}</p> 
+                        <h5 id="newsDate">{newsDate}</h5>
                     </div>
                         <div className="meta-text">
-                        <p>This is a random text, that should be a description of a news from the dock...</p>
+                        <p>{newsTekst}</p>
                         </div>
                 </section>
+            </div>
             </div>
         </Fragment>
     )
