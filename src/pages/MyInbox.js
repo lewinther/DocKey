@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import "../../src/styles.css";
 
 //Components import
-import SearchBar from './components/SearchBar';
+import SearchBar from '../components/SearchBar';
 
 export default function MyInbox() {
     return(
