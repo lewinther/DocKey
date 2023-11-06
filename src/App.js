@@ -24,8 +24,6 @@ export default function App() {
 
   return (
     <>
-    <h1>Welcome Flemming</h1>
-    <SearchBar />
     <BrowserRouter>
       <Routes>
         <Route index element={<Home />} />
