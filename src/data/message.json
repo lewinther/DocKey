@@ -1,0 +1,16 @@
+[
+	{
+		"messageSenderNo": "P9",
+		"messageRecieverNo": "P11",
+		"messageDate": "02/11/2023",
+		"messageTime": "10:15:10",
+		"messageText": "Hi, dock mate! Your front sail has rolled out, and I have done my best to secure it with some of my own robe. Yor should definitely check on it as fast as possible, and could you return the to D11 afterwards? Have a good weekend! Dea from D11"
+	},
+	{
+		"messageSenderNo": "P22",
+		"messageRecieverNo": "P11",
+		"messageDate": "22/10/2023",
+		"messageTime": "12:15:10",
+		"messageText": "Ahoy there! Your boats morrings need a check up, as one of them are close to snapping. It is okay for now, but please check it as soon as possible. Morten F11"
+	}
+]

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Fragment, createContext, useEffect, useState } from "react";
+import { Fragment } from "react";
 
 // CSS import
 import './App.css';
@@ -10,14 +10,10 @@ import './styles.css'
 import Home from './pages/Home';
 import MyInbox from "./pages/MyInbox";
 import NewMessage from "./pages/NewMessage";
+import Profile from "./pages/Profile";
 
 //Components import
 import NavbarBottom from './components/NavbarBottom';
-
-
-export const NewsContext = createContext<undefined>(
-  undefined
-)
 
 export default function App() {
 
@@ -28,6 +24,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="Inbox" element={<MyInbox />} />
         <Route path="NewMessage" element={<NewMessage />} />
+        <Route path="Profile" element={<Profile />} />
       </Routes>
     <NavbarBottom />
     </BrowserRouter>

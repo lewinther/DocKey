@@ -20,7 +20,7 @@ h2 {
 /* component headline in CAPS */
 h3 { 
 	color: #FFFF;
-	font-size: 16px;
+	font-size: 14px;
 	font-family: 'Source Sans Variable', sans-serif;
 	font-weight: 400;
 	padding-left: 10px;
@@ -46,7 +46,7 @@ h5 {
 
 /* meta text (in messages etc.) */
 p {
-	color: #000000;
+	color: #012657;
 	font-size: 15px;
 	font-family: 'Source Sans Variable', sans-serif;
 	font-weight: 400;
@@ -71,12 +71,19 @@ p {
 	font-weight: 400;
 	width: fit-content;
 	padding: 7px 10px;
-	display: inline-block;
 	border-radius: 10px;
+	margin-top: 20px;
 }
 
 .BlueButton:hover{
 	background-color: #051830;
+}
+
+.centered{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 }
 
 /* Background picture */
@@ -125,6 +132,33 @@ body{
     box-shadow: 0 15px 25px rgba(0,0,0,0.3);
 }
 
+/* MessageCard and MessageCardContainer formatting */
+.in-line-message{
+	display: flex;
+	flex-direction: row;
+}
+
+.in-column-message{
+	display: flex;
+	flex-direction: column;
+}
+
+.message-card-body{
+	width: 300px;
+	padding: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.message-card-container{
+	width: 400px;
+	margin:auto;
+	background-color:rgba(216, 221, 229, 0.847);
+	border-radius: 15px;
+	box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+}
+
 /* searchbar */
 .search-input {
     font-size: 16px; 
@@ -133,6 +167,7 @@ body{
     width: 80%;
     border: 1px solid #ccc;
 	padding: 2px;
+	margin-top: 40px;
     
 }
 /* Responsive font size adjustments */
@@ -176,7 +211,7 @@ body{
 .navbar-bottom {
     display: flex;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 20px 20px;
     background-color: #ffffff;
     border-radius: 12px;
     bottom: 0;

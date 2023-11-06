@@ -20,28 +20,28 @@ function NavbarBottom() {
         <Fragment>
         <div className="navbar-bottom">
             <Link className="link" to={`/`}>
-            <div className={`nav-item ${activeItem === 'Home' ? 'active' : ''}`} onClick={() => handleItemClick("Home")}>
-                <IconHome className="icon" />
-                <p>Home</p>
-            </div>
+              <div className={`nav-item ${activeItem === 'Home' ? 'active' : ''}`} onClick={() => handleItemClick("Home")}>
+                  <IconHome className="icon" />
+                  <p>Home</p>
+              </div>
             </Link>
             <Link className="link" to={`/Inbox`}>
-            <div className={`nav-item ${activeItem === 'Inbox' ? 'active' : ''}`} onClick={() => handleItemClick("Inbox")}>
-                <IconInbox className="icon" />
-                <p>Inbox</p>
-            </div>
+              <div className={`nav-item ${activeItem === 'Inbox' ? 'active' : ''}`} onClick={() => handleItemClick("Inbox")}>
+                  <IconInbox className="icon" />
+                  <p>Inbox</p>
+              </div>
             </Link>
             <Link className="link" to={`/NewMessage`}>
-            <div className={`nav-item ${activeItem === 'News' ? 'active' : ''}`} onClick={() => handleItemClick("News")}>
-                <IconNewm className="icon" />
-                <p>New</p>
-            </div>
+              <div className={`nav-item ${activeItem === 'Newm' ? 'active' : ''}`} onClick={() => handleItemClick("Newm")}>
+                  <IconNewm className="icon" />
+                  <p>New</p>
+              </div>
             </Link>
             <Link className="link" to={`/NewMessage`}>
-            <div className={`nav-item ${activeItem === 'Profile' ? 'active' : ''}`} onClick={() => handleItemClick("Profile")}>
-                <IconProfile className="icon" />
-                <p>Profile</p>
-            </div>
+              <div className={`nav-item ${activeItem === 'Profile' ? 'active' : ''}`} onClick={() => handleItemClick("Profile")}>
+                  <IconProfile className="icon" />
+                  <p>Profile</p>
+              </div>
             </Link>
         </div>
         </Fragment>
