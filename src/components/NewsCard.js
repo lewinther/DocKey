@@ -1,4 +1,7 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
+
+//import news data
+import data from "../data/news.json"
 
 export default function NewsCard({
     newsId,
@@ -8,9 +11,11 @@ export default function NewsCard({
     newsTekst,
 }) {
 
-async function getNewsData(){
-    
-}
+const getNewsData = async () => {
+    const res = await fetch("../data/news.json");
+    const data = await res.json();
+    return data;
+};
 
     return(
         <Fragment>
