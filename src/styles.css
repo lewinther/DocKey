@@ -79,6 +79,30 @@ p {
 	background-color: #051830;
 }
 
+.WhiteButton {
+    background-color: #FFFF;
+    color: #1D385C;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 7px 10px;
+    border-radius: 10px;
+    border: 2px solid #1D385C; /* Add border to make it similar to BlueButton */
+}
+
+.WhiteButton:hover {
+    background-color: #f0f0f0; /* Slightly darker white for hover effect */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Align button group to center */
+	
+
+}
+
+
+
 .centered{
 	display: flex;
 	justify-content: center;
