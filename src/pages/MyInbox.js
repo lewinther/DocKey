@@ -5,6 +5,7 @@ import "../../src/styles.css";
 
 //Components import
 import SearchBar from '../components/SearchBar';
+import MessageCardContainerINBOX from '../components/MessageCardContainerINBOX'
 
 export default function MyInbox() {
     return(
@@ -12,8 +13,7 @@ export default function MyInbox() {
     <div className="centered">
     <SearchBar />
     </div>
-    <h2>Not yet implemented</h2>
-
+    <MessageCardContainerINBOX />
     </Fragment>
     )
 }

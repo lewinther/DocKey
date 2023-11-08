@@ -149,7 +149,8 @@ body{
 
 .news-card-container{
 	max-width: 400px;
-	margin:auto;
+	margin: auto;
+	margin-top: 10px;
 	background-color:rgba(216, 221, 229, 0.847);
 	border-radius: 15px;
 	box-sizing: border-box;
