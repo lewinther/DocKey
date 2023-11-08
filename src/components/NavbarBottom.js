@@ -37,7 +37,7 @@ function NavbarBottom() {
                   <p>New</p>
               </div>
             </Link>
-            <Link className="link" to={`/NewMessage`}>
+            <Link className="link" to={`/Profile`}>
               <div className={`nav-item ${activeItem === 'Profile' ? 'active' : ''}`} onClick={() => handleItemClick("Profile")}>
                   <IconProfile className="icon" />
                   <p>Profile</p>
