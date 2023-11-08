@@ -26,9 +26,8 @@ export default function App() {
         <Route path="NewMessage" element={<NewMessage />} />
         <Route path="Profile" element={<Profile />} />
       </Routes>
+    <NavbarBottom />
     </BrowserRouter>
-    <Fragment>
-      <NavbarBottom />
-    </Fragment></>
+   </>
   );
 }

@@ -20,10 +20,9 @@ h2 {
 /* component headline in CAPS */
 h3 { 
 	color: #FFFF;
-	font-size: 16px;
+	font-size: 14px;
 	font-family: 'Source Sans Variable', sans-serif;
 	font-weight: 400;
-	text-transform: uppercase;
 	padding-left: 10px;
 }
 
@@ -72,12 +71,43 @@ p {
 	font-weight: 400;
 	width: fit-content;
 	padding: 7px 10px;
-	display: inline-block;
 	border-radius: 10px;
+	margin-top: 20px;
 }
 
 .BlueButton:hover{
 	background-color: #051830;
+}
+
+.WhiteButton {
+    background-color: #FFFF;
+    color: #1D385C;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 7px 10px;
+    border-radius: 10px;
+    border: 2px solid #1D385C; /* Add border to make it similar to BlueButton */
+}
+
+.WhiteButton:hover {
+    background-color: #f0f0f0; /* Slightly darker white for hover effect */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Align button group to center */
+	
+
+}
+
+
+
+.centered{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 }
 
 /* Background picture */
@@ -133,6 +163,33 @@ body{
 	align-items: center;
 }
 
+/* MessageCard and MessageCardContainer formatting */
+.in-line-message{
+	display: flex;
+	flex-direction: row;
+}
+
+.in-column-message{
+	display: flex;
+	flex-direction: column;
+}
+
+.message-card-body{
+	width: 300px;
+	padding: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.message-card-container{
+	width: 400px;
+	margin:auto;
+	background-color:rgba(216, 221, 229, 0.847);
+	border-radius: 15px;
+	box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+}
+
 /* searchbar */
 .search-input {
     font-size: 16px; 
@@ -141,6 +198,7 @@ body{
     width: 80%;
     border: 1px solid #ccc;
 	padding: 2px;
+	margin-top: 40px;
     
 }
 /* Responsive font size adjustments */
@@ -162,11 +220,29 @@ body{
     }
 }
 
-/*Navbar style*/
+/* dock select bar */
+.dock-select-form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 10px;
+  }
+  
+  .dock-select {
+	font-size: 16px;
+	font-family: 'Source Sans Variable', sans-serif;
+	border-radius: 10px;
+	width: 90vw; 
+	border: 1px solid #ccc;
+	padding: 2px;
+	color: #9FAABC;
+  }
+
+  /*Navbar style*/
 .navbar-bottom {
     display: flex;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 20px 20px;
     background-color: #ffffff;
     border-radius: 12px;
     bottom: 0;
@@ -203,5 +279,40 @@ body{
     fill: #012657;
 }
 
+label {
+	display: block;
+  }
+  
+.new-message-container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 5%;
+	padding-top: 0%;
+	box-sizing: border-box;
+	position: relative;
+	margin: 0 auto; /* Center horizontally */
+}
 
-
+textarea {
+	flex: 1; /* Allow textarea to stretch vertically within the container */
+	width: 90vw; 
+	padding: 10px;
+	border-radius: 10px;
+	margin: 0; /* Reset the margin to prevent overflow */
+	box-sizing: border-box; /* Ensure padding is included in width */
+	min-height: 30vh;
+	overflow-y: scroll;
+	height: 100px;
+	resize: none; /* Remove this if you want the user to resize the textarea */
+	color: #000000;
+	font-size: 15px;
+	font-family: 'Source Sans Variable', sans-serif;
+	font-weight: 400;
+}
+  
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+  }
