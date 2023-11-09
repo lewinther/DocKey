@@ -283,6 +283,10 @@ body{
 label {
 	display: block;
   }
+
+.margin-top-30px {
+	margin-top: 30px;
+}
   
 .new-message-container {
 	height: 100%;
