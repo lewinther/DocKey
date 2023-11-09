@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import "./styles.css";
-import SearchBar from "./SearchBar";
+import SearchBar from "../src/components/SearchBar";
 
 function App() {
   const [messages, setMessages] = useState([
