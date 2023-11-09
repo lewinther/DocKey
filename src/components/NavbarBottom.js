@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Fragment } from "react";
 import IconHome from "../assets/IconHome";
 import IconInbox from "../assets/IconInbox";
-import IconNewm from "../assets/IconNewm";
+import IconNewMessage from "../assets/IconNewMessage";
 import IconProfile from "../assets/IconProfile";
 import { Link } from "react-router-dom";
 
@@ -38,10 +38,10 @@ function NavbarBottom() {
         </Link>
         <Link className="link" to={`/NewMessage`}>
           <div
-            className={`nav-item ${activeItem === "Newm" ? "active" : ""}`}
-            onClick={() => handleItemClick("Newm")}
+            className={`nav-item ${activeItem === "NewMessage" ? "active" : ""}`}
+            onClick={() => handleItemClick("NewMessage")}
           >
-            <IconNewm className="icon" />
+            <IconNewMessage className="icon" />
             <p>New</p>
           </div>
         </Link>

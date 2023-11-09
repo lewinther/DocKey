@@ -1,6 +1,6 @@
 import React from "react";
 
-function IconNewm(props) {
+function IconNewMessage(props) {
     return (
 
         <svg width="33" height="33" viewBox="0 0 33 33" fill="#6F809B" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -17,4 +17,4 @@ function IconNewm(props) {
         );
 }
 
-export default IconNewm;
+export default IconNewMessage;
