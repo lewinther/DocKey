@@ -8,17 +8,20 @@ import "../../src/styles.css";
 import NewsCardContainer from "../components/NewsCardContainer";
 import MessageCardContainer from "../components/MessageCardContainer";
 
-export default function Home(){
-    return (
-        <Fragment>
-            <div className="in-column">
-                <h1>Welcome Flemming!</h1>
-                <NewsCardContainer />
-                <MessageCardContainer/>
-                <div className="centered">
-                <Link Button className="BlueButton link" to={`/NewMessage`}> Send new message </Link>
-                </div>
-            </div>
-        </Fragment>
-    );
+export default function Home() {
+  return (
+    <Fragment>
+      <div className="in-column">
+        <h1>Welcome Flemming!</h1>
+        <NewsCardContainer />
+        <MessageCardContainer />
+        <div className="centered">
+          <Link Button className="BlueButton link" to={`/NewMessage`}>
+            {" "}
+            Send new message{" "}
+          </Link>
+        </div>
+      </div>
+    </Fragment>
+  );
 }

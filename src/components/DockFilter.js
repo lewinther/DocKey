@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const DockFilter = ({ onDockSelect, dockNumbers }) => {
-  const [dockNumber, setDockNumber] = useState('');
+  const [dockNumber, setDockNumber] = useState("");
 
   const handleSelectionChange = (selectedDockNumber) => {
     onDockSelect(selectedDockNumber);

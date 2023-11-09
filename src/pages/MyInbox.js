@@ -4,16 +4,16 @@ import { Fragment } from "react";
 import "../../src/styles.css";
 
 //Components import
-import SearchBar from '../components/SearchBar';
-import MessageCardContainerINBOX from '../components/MessageCardContainerINBOX'
+import SearchBar from "../components/SearchBar";
+import MessageCardContainerINBOX from "../components/MessageCardContainerINBOX";
 
 export default function MyInbox() {
-    return(
+  return (
     <Fragment>
-    <div className="centered">
-    <SearchBar />
-    </div>
-    <MessageCardContainerINBOX />
+      <div className="centered">
+        <SearchBar />
+      </div>
+      <MessageCardContainerINBOX />
     </Fragment>
-    )
+  );
 }

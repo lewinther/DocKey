@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Fragment } from "react";
 
 // CSS import
 import './App.css';
