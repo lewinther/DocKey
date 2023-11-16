@@ -101,21 +101,19 @@ p {
 
 }
 
-
-
 .centered{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 }
 
 /* Background picture */
 body{
 	background-image: url(assets/Background.jpg);
-	background-repeat:no-repeat;
-	background-position:top;
-	background-size:cover; /*Something funny about the sizing, can't figure it out*/
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background-size:cover;
 }
 
 /* NewsCard and NewsCardContainer formatting */
@@ -200,8 +198,9 @@ body{
     border: 1px solid #ccc;
 	padding: 2px;
 	margin-top: 40px;
-    
+	background-color:rgba(216, 221, 229, 0.847);
 }
+
 /* Responsive font size adjustments */
 @media (max-width: 600px) { 
     .search-input {
@@ -234,9 +233,9 @@ body{
 	font-family: 'Source Sans Variable', sans-serif;
 	border-radius: 10px;
 	width: 90vw; 
-	border: 1px solid #ccc;
 	padding: 2px;
-	color: #9FAABC;
+	color: #1D385C;
+	background-color:rgba(216, 221, 229, 0.932);
   }
 
   /*Navbar style*/
@@ -244,7 +243,7 @@ body{
     display: flex;
     justify-content: space-between;
     padding: 20px 20px;
-    background-color: #ffffff;
+    background-color: rgba(241, 243, 246, 0.778);
     border-radius: 12px;
     bottom: 0;
     left: 0;
@@ -257,27 +256,27 @@ body{
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    padding: 0% 5%;
+    padding: 0% 0%;
 }
 
 /*Navbar Button passive state*/
 .nav-item .icon {
-    fill: #9FAABC;
+    fill: #697fa7;
 }
 
 .nav-item p {
     margin-top: 4px;
     font-size: 14px;
-    fill: #9FAABC;
+    fill: #697fa7;
 }
 
 /*Navbar Button active state*/
 .nav-item.active .icon {
-    fill: #012657;
+    fill: #1D385C;
 }
 
 .nav-item.active p {
-    fill: #012657;
+    fill: #1D385C;
 }
 
 label {
@@ -314,6 +313,7 @@ textarea {
 	font-size: 15px;
 	font-family: 'Source Sans Variable', sans-serif;
 	font-weight: 400;
+	background-color:rgba(216, 221, 229, 0.847);
 }
   
 html, body {
