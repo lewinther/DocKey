@@ -1,4 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Parse from 'parse';
+
+// Your Parse initialization configuration goes here
+const PARSE_APPLICATION_ID = 'l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ';
+const PARSE_JAVASCRIPT_KEY = 'h9PTAAitCJFul7XadjhQbXFaK1N8VGZdJodYl5Tx';
+const PARSE_HOST_URL = 'https://parseapi.back4app.com/';
+Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
+Parse.serverURL = PARSE_HOST_URL;
 
 // CSS import
 import './App.css';
