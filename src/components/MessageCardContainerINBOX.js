@@ -17,6 +17,7 @@ export default function MessageCardContainerINBOX() {
       const query = new Parse.Query(Message);
 
       // Example: Fetch messages for a specific user
+      query.descending("Message_Date");
       query.equalTo('Receiver_User_ID', Parse.Object.extend('_User').createWithoutData('YznbDiMrX1'));
 
       try {
