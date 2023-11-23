@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Parse from 'parse';
 
 // CSS import
 import './App.css';
