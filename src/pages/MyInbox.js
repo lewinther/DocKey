@@ -5,7 +5,7 @@ import "../../src/styles.css";
 
 //Components import
 import SearchBar from "../components/SearchBar";
-import MessageCardContainerINBOX from "../components/MessageCardContainerINBOX";
+import ChatListInbox from "../components/ChatListInbox";
 
 export default function MyInbox() {
   return (
@@ -13,7 +13,7 @@ export default function MyInbox() {
       <div className="centered">
         <SearchBar />
       </div>
-      <MessageCardContainerINBOX />
+      <ChatListInbox/>
     </Fragment>
   );
 }
