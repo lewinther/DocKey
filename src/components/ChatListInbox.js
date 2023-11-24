@@ -39,32 +39,59 @@ export default function ChatListInbox() {
       const latestMessages = Array.from(chatPartnersMap.values());
       // Ensure you have messages and Message_Date is not undefined before setting state.
       const filteredMessages = latestMessages.filter(msg => msg && msg.get('Message_Date'));
-      setChats(filteredMessages); // Update state with the filtered messages.
-      console.log(filteredMessages); // Print the messages for testing purposes.
+      // Now, fetch usernames for each chat partner ID using the user IDs gathered
+      const chatPartnerUsernamesPromises = Array.from(chatPartnersMap.keys()).map((partnerId) => {
+        const userQuery = new Parse.Query(Parse.User);
+        userQuery.equalTo('objectId', partnerId);
+        return userQuery.first().then((user) => {
+          return user ? { id: partnerId, username: user.get('username') } : null;
+        });
+      });
 
+      return Promise.all(chatPartnerUsernamesPromises).then((usernames) => {
+        // Create a map of user IDs to usernames
+        const userIdToUsernameMap = usernames.reduce((acc, user) => {
+          if (user) acc[user.id] = user.username;
+          return acc;
+        }, {});
+      
+        // Add the usernames to the chat messages
+        const chatsWithUsernames = filteredMessages.map((parseMessage) => {
+          const partnerId = parseMessage.get('Sender_User_ID').id === currentUser ? parseMessage.get('Receiver_User_ID').id : parseMessage.get('Sender_User_ID').id;
+          return {
+            parseMessage,
+            partnerUsername: userIdToUsernameMap[partnerId] || 'Unknown',
+          };
+        });
+      
+        return chatsWithUsernames;
+      });
+
+    }).then((chatsWithUsernames) => {
+      setChats(chatsWithUsernames); // Update state with the latest messages including usernames
+      console.log(chatsWithUsernames); // Print the messages with usernames for testing purposes.
     }).catch(error => {
       console.error('Error fetching chat partners or messages: ', error);
     });
-
-  }, []); // Empty dependency array means this effect will only run once on component mount.
+  }, []);
 
   // Render a list of ChatCards for each chat.
   return (
-    <div className="chat-list-inbox">
-      {chats.map((message, index) => {
-        const chatDate = message.get('Message_Date') ? message.get('Message_Date').toDateString() : 'Unknown date';
-        const chatPartnerId = message.get('Sender_User_ID').id === currentUser ? message.get('Receiver_User_ID').id : message.get('Sender_User_ID').id;
-        const chatPreviewText = message.get('Message_Text'); // Use the correct key for message text.
+    <div className="chat-card">
+      {
+        chats.map(({ parseMessage, partnerUsername }, index) => {
+        const chatDate = parseMessage.get('Message_Date') ? parseMessage.get('Message_Date').toDateString() : 'Unknown date';
+        const chatPreviewText = parseMessage.get('Message_Text'); // Use the correct key for message text.
 
         // Replace the div below with your ChatCard component when ready.
         return (
-          <div key={index} className="chat-card">
-            <p>Chat with: {chatPartnerId}</p>
+            <div key={index} className="chat-card">
+            <p>Chat with: {partnerUsername}</p>
             <p>Date: {chatDate}</p>
             <p>Preview: {chatPreviewText}</p>
-          </div>
+            </div>
         );
-      })}
+    })}
     </div>
-  );
-}
+  )
+};
