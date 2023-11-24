@@ -5,6 +5,8 @@ import Parse from 'parse';
 
 // CSS import
 import "../../src/styles.css";
+
+//components import
 import MessageCard from "./MessageCard";
 
 export default function MessageCardContainerINBOX() {
