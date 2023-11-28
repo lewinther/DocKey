@@ -97,8 +97,6 @@ p {
 .button-container {
     display: flex;
     justify-content: center; /* Align button group to center */
-	
-
 }
 
 .centered{
@@ -114,6 +112,7 @@ body{
 	margin-left: auto;
 	margin-right: auto;
 	background-size:cover;
+	height: 100%;
 }
 
 /* NewsCard and NewsCardContainer formatting */
@@ -139,16 +138,15 @@ body{
 }
 
 .news-card-body{
-	max-width: 300px;
-	padding: 20px;
+	max-width: 100%;
+	padding: 5%;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
 .news-card-container{
-	max-width: 400px;
-	margin: auto;
-	margin-top: 10px;
+	max-width: 100%;
+	margin: 2%;
 	background-color:rgba(216, 221, 229, 0.847);
 	border-radius: 15px;
 	box-sizing: border-box;
@@ -180,44 +178,40 @@ body{
 	margin-bottom: 10px;
 }
 
-.message-card-container{
-	width: 400px;
-	margin:auto;
-	background-color:rgba(216, 221, 229, 0.847);
+.message-list {
+    display: block;
+    max-width: 100%;
+    margin: 2%;
 	border-radius: 15px;
+    background-color: rgba(216, 221, 229, 0.847);
+    overflow-y: auto; /* Enable vertical scrolling */
 	box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+	padding: 0.5%;
+	padding-top: 0.5%;
+	height: 100%;
+}
+
+
+
+
+.message-card-container{
+	margin: 0.5%;
+	background-color:rgba(216, 221, 229);
+	box-sizing: border-box;
+	display: block;
+	border-radius: 10px;
+
 }
 
 /* searchbar */
 .search-input {
-    font-size: 16px; 
-    font-family: 'Source Sans Variable', sans-serif;
+    font-size: 16px;
+	width: 100%; 
     border-radius: 10px;
-    width: 80%;
     border: 1px solid #ccc;
 	padding: 2px;
-	margin-top: 40px;
+	margin: 10% 5% auto;
 	background-color:rgba(216, 221, 229, 0.847);
-}
-
-/* Responsive font size adjustments */
-@media (max-width: 600px) { 
-    .search-input {
-        font-size: 14px;
-    }
-}
-
-@media (min-width: 601px) and (max-width: 1024px) { 
-    .search-input {
-        font-size: 15px;
-    }
-}
-
-@media (min-width: 1025px) {
-    .search-input {
-        font-size: 16px;
-    }
 }
 
 /* dock select bar */
@@ -242,9 +236,8 @@ body{
 .navbar-bottom {
     display: flex;
     justify-content: space-between;
-    padding: 20px 20px;
-    background-color: rgba(241, 243, 246, 0.778);
-    border-radius: 12px;
+    padding: 2%;
+    background-color: rgba(241, 243, 246);
     bottom: 0;
     left: 0;
     right: 0;
@@ -262,12 +255,13 @@ body{
 /*Navbar Button passive state*/
 .nav-item .icon {
     fill: #697fa7;
+	padding: 5%;
 }
 
 .nav-item p {
-    margin-top: 4px;
     font-size: 14px;
     fill: #697fa7;
+	margin: 2%;
 }
 
 /*Navbar Button active state*/
@@ -320,4 +314,10 @@ html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+  }
+
+#root {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
   }

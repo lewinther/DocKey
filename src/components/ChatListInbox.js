@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Parse from 'parse';
-// import ChatCard from "./ChatCard";
+import ChatCard from "./ChatCard";
 import "../../src/styles.css";
 
 export default function ChatListInbox() {
@@ -75,23 +75,27 @@ export default function ChatListInbox() {
     });
   }, []);
 
-  // Render a list of ChatCards for each chat.
-  return (
-    <div className="chat-card">
-      {
-        chats.map(({ parseMessage, partnerUsername }, index) => {
-        const chatDate = parseMessage.get('Message_Date') ? parseMessage.get('Message_Date').toDateString() : 'Unknown date';
-        const chatPreviewText = parseMessage.get('Message_Text'); // Use the correct key for message text.
+// ... (The rest of the ChatListInbox component)
 
-        // Replace the div below with your ChatCard component when ready.
+return (
+      <div className="message-list">
+          {chats.map(({ parseMessage, partnerUsername }, index) => {
+            const chatPartnerID = parseMessage.id; // Assuming you have the id property available.
+            const chatDate = parseMessage.get('Message_Date') ? parseMessage.get('Message_Date').toDateString() : 'Unknown date';
+            const chatPreviewText = parseMessage.get('Message_Text'); // Use the correct key for message text.
+    
         return (
-            <div key={index} className="chat-card">
-            <p>Chat with: {partnerUsername}</p>
-            <p>Date: {chatDate}</p>
-            <p>Preview: {chatPreviewText}</p>
-            </div>
+          <ChatCard
+            key={index}
+            chatPartnerID={chatPartnerID}
+            chatPartnerUsername={partnerUsername}
+            chatDate={chatDate}
+            chatPreviewText={chatPreviewText}
+          />
         );
-    })}
-    </div>
+      })}
+      </div>
   )
+  
+  
 };

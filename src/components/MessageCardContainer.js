@@ -8,7 +8,7 @@ export default function MessageCardContainer() {
       <h3 className="centered margin-top-30px">
         Check your inbox:
       </h3>
-      <section className="message-card-container in-column">
+      <section className="news-card-container in-column">
         <MessageCard />
       </section>
     </Fragment>
