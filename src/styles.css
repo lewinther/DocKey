@@ -189,7 +189,7 @@ body{
 	box-sizing: border-box;
 	padding: 0.5%;
 	padding-top: 0.5%;
-	height: 78%;
+	height: 73%;
 }
 
 .message-list-small {
@@ -214,15 +214,19 @@ body{
 
 }
 
+form {
+	max-width: 100%;
+}
+
 /* searchbar */
 .search-input {
     font-size: 16px;
-	max-width: 100%; 
     border-radius: 10px;
     border: 1px solid #ccc;
 	padding: 2px;
-	margin: 10% 5% auto;
+	margin: 2%;
 	background-color:rgba(216, 221, 229, 0.847);
+	box-sizing: border-box;
 }
 
 /* dock select bar */

@@ -12,6 +12,7 @@ export default function MyInbox() {
   return (
     <Fragment>
       <div className="in-column">
+      <h1>Inbox</h1>
       <SearchBar />
       <ChatListInbox/>
       <NavbarBottom activeItem={"Inbox"} />
