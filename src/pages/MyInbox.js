@@ -6,6 +6,7 @@ import "../../src/styles.css";
 //Components import
 import SearchBar from "../components/SearchBar";
 import ChatListInbox from "../components/ChatListInbox";
+import NavbarBottom from '../components/NavbarBottom';
 
 export default function MyInbox() {
   return (
@@ -14,6 +15,7 @@ export default function MyInbox() {
         <SearchBar />
       </div>
       <ChatListInbox/>
+      <NavbarBottom activeItem={"Inbox"} />
     </Fragment>
   );
 }

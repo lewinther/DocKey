@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Parse from 'parse';
 
 // CSS import
 import './App.css';
@@ -12,9 +11,6 @@ import MyInbox from "./pages/MyInbox";
 import NewMessage from "./pages/NewMessage";
 import Profile from "./pages/Profile";
 
-//Components import
-import NavbarBottom from './components/NavbarBottom';
-
 export default function App() {
 
   return (
@@ -26,7 +22,6 @@ export default function App() {
         <Route path="NewMessage" element={<NewMessage />} />
         <Route path="Profile" element={<Profile />} />
       </Routes>
-    <NavbarBottom />
     </BrowserRouter>
    </>
   );

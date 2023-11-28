@@ -8,6 +8,7 @@ import "../../src/styles.css";
 // Components
 import NewsCardContainer from "../components/NewsCardContainer";
 import MessageCardContainer from "../components/MessageCardContainer";
+import NavbarBottom from '../components/NavbarBottom';
 
 // Your Parse initialization configuration goes here
 const PARSE_APPLICATION_ID = 'l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ';
@@ -50,6 +51,7 @@ export default function Home() {
           </Link>
         </div>
       </div>
+      <NavbarBottom activeItem={"Home"} />
     </Fragment>
   );
 }

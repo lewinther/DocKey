@@ -8,6 +8,7 @@ import "../../src/styles.css";
 // Components
 import NewMessageCardContainer from "../components/NewMessageCardContainer";
 import DockFilter from "../components/DockFilter";
+import NavbarBottom from '../components/NavbarBottom';
 
 // Your Parse initialization configuration goes here
 const PARSE_APPLICATION_ID = 'l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ';
@@ -129,6 +130,7 @@ export default function NewMessage() {
           </button>
         </div>
       </div>
+      <NavbarBottom activeItem={"NewMessage"} />
     </Fragment>
   );
 }
