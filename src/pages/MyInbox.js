@@ -11,11 +11,11 @@ import NavbarBottom from '../components/NavbarBottom';
 export default function MyInbox() {
   return (
     <Fragment>
-      <div className="centered">
-        <SearchBar />
-      </div>
+      <div className="in-column">
+      <SearchBar />
       <ChatListInbox/>
       <NavbarBottom activeItem={"Inbox"} />
+      </div>
     </Fragment>
   );
 }

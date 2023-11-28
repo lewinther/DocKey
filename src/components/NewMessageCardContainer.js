@@ -14,7 +14,7 @@ export default function NewMessageCardContainer({
   return (
     //handle message change calls oncontentchange and updates parent//
     <Fragment>
-      <section className="new-message-container in-column">
+      <section className="new-message-container">
         <textarea onChange={handleMessageChange} value={messageContent} />
       </section>
     </Fragment>
