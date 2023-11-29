@@ -39,7 +39,6 @@ export default function NewsCard(props) {
   return (
     <Fragment>
       <div className="card" id={props.newsId}>
-        <div className="in-line">
           {newsImg && (
             <img
               className="news-card-img"
@@ -59,7 +58,6 @@ export default function NewsCard(props) {
             </div>
           </section>
         </div>
-      </div>
     </Fragment>
   );
 }

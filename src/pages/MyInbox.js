@@ -5,15 +5,18 @@ import "../../src/styles.css";
 
 //Components import
 import SearchBar from "../components/SearchBar";
-import MessageCardContainerINBOX from "../components/MessageCardContainerINBOX";
+import ChatListInbox from "../components/ChatListInbox";
+import NavbarBottom from '../components/NavbarBottom';
 
 export default function MyInbox() {
   return (
     <Fragment>
-      <div className="centered">
-        <SearchBar />
+      <div className="in-column">
+      <h1>Inbox</h1>
+      <SearchBar />
+      <ChatListInbox/>
+      <NavbarBottom activeItem={"Inbox"} />
       </div>
-      <MessageCardContainerINBOX />
     </Fragment>
   );
 }

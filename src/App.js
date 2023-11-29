@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Parse from 'parse';
 
 // CSS import
 import './App.css';
@@ -13,9 +12,6 @@ import NewMessage from "./pages/NewMessage";
 import Profile from "./pages/Profile";
 import Chat from "./pages/Chat";
 
-//Components import
-import NavbarBottom from './components/NavbarBottom';
-
 export default function App() {
 
   return (
@@ -28,7 +24,6 @@ export default function App() {
         <Route path="Profile" element={<Profile />} />
         <Route path="Chat" element={<Chat />} />
       </Routes>
-    <NavbarBottom />
     </BrowserRouter>
    </>
   );
