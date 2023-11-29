@@ -119,7 +119,7 @@ body{
 /* NewsCard and NewsCardContainer formatting */
 .in-line{
 	display: flex;
-	flex-direction: row;
+	flex-direction: row !important;
 }
 
 .in-column{
@@ -157,10 +157,49 @@ body{
 }
 
 .container-container{
+	display: flex;
+	flex-direction: column;
 	max-width: 50%;
 	margin-top: 10px;
 	margin-left: 25%;
 	align-items: center;
+}
+
+/* ChatCard and ChatContainer formatting */
+.chat-container{
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto !important;
+	row-gap:15px;
+	width: 400px;
+	max-height: 420px;
+	padding: 5px;
+	margin: auto;
+	margin-top: 10px;
+	background-color:rgba(216, 221, 229, 0.847);
+	border-radius: 15px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+}
+
+.chat-card {
+	display:flex;
+	width: fit-content;
+	height: fit-content;
+	border-radius: 15px;
+}
+
+.chat-card-body{
+	padding: 5px;
+}
+
+.chats {
+	padding-top: 2px;
+	background-color: #FFFFFF;
+}
+
+.chats:nth-child(odd){
+	background-color: #CCD5DE;
+	align-self:self-end;
 }
 
 /* MessageCard and MessageCardContainer formatting */

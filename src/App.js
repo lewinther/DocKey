@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import MyInbox from "./pages/MyInbox";
 import NewMessage from "./pages/NewMessage";
 import Profile from "./pages/Profile";
+import Chat from "./pages/Chat";
 
 export default function App() {
 
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="Inbox" element={<MyInbox />} />
         <Route path="NewMessage" element={<NewMessage />} />
         <Route path="Profile" element={<Profile />} />
+        <Route path="Chat" element={<Chat />} />
       </Routes>
     </BrowserRouter>
    </>
