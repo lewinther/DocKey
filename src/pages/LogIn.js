@@ -1,6 +1,8 @@
-import React, { Fragment, useState, useEffect, useNavigate } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Parse from "parse";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
+
+
 
 // CSS import
 import "../../src/styles.css";
@@ -18,6 +20,7 @@ Parse.serverURL = PARSE_HOST_URL;
 const LogIn = () => {
 	const [dockNumber, setDockNumber] = useState("");
 	const [password, setPassword] = useState ("");
+	const navigate = useNavigate();
 
 	// Validating the credentials, and use Parse to check if the dock no. and password match
 	const handleLogin = async () => {
@@ -31,8 +34,8 @@ const LogIn = () => {
 				const storedPassword = user.get("password");
 				if (storedPassword === password){
 					alert("Login successful!"); // Successful Login here
-					Navigate("/Home"); // Redirect to the home page
-				}else {
+					navigate("/Home"); // Redirect to the home page
+				} else {
 					alert("Invalid password");
 				}
 
@@ -71,8 +74,8 @@ const LogIn = () => {
   
 		<div className="button-container">
 		  <div className="button-group">
-			<button className="BlueButton" onClick={handleLogin}>
-			  Log in
+		  	<button className="BlueButton" onClick={(e) => { e.preventDefault(); 	handleLogin(); }}>
+  			Log in
 			</button>
 		  </div>
 		</div>
