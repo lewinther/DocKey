@@ -5,7 +5,7 @@ import Parse from "parse";
 import "../../src/styles.css";
 
 //components import
-import ChatCard from "./ChatCard";
+import ChatCard from "./MessageCard";
 
 export default function ChatContainer() {
   const [messages, setMessages] = useState([]);

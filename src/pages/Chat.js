@@ -6,7 +6,7 @@ import Parse from "parse";
 import "../../src/styles.css";
 
 // Components
-import ChatContainer from "../components/ChatContainer";
+import ChatContainer from "../components/MessageCardContainer";
 
 // Your Parse initialization configuration goes here
 const PARSE_APPLICATION_ID = "l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ";
