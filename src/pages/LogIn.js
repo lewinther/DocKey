@@ -6,7 +6,6 @@ import { Navigate } from "react-router";
 import "../../src/styles.css";
 
 // Components
-import DockFilter from "../components/DockFilter";
 
 // Your Parse initialization configuration goes here
 const PARSE_APPLICATION_ID = 'l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ';
@@ -19,13 +18,6 @@ Parse.serverURL = PARSE_HOST_URL;
 const LogIn = () => {
 	const [dockNumber, setDockNumber] = useState("");
 	const [password, setPassword] = useState ("");
-	const [selectedDock, setSelectedDock] = useState("");
-
-	  //update selected dock state when user selects a dock//
-	  const handleDockSelection = (selectedDockNumber) => {
-		console.log(`Selected dock number: ${selectedDockNumber}`);
-		setSelectedDock(selectedDockNumber);
-	  };
 
 	// Validating the credentials, and use Parse to check if the dock no. and password match
 	const handleLogin = async () => {
@@ -56,17 +48,35 @@ const LogIn = () => {
 
 	return(
 		<Fragment>
-			<div className="login-container" >
-				<h1>Log into your account</h1>
-			</div>
-			<h3>Which dock do you want to contact?</h3>
-	        <div className="button-container">
-        <div className="button-group">
-          <button className="BlueButton" onClick={handleLogin}> Log in </button>
-        </div>
-      </div>
+		<div className="login-container">
+		  <h1>Log into your account</h1>
+		  <div>
 
-		</Fragment>
+		  </div>
+		  <div className="input-container">
+			<input
+			  type="text"
+			  placeholder="Dock Number"
+			  value={dockNumber}
+			  onChange={(e) => setDockNumber(e.target.value)}
+			/>
+			<input
+			  type="password"
+			  placeholder="Password"
+			  value={password}
+			  onChange={(e) => setPassword(e.target.value)}
+			/>
+		  </div>
+		</div>
+  
+		<div className="button-container">
+		  <div className="button-group">
+			<button className="BlueButton" onClick={handleLogin}>
+			  Log in
+			</button>
+		  </div>
+		</div>
+	  </Fragment>
 	)
 
 
