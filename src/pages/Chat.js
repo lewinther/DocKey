@@ -52,6 +52,7 @@ export default function Chat() {
         </Link>
         </div>
       </div>
+      <NavbarBottom activeItem={"Inbox"} />
     </Fragment>
   );
 }
