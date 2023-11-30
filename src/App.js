@@ -11,20 +11,41 @@ import Home from './pages/Home';
 import MyInbox from "./pages/MyInbox";
 import NewMessage from "./pages/NewMessage";
 import Profile from "./pages/Profile";
+import LogIn from "./pages/LogIn";
 
 //Components import
 import NavbarBottom from './components/NavbarBottom';
+import { useEffect, useState } from "react";
 
 export default function App() {
+  
+  // Checking the authentication status
+  const [authenticated, setAuthenticated] = useState(false);
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const currentUser = Parse.User.current();
+        if (currentUser) {
+          setAuthenticated(true);
+        }else {
+          setAuthenticated(false);
+        }
+      } catch (error) {
+        console.error('Error checking authentication:', error);
+      }
+    };
+    checkAuthentication();
+  }, []);
 
   return (
     <>
     <BrowserRouter>
       <Routes>
-        <Route index element={<Home />} />
+        <Route path="/" element={authenticated ? <Home /> : <LogIn/>} />
         <Route path="Inbox" element={<MyInbox />} />
         <Route path="NewMessage" element={<NewMessage />} />
         <Route path="Profile" element={<Profile />} />
+        <Route path="LogIn" element={<LogIn />} />
       </Routes>
     <NavbarBottom />
     </BrowserRouter>
