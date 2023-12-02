@@ -91,7 +91,7 @@ return (
       <div className="message-list-small">
           {chats.map(({ parseMessage, partnerUsername }, index) => {
             const chatPartnerID = parseMessage.id; // Assuming you have the id property available.
-            const chatDate = parseMessage.get('Message_Date') ? parseMessage.get('Message_Date').toDateString() : 'Unknown date';
+            const chatDate = parseMessage.get('Message_Date').toLocaleDateString() ? parseMessage.get('Message_Date').toLocaleDateString() : 'Unknown date';
             const chatPreviewText = parseMessage.get('Message_Text'); // Use the correct key for message text.
     
         return (

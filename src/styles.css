@@ -89,7 +89,7 @@ p {
 	font-family: 'Ubuntu', sans-serif;
 	font-size: 90%;
 	font-weight: 400;
-	width: 30%;
+	width: 40%;
 	padding: 2%;
 	border-radius: 10px;
 	display: inline-block;
@@ -104,7 +104,7 @@ p {
     font-family: 'Ubuntu', sans-serif;
     font-size: 90%;
     font-weight: 400;
-	width: 30%;
+	width: 40%;
     padding: 2%;
     border-radius: 10px;
     border: 2px solid #1D385C; /* Add border to make it similar to BlueButton */
@@ -416,75 +416,6 @@ textarea {
 	background-color:rgba(216, 221, 229, 0.847);
 	border-color: #1D385C;
   }
-
-
-  .new-message-container .send-button:hover {
-	background-color: #FFFFFF;
-	color: #1D385C;
-  }
-
-  .new-message-container .send-button:active {
-	background-color: #1D385C;
-	color: #FFFFFF;
-  }
-
-  .new-message-container .send-button:focus {
-	outline: none;
-  }
-
-  .new-message-container .send-button:disabled {
-	background-color: #FFFFFF;
-	color: #1D385C;
-	border-color: #FFFFFF;
-	cursor: not-allowed;
-  }
-
-  .new-message-container .send-button:disabled:hover {
-	background-color: #FFFFFF;
-	color: #1D385C;
-	border-color: #FFFFFF;
-  }
-
-  .new-message-container .send-button:disabled:active {
-	background-color: #FFFFFF;
-	color: #1D385C;
-	border-color: #FFFFFF;
-  }
-
-  .new-message-container .send-button:disabled:focus {
-	outline: none;
-  }
-
-  .new-message-container .send-button:disabled {
-	background-color: #FFFFFF;
-	color: #1D385C;
-	border-color: #FFFFFF;
-	cursor: not-allowed;
-  }
-
-  .new-message-container .send-button:disabled:hover {
-	background-color: #FFFFFF;
-	color: #1D385C;
-	border-color: #FFFFFF;
-  }
-
-  .new-message-container .send-button:disabled:active {
-	background-color: #FFFFFF;
-	color: #1D385C;
-	border-color: #FFFFFF;
-  }
-
-  .new-message-container .send-button:disabled:focus {
-	outline: none;
-  }
-
-  .new-message-container .send-button:disabled {
-	background-color: #FFFFFF;
-	color: #1D385C;
-	border-color: #FFFFFF;
-	cursor: not-
-
-}
   
 html, body {
 	height: 100%;
