@@ -23,6 +23,10 @@ export default function Chat() {
   // Retrieve the user ID and chat partner ID from the navigation state
   const { currentUser, chatPartnerID } = location.state || {};
 
+  // console log the current user and chat partner ID
+  console.log("Current user ID: ", currentUser);
+  console.log("Chat partner ID: ", chatPartnerID);
+
   useEffect(() => {
     if (currentUser) {
       const User = Parse.Object.extend("_User");

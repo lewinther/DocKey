@@ -1,13 +1,18 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Parse from 'parse';
 import ChatCard from "./ChatCard";
+import { useNavigate, Link } from "react-router-dom";
 import "../../src/styles.css";
-import { Link } from "react-router-dom";
-
 
 export default function ChatListHome() {
   const [chats, setChats] = useState([]);
   const currentUser = 'YznbDiMrX1'; // temporary hard-coded user ID
+  const navigate = useNavigate(); // Hook for programmatically navigating
+
+  // Function to handle chat card click
+  const handleChatClick = (chatPartnerID) => {
+    navigate(`/Chat`, { state: { chatPartnerID, currentUser } });
+  };
 
   useEffect(() => {
     // Queries for messages where the current user is either sender or receiver.
@@ -89,20 +94,21 @@ return (
       </div>
 
       <div className="message-list-small">
-          {chats.map(({ parseMessage, partnerUsername }, index) => {
-            const chatPartnerID = parseMessage.id; // Assuming you have the id property available.
-            const chatDate = parseMessage.get('Message_Date').toLocaleDateString() ? parseMessage.get('Message_Date').toLocaleDateString() : 'Unknown date';
-            const chatPreviewText = parseMessage.get('Message_Text'); // Use the correct key for message text.
-    
-        return (
-          <ChatCard
-            key={index}
-            chatPartnerID={chatPartnerID}
-            chatPartnerUsername={partnerUsername}
-            chatDate={chatDate}
-            chatPreviewText={chatPreviewText}
-          />
-        );
+      {chats.map(({ parseMessage, partnerUsername }, index) => {
+      const chatPartnerID = parseMessage.id; // Assuming you have the id property available.
+      const chatDate = parseMessage.get('Message_Date').toLocaleDateString() ? parseMessage.get('Message_Date').toLocaleDateString() : 'Unknown date';
+      const chatPreviewText = parseMessage.get('Message_Text'); // Use the correct key for message text.
+
+      return (
+        <ChatCard
+          key={index}
+          chatPartnerID={chatPartnerID}
+          chatPartnerUsername={partnerUsername}
+          chatDate={chatDate}
+          chatPreviewText={chatPreviewText}
+          onClick={() => handleChatClick(chatPartnerID)}
+        />
+      );
       })}
       </div>
       </Fragment>

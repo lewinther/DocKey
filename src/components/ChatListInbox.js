@@ -82,10 +82,9 @@ export default function ChatListHome() {
     });
   }, []);
 
-// ... (The rest of the ChatListInbox component)
 
 return (
-  <div className="message-list-small">
+  <div className="message-list">
     {chats.map(({ parseMessage, partnerUsername }, index) => {
       const chatPartnerID = parseMessage.id; // Assuming you have the id property available.
       const chatDate = parseMessage.get('Message_Date').toLocaleDateString() ? parseMessage.get('Message_Date').toLocaleDateString() : 'Unknown date';
