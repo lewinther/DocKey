@@ -2,6 +2,8 @@ import React, { Fragment, useEffect, useState } from 'react';
 import Parse from 'parse';
 import ChatCard from "./ChatCard";
 import "../../src/styles.css";
+import { Link } from "react-router-dom";
+
 
 export default function ChatListHome() {
   const [chats, setChats] = useState([]);
@@ -79,7 +81,13 @@ export default function ChatListHome() {
 
 return (
      <Fragment>
-      <h3>Your Messages</h3>
+      <div className='wrapper'>
+        <h3 className='h3-home'> Your Messages </h3>
+        <Link Button className="new-message-button link" to={`/NewMessage`}>
+            Send New Message
+        </Link>
+      </div>
+
       <div className="message-list-small">
           {chats.map(({ parseMessage, partnerUsername }, index) => {
             const chatPartnerID = parseMessage.id; // Assuming you have the id property available.

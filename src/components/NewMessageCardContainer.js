@@ -1,7 +1,5 @@
 import { Fragment } from "react";
 
-import InputMessage from "./InputMessage";
-
 export default function NewMessageCardContainer({
   messageContent,
   onContentChange,
@@ -15,7 +13,7 @@ export default function NewMessageCardContainer({
     //handle message change calls oncontentchange and updates parent//
     <Fragment>
       <section className="new-message-container">
-        <textarea onChange={handleMessageChange} value={messageContent} />
+        <textarea onChange={handleMessageChange} value={messageContent} placeholder="Type in your message here..."></textarea> 
       </section>
     </Fragment>
   );

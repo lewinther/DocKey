@@ -22,7 +22,7 @@ const DockFilter = ({ onDockSelect, dockNumbers }) => {
           onChange={handleChange}
           className="dock-select"
         >
-          <option value="">Choose dock number</option>
+          <option value="">Choose a dock number to contact</option>
           {dockNumbers.map((number) => (
             <option key={number} value={number}>
               {number}
