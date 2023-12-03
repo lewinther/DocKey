@@ -311,11 +311,14 @@ form {
     font-size: 90%;
     border-radius: 10px;
     border: 1px solid #ccc;
-	padding: 2px;
-	margin: 2%;
-	background-color:rgba(216, 221, 229, 0.847);
-	box-sizing: border-box;
+    padding: 6px;
+    margin: 0 4%; 
+    /*background-color: rgba(216, 221, 229, 0.847);*/
+	background-color: #FFFFFF;
+    box-sizing: border-box;
+    width: 92%;
 }
+
 
 /* dock select bar */
 .dock-select-form {

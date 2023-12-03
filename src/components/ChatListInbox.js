@@ -4,7 +4,7 @@ import ChatCard from "./ChatCard";
 import { useNavigate, Link } from "react-router-dom";
 import "../../src/styles.css";
 
-export default function ChatListHome() {
+export default function ChatListHome({ searchTerm }) {
   const [chats, setChats] = useState([]);
   const currentUser = 'YznbDiMrX1'; // temporary hard-coded user ID
   const navigate = useNavigate(); // Hook for programmatically navigating
@@ -75,12 +75,19 @@ export default function ChatListHome() {
       });
 
     }).then((chatsWithUsernames) => {
-      setChats(chatsWithUsernames); // Update state with the latest messages including usernames
-      console.log(chatsWithUsernames); // Print the messages with usernames for testing purposes.
-    }).catch(error => {
-      console.error('Error fetching chat partners or messages: ', error);
-    });
-  }, []);
+      const filteredChats = searchTerm
+        ? chatsWithUsernames.filter(({ parseMessage, partnerUsername }) =>
+            partnerUsername.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            parseMessage.get('Message_Text').toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        : chatsWithUsernames;
+
+
+        setChats(filteredChats);
+      }).catch(error => {
+        console.error('Error fetching chat partners or messages: ', error);
+      });
+    }, [searchTerm]); 
 
 
 return (
