@@ -32,7 +32,7 @@ const LogIn = () => {
 	
 		  if (user) {
 			// Found the user by dock number
-			alert("Dock number exists. Redirecting to Home page!");
+			// alert("Dock number exists. Redirecting to Home page!");
 			navigate("/Home"); // Redirect to the home page
 		  } else {
 			alert("Dock no. not in use, contact the harbour office!");
@@ -77,7 +77,7 @@ const LogIn = () => {
 	)
 
 
-}
+};
 
 export default LogIn; 
 

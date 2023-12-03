@@ -1,19 +1,18 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Parse from 'parse';
 
 // CSS import
 import './App.css';
 import './styles.css';
-import './styles.css'
 
-//Pages import
+// Pages import
 import Home from './pages/Home';
 import MyInbox from "./pages/MyInbox";
 import NewMessage from "./pages/NewMessage";
 import Profile from "./pages/Profile";
 import LogIn from "./pages/LogIn";
 
-//Components import
+// Components import
 import NavbarBottom from './components/NavbarBottom';
 import { useEffect, useState } from "react";
 import Chat from "./pages/Chat";
@@ -28,7 +27,7 @@ export default function App() {
         const currentUser = Parse.User.current();
         if (currentUser) {
           setAuthenticated(true);
-        }else {
+        } else {
           setAuthenticated(false);
         }
       } catch (error) {
@@ -40,15 +39,19 @@ export default function App() {
 
   return (
     <>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={authenticated ? <Home /> : <LogIn/>} />
-        <Route path="Inbox" element={<MyInbox />} />
-        <Route path="NewMessage" element={<NewMessage />} />
-        <Route path="Profile" element={<Profile />} />
-        <Route path="Chat" element={<Chat />} />
-      </Routes>
-    </BrowserRouter>
-   </>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={authenticated ? <Navigate to="/Home" /> : <LogIn />}
+          />
+          <Route path="/Home" element={<Home />} />
+          <Route path="/Inbox" element={<MyInbox />} />
+          <Route path="/NewMessage" element={<NewMessage />} />
+          <Route path="/Profile" element={<Profile />} />
+          <Route path="/Chat" element={<Chat />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
