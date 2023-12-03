@@ -5,6 +5,7 @@ import "../../src/styles.css";
 
 //components import
 import UserInfo from "../components/UserInfo";
+import NavbarBottom from '../components/NavbarBottom';
 
 export default function Profile({ userName }) {
   return (
@@ -15,6 +16,7 @@ export default function Profile({ userName }) {
         <UserInfo />
         <h2 className="bold">Privacy settings</h2>
       </div>
+      <NavbarBottom activeItem={"Profile"} />
     </Fragment>
   );
 }

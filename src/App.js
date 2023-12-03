@@ -16,6 +16,7 @@ import LogIn from "./pages/LogIn";
 //Components import
 import NavbarBottom from './components/NavbarBottom';
 import { useEffect, useState } from "react";
+import Chat from "./pages/Chat";
 
 export default function App() {
   
@@ -45,8 +46,8 @@ export default function App() {
         <Route path="Inbox" element={<MyInbox />} />
         <Route path="NewMessage" element={<NewMessage />} />
         <Route path="Profile" element={<Profile />} />
+        <Route path="Chat" element={<Chat />} />
       </Routes>
-    <NavbarBottom />
     </BrowserRouter>
    </>
   );

@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-export default function MessageCard({
+export default function ChatCard({
   messageSenderNo,
   messageRecieverNo,
   messageDate,
@@ -11,9 +11,8 @@ export default function MessageCard({
 
   return (
     <Fragment>
-      <div className="messageCard" id={messageRecieverNo + messageRecieverNo}>
-        <div className="in-line-message">
-          <section className="message-card-body">
+      <div className="chat-card chats" id={messageRecieverNo + messageRecieverNo}>
+          <section className="chat-card-body">
             <div className="in-line-message">
               <p className="bold" id="messageSender">
                 {messageSenderNo}
@@ -24,7 +23,6 @@ export default function MessageCard({
               <p>{messageText}</p>
             </div>
           </section>
-        </div>
       </div>
     </Fragment>
   );
