@@ -1,4 +1,7 @@
 /* Typography */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+
 
 /* Welcome Flemming */
 h1 {
@@ -21,14 +24,14 @@ h2 {
 h3 { 
 	color: #FFFF;
 	font-size: 90%;
-	font-family: 'Source Sans Variable', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
 }
 
 .h3-home { 
 	color: #FFFF;
 	font-size: 90%;
-	font-family: 'Source Sans Variable', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
 	display: inline-block;
 	margin: 2% 4% ;
@@ -48,7 +51,7 @@ h4 {
 h5 {
 	color: #919191;
 	font-size: 11px;
-	font-family: 'Source Sans Variable', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
 	text-align: right;
 	padding-left: 20px;
@@ -58,7 +61,7 @@ h5 {
 p {
 	color: #012657;
 	font-size: 90%;
-	font-family: 'Source Sans Variable', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
 }
 
@@ -309,6 +312,7 @@ form {
 /* searchbar */
 .search-input {
     font-size: 90%;
+	font-family: 'Source Sans Pro', sans-serif;
     border-radius: 10px;
     border: 1px solid #ccc;
     padding: 6px;
@@ -327,7 +331,7 @@ form {
   
 .dock-select {
 	font-size: 90%;
-	font-family: 'Source Sans Variable', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	border-radius: 10px;
 	padding: 2%;
 	color: #1D385C;
@@ -414,7 +418,7 @@ textarea {
 	resize: none; /* Remove this if you want the user to resize the textarea */
 	color: #1D385C;
 	font-size: 90%;
-	font-family: 'Source Sans Variable', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
 	background-color:rgba(216, 221, 229, 0.847);
 	border-color: #1D385C;
