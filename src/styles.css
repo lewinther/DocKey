@@ -405,6 +405,49 @@ label {
 	margin-bottom: 6%;
   }
 
+.image-preview-wrapper {
+	display: flex;
+	align-items: center; 
+	justify-content: flex-start;
+	margin-top: 10px; 
+	}
+
+.image-preview-container {
+	padding: 10px;
+	border-radius: 10px;
+	max-width: 200px; 
+	max-height: 200px; 
+	box-sizing: border-box;
+	}
+
+.image-preview {
+	width: 100%; 
+	height: 100%;
+	border-radius: 10px; 
+	object-fit: cover; 
+	}
+
+.delete-image-button {
+	background-color: #b3251b; /* Red color to indicate deletion */
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 16px; /* Adjust the font size if needed */
+	padding: 10px 20px; /* Adjust the padding to match the size of the button to other buttons */
+	border-radius: 10px; /* Rounded corners as the other buttons */
+	border: none;
+	cursor: pointer;
+	font-weight: 400; /* Match the font weight to other buttons */
+	margin-left: 25px;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2); /* Optional: adds a slight shadow for depth */
+	transition: background-color 0.3s; /* Optional: smooth background color transition on hover */
+	}
+	
+	.delete-image-button:hover {
+	background-color: #9e1e15; /* A darker red on hover for better user experience */
+	}
+	  
+
+
 
 textarea {
 	flex: 1; /* Allow textarea to stretch vertically within the container */
