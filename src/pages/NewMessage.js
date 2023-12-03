@@ -9,7 +9,7 @@ import "../../src/styles.css";
 import NewMessageCardContainer from "../components/NewMessageCardContainer";
 import DockFilter from "../components/DockFilter";
 
-// Your Parse initialization configuration goes here
+// Parse initialization configuration goes here
 const PARSE_APPLICATION_ID = 'l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ';
 const PARSE_JAVASCRIPT_KEY = 'h9PTAAitCJFul7XadjhQbXFaK1N8VGZdJodYl5Tx';
 const PARSE_HOST_URL = 'https://parseapi.back4app.com/';

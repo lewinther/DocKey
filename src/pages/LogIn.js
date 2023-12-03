@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState} from "react";
 import Parse from "parse";
 import { useNavigate } from "react-router";
 
@@ -24,30 +24,24 @@ const LogIn = () => {
 
 	// Validating the credentials, and use Parse to check if the dock no. and password match
 	const handleLogin = async () => {
-		try{
-			const User = Parse.Object.extend("_User");
-			const query = new Parse.Query(User);
-			query.equalTo("dock", dockNumber);
-			const user = await query.first();
-
-			if (user) {
-				const storedPassword = user.get("password");
-				if (storedPassword === password){
-					alert("Login successful!"); // Successful Login here
-					navigate("/Home"); // Redirect to the home page
-				} else {
-					alert("Invalid password");
-				}
-
-			} else {
-				alert("Dock no. not in use, contact the harbour office!");
-			}
+		try {
+		  const User = Parse.Object.extend("_User");
+		  const query = new Parse.Query(User);
+		  query.equalTo("dock", dockNumber);
+		  const user = await query.first();
+	
+		  if (user) {
+			// Found the user by dock number
+			alert("Dock number exists. Redirecting to Home page!");
+			navigate("/Home"); // Redirect to the home page
+		  } else {
+			alert("Dock no. not in use, contact the harbour office!");
+		  }
 		} catch (error) {
-			console.error("Error while logging in", error);
-			alert("Login failed. Flease try again, or contact the harbour office");
-		
+		  console.error("Error while logging in", error);
+		  alert("Login failed. Please try again, or contact the harbour office");
 		}
-	};
+	  };
 
 	return(
 		<Fragment>

@@ -45,7 +45,6 @@ export default function App() {
         <Route path="Inbox" element={<MyInbox />} />
         <Route path="NewMessage" element={<NewMessage />} />
         <Route path="Profile" element={<Profile />} />
-        <Route path="LogIn" element={<LogIn />} />
       </Routes>
     <NavbarBottom />
     </BrowserRouter>
