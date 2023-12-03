@@ -44,12 +44,6 @@ export default function Home() {
         <h1>Welcome {user.get('username')}!</h1>
         <NewsCardContainer />
         <ChatListHome />
-        <div className="centered">
-          <Link Button className="BlueButton link" to={`/NewMessage`}>
-            {" "}
-            Send new message{" "}
-          </Link>
-        </div>
         <NavbarBottom activeItem={"Home"} />
       </div>
     </Fragment>

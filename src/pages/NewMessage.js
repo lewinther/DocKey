@@ -110,22 +110,20 @@ export default function NewMessage() {
   return (
     <Fragment>
       <h1>New Message</h1>
-      <h3>Which dock do you want to contact?</h3>
       <DockFilter
         onDockSelect={handleDockSelection}
         dockNumbers={dockNumbers}
       />
-      <h3>Your Message:</h3>
       <NewMessageCardContainer
         messageContent={messageContent}
         onContentChange={handleMessageContentChange}
       />
       <div className="button-container">
-        <div className="button-group">
-          <Link className="WhiteButton link" to={`/AttachPhoto`}>
+        <div className="wrapper">
+          <Link className="attach-button link" to={`/AttachPhoto`}>
             Attach Photo
           </Link>
-          <button className="BlueButton" onClick={handleSendMessage}>
+          <button className="send-button" onClick={handleSendMessage}>
             Send
           </button>
         </div>
