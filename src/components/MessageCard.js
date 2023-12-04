@@ -19,7 +19,7 @@ console.log("Image URL:", imageUrl); // Check if the URL is correct
           <section className="chat-card-body">
             <div className="in-line-message">
               <p className="bold" id="messageSender">
-                {messageSenderNo}
+                {"Sender: " + messageSenderNo + " Receiver: " + messageRecieverNo}
               </p>
               <h5 id="messageDate">{messageDate}</h5>
             </div>

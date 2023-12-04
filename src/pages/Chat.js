@@ -50,9 +50,9 @@ export default function Chat() {
   return (
     <Fragment>
       <div>
-        <div className="container-container">
+        <div className="">
           <ChatContainer chatPartnerID={chatPartnerID} currentUserID={currentUser} />
-          <Link className="BlueButton link" to={`/NewMessage`}>
+          <Link className="send-new-message-button link" to={`/NewMessage`}>
             Send new message
           </Link>
         </div>

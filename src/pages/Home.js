@@ -7,7 +7,7 @@ import "../../src/styles.css";
 
 // Components
 import NewsCardContainer from "../components/NewsCardContainer";
-import MessageCardContainer from "../components/MessageCardContainer";
+import MessageCardContainer from "../components/ChatListHome";
 import NavbarBottom from '../components/NavbarBottom';
 
 // Your Parse initialization configuration goes here
@@ -50,7 +50,7 @@ export default function Home() {
             Send new message{" "}
           </Link>
         </div>
-        <NavbarBottom activeItem={"Inbox"} />
+        <NavbarBottom activeItem={"Home"} />
       </div>
     </Fragment>
   );
