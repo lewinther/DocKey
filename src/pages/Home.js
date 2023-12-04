@@ -7,7 +7,7 @@ import "../../src/styles.css";
 
 // Components
 import NewsCardContainer from "../components/NewsCardContainer";
-import ChatListHome from "../components/ChatListHome";
+import MessageCardContainer from "../components/MessageCardContainer";
 import NavbarBottom from '../components/NavbarBottom';
 
 // Your Parse initialization configuration goes here
@@ -43,9 +43,16 @@ export default function Home() {
       <div className="in-column">
         <h1>Welcome, {user.get('first_name')}!</h1>
         <NewsCardContainer />
-        <ChatListHome />
-        <NavbarBottom activeItem={"Home"} />
+        <MessageCardContainer />
+        <div className="centered">
+          <Link Button className="BlueButton link" to={`/NewMessage`}>
+            {" "}
+            Send new message{" "}
+          </Link>
+        </div>
+        <NavbarBottom activeItem={"Inbox"} />
       </div>
     </Fragment>
   );
 }
+
