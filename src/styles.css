@@ -128,8 +128,8 @@ p {
 	padding: 2%;
 	border-radius: 10px;
 	display: inline-block;
-	right: 4%;
-	position: fixed;
+	margin-left: 27%;
+	/*position: fixed;*/
 }
 
 .send-new-message-button{
