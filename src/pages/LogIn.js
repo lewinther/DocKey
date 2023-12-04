@@ -2,8 +2,6 @@ import React, { Fragment, useState} from "react";
 import Parse from "parse";
 import { useNavigate } from "react-router";
 
-
-
 // CSS import
 import "../../src/styles.css";
 
@@ -17,45 +15,57 @@ Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
 Parse.serverURL = PARSE_HOST_URL;
 
 
-const LogIn = () => {
-	const [dockNumber, setDockNumber] = useState("");
-	const [password, setPassword] = useState ("");
-	const navigate = useNavigate();
+export const UserLogin = () => {
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+	const [currentUser, setCurrentUser] = useState(null);
 
-	// Validating the credentials, and use Parse to check if the dock no. and password match
-	const handleLogin = async () => {
-		try {
-		  const User = Parse.Object.extend("_User");
-		  const query = new Parse.Query(User);
-		  query.equalTo("dock", dockNumber);
-		  const user = await query.first();
-	
-		  if (user) {
-			// Found the user by dock number
-			// alert("Dock number exists. Redirecting to Home page!");
-			navigate("/Home"); // Redirect to the home page
-		  } else {
-			alert("Dock no. not in use, contact the harbour office!");
-		  }
-		} catch (error) {
-		  console.error("Error while logging in", error);
-		  alert("Login failed. Please try again, or contact the harbour office");
-		}
-	  };
+	  // Function that will return current user and also update current username
+  const getCurrentUser = async function () {
+    const currentUser = await Parse.User.current();
+    // Update state variable holding current user
+    setCurrentUser(currentUser);
+    return currentUser;
+
+};
+
+const doUserLogIn = async function () {
+	const usernameValue = username;
+	const passwordValue = password;
+
+	try {
+		const loggedInUser = await Parse.User.logIn(usernameValue, passwordValue);
+		alert(
+			`Success! User ${loggedInUser.get('username')} has successfully signed in!`
+		  );
+		  const currentUser = await Parse.User.current();
+		  console.log(loggedInUser === currentUser);
+		  setCurrentUser("");
+		  setPassword("");
+
+		  // Update state variables holding current user
+		  getCurrentUser();
+		  return true; 
+	} catch (error){
+		    // Error can be caused by wrong parameters or lack of Internet connection
+			alert(`Error! ${error.message}`);
+			return false;
+	}
+};
 
 	return(
-		<Fragment>
+		<div>
 		<div className="login-container">
 		  <h1>Log into your account</h1>
 		  <div>
 
 		  </div>
-		  <div className="input-container">
+		  <div className="textarea">
 			<input
 			  type="text"
 			  placeholder="Dock Number"
-			  value={dockNumber}
-			  onChange={(e) => setDockNumber(e.target.value)}
+			  value={username}
+			  onChange={(e) => setUsername(e.target.value)}
 			/>
 			<input
 			  type="password"
@@ -68,22 +78,13 @@ const LogIn = () => {
   
 		<div className="button-container">
 		  <div className="button-group">
-		  	<button className="BlueButton" onClick={(e) => { e.preventDefault(); 	handleLogin(); }}>
+		  	<button className="BlueButton" onClick={() => doUserLogIn()}>
   			Log in
 			</button>
 		  </div>
 		</div>
-	  </Fragment>
-	)
+	  </div>
+  );
+}
 
-
-};
-
-export default LogIn; 
-
-
-
-
-
-
-
+export default UserLogin;

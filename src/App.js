@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import MyInbox from "./pages/MyInbox";
 import NewMessage from "./pages/NewMessage";
 import Profile from "./pages/Profile";
-import LogIn from "./pages/LogIn";
+import UserLogin from "./pages/LogIn";
 
 // Components import
 import NavbarBottom from './components/NavbarBottom';
@@ -43,7 +43,7 @@ export default function App() {
         <Routes>
           <Route
             path="/"
-            element={authenticated ? <Navigate to="/Home" /> : <LogIn />}
+            element={authenticated ? <Navigate to="/Home" /> : <UserLogin />}
           />
           <Route path="/Home" element={<Home />} />
           <Route path="/Inbox" element={<MyInbox />} />
@@ -54,4 +54,4 @@ export default function App() {
       </BrowserRouter>
     </>
   );
-}
+};
