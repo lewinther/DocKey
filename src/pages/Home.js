@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <Fragment>
       <div className="in-column">
-        <h1>Welcome {user.get('username')}!</h1>
+        <h1>Welcome, {user.get('first_name')}!</h1>
         <NewsCardContainer />
         <MessageCardContainer />
         <div className="centered">

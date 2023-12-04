@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Parse from 'parse';
 import ChatCard from "./ChatCard";
+import { useNavigate, Link } from "react-router-dom";
 import "../../src/styles.css";
 
-export default function ChatListInbox() {
+export default function ChatListHome({ searchTerm }) {
   const [chats, setChats] = useState([]);
   const currentUser = 'YznbDiMrX1'; // temporary hard-coded user ID
+  const navigate = useNavigate(); // Hook for programmatically navigating
+
+  // Function to handle chat card click
+  const handleChatClick = (chatPartnerID) => {
+    navigate(`/Chat`, { state: { chatPartnerID, currentUser } });
+  };
 
   useEffect(() => {
     // Queries for messages where the current user is either sender or receiver.
@@ -68,34 +75,41 @@ export default function ChatListInbox() {
       });
 
     }).then((chatsWithUsernames) => {
-      setChats(chatsWithUsernames); // Update state with the latest messages including usernames
-      console.log(chatsWithUsernames); // Print the messages with usernames for testing purposes.
-    }).catch(error => {
-      console.error('Error fetching chat partners or messages: ', error);
-    });
-  }, []);
+      const filteredChats = searchTerm
+        ? chatsWithUsernames.filter(({ parseMessage, partnerUsername }) =>
+            partnerUsername.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            parseMessage.get('Message_Text').toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        : chatsWithUsernames;
 
-// ... (The rest of the ChatListInbox component)
+
+        setChats(filteredChats);
+      }).catch(error => {
+        console.error('Error fetching chat partners or messages: ', error);
+      });
+    }, [searchTerm]); 
+
 
 return (
-      <div className="message-list">
-          {chats.map(({ parseMessage, partnerUsername }, index) => {
-            const chatPartnerID = parseMessage.id; // Assuming you have the id property available.
-            const chatDate = parseMessage.get('Message_Date') ? parseMessage.get('Message_Date').toDateString() : 'Unknown date';
-            const chatPreviewText = parseMessage.get('Message_Text'); // Use the correct key for message text.
-    
-        return (
-          <ChatCard
-            key={index}
-            chatPartnerID={chatPartnerID}
-            chatPartnerUsername={partnerUsername}
-            chatDate={chatDate}
-            chatPreviewText={chatPreviewText}
-          />
-        );
-      })}
-      </div>
-  )
+  <div className="message-list">
+    {chats.map(({ parseMessage, partnerUsername }, index) => {
+      const chatPartnerID = parseMessage.id; // Assuming you have the id property available.
+      const chatDate = parseMessage.get('Message_Date').toLocaleDateString() ? parseMessage.get('Message_Date').toLocaleDateString() : 'Unknown date';
+      const chatPreviewText = parseMessage.get('Message_Text'); // Use the correct key for message text.
+
+      return (
+        <ChatCard
+          key={index}
+          chatPartnerID={chatPartnerID}
+          chatPartnerUsername={partnerUsername}
+          chatDate={chatDate}
+          chatPreviewText={chatPreviewText}
+          onClick={() => handleChatClick(chatPartnerID)}
+        />
+      );
+    })}
+  </div>
+)
   
   
 };

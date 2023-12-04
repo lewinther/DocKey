@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Parse from "parse";
 
@@ -24,6 +24,8 @@ export default function NewMessage() {
   const [selectedDock, setSelectedDock] = useState("");
   const [messageContent, setMessageContent] = useState("");
   const [dockNumberToUserIdMapping, setDockNumberToUserIdMapping] = useState({});
+  const [imageFile, setImageFile] = useState(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const fetchDockNumbers = async () => {
@@ -56,76 +58,127 @@ export default function NewMessage() {
     fetchDockNumbers();
   }, []);
 
-  //update selected dock state when user selects a dock//
-  const handleDockSelection = (selectedDockNumber) => {
-    console.log(`Selected dock number: ${selectedDockNumber}`);
-    setSelectedDock(selectedDockNumber);
-  };
+    //update selected dock state when user selects a dock//
+    const handleDockSelection = (selectedDockNumber) => {
+      console.log(`Selected dock number: ${selectedDockNumber}`);
+      setSelectedDock(selectedDockNumber);
+    };
 
-  const handleMessageContentChange = (content) => {
-    setMessageContent(content);
-  };
+    const handleMessageContentChange = (content) => {
+      setMessageContent(content);
+    };
 
-  // for when both dock number and message content are selected//
-  const handleSendMessage = async () => {
-    if (!selectedDock || !messageContent) {
-      alert("Ensure a dock number has been selected or enter a message");
-      return;
-    }
-  
-    // mapping dock number to user id
-    const receiverId = dockNumberToUserIdMapping[selectedDock];
-    //const senderId = getCurrentUserId(); // **will be future task to put this fxn in 
-    const senderId = 'YznbDiMrX1';
+    const handleAttachClick = () => {
+      fileInputRef.current.click();
+    };
 
-    if (!receiverId) {
-      alert("Invalid dock number selected");
-      return;
-    }
-  
-    try {
-      // making pointers for sender and receiver
-      let senderPointer = Parse.Object.extend('_User').createWithoutData(senderId);
-      let receiverPointer = Parse.Object.extend('_User').createWithoutData(receiverId);
+    const handleImageChange = (event) => {
+      if (event.target.files[0]) {
+        const file = event.target.files[0];
+        const previewUrl = URL.createObjectURL(file);
+        setImageFile({ file, previewUrl }); // stores the File object and the preview URL
+        event.target.value = null;
+      }
+    };
+    
+    
 
-      // new message object
-      const Message = new Parse.Object("Message");
-      Message.set('Message_Text', messageContent);
-      Message.set('Sender_User_ID', senderPointer);
-      Message.set('Receiver_User_ID', receiverPointer);
-      // Current date and time as message date 
-      Message.set('Message_Date', new Date());
-  
-      await Message.save();
-  
-      alert(`Message sent to ${selectedDock}!`);
-      setMessageContent(""); 
-    } catch (error) {
-      console.error('Error while sending message:', error);
-      alert(`Failed to send message: ${error.message}`);
-    }    
-  };
+    const onDeleteImage = () => {
+      setImageFile(null); // removes image preview and file
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null; // resets the input file value - needed for refresh
+      }
+    };
+
+    // for when both dock number and message content are selected//
+    const handleSendMessage = async () => {
+      if (!selectedDock || !messageContent) {
+        alert("Ensure a dock number has been selected or enter a message");
+        return;
+      }
+    
+      // mapping dock number to user id
+      const receiverId = dockNumberToUserIdMapping[selectedDock];
+      //const senderId = getCurrentUserId(); // **will be future task to put this fxn in 
+      const senderId = 'YznbDiMrX1';
+    
+      if (!receiverId) {
+        alert("Invalid dock number selected");
+        return;
+      }
+
+      let parseFile;
+      let ImageObject;
+    
+      try {
+        if (imageFile && imageFile.file) {
+          
+          parseFile = new Parse.File(imageFile.file.name, imageFile.file);
+          await parseFile.save();
+    
+          // adding image to image table in parse db
+          ImageObject = new Parse.Object("Image");
+          ImageObject.set('Image_File', parseFile);
+          await ImageObject.save();
+        }
+        
+        // making pointers for sender and receiver
+        let senderPointer = Parse.Object.extend('_User').createWithoutData(senderId);
+        let receiverPointer = Parse.Object.extend('_User').createWithoutData(receiverId);
+    
+        // new message object
+        const Message = new Parse.Object("Message");
+        Message.set('Message_Text', messageContent);
+        Message.set('Sender_User_ID', senderPointer);
+        Message.set('Receiver_User_ID', receiverPointer);       
+        // Current date and time as message date 
+        Message.set('Message_Date', new Date());
+
+         // if there is an image, add it to the Message object
+        if (ImageObject) {
+          Message.set('Image', ImageObject); // creates an image pointer to the file in the image table 
+        }
+    
+        await Message.save();
+    
+        alert(`Message sent to ${selectedDock}!`);
+        setMessageContent(""); 
+        setImageFile(null); // reset the image file state after sending
+    
+      } catch (error) {
+        console.error('Error while sending message or uploading image:', error);
+        alert(`Failed to send message: ${error.message}`);
+      }    
+    };
+    
   
 
   return (
     <Fragment>
       <h1>New Message</h1>
-      <h3>Which dock do you want to contact?</h3>
       <DockFilter
         onDockSelect={handleDockSelection}
         dockNumbers={dockNumbers}
       />
-      <h3>Your Message:</h3>
       <NewMessageCardContainer
         messageContent={messageContent}
+        imagePreview={imageFile ? imageFile.previewUrl : null}
         onContentChange={handleMessageContentChange}
+        onDeleteImage={onDeleteImage}
+      />
+       <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleImageChange}
+        accept="image/*"
+        style={{ display: 'none' }} // hiding input element to use attach photo btn
       />
       <div className="button-container">
-        <div className="button-group">
-          <Link className="WhiteButton link" to={`/AttachPhoto`}>
+        <div className="wrapper">
+          <button className="attach-button" onClick={handleAttachClick}>
             Attach Photo
-          </Link>
-          <button className="BlueButton" onClick={handleSendMessage}>
+          </button>
+          <button className="send-button" onClick={handleSendMessage}>
             Send
           </button>
         </div>
