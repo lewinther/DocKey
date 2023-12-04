@@ -34,7 +34,7 @@ export default function UserInfo() {
   return (
     <Fragment>
       <section className="chat-container in-column">
-        <p className="in-line">Name: {user.get('firstname') + " " + user.get('lastname')}</p>
+        <p className="in-line">Name: {user.get('first_name') + " " + user.get('last_name')}</p>
         <p className="in-line">Phone: {user.get('phone_no')}</p>
         <p className="in-line">E-mail: {user.get('email')}</p>
       </section>
