@@ -41,15 +41,9 @@ export default function Home() {
   return (
     <Fragment>
       <div className="in-column">
-        <h1>Welcome {user.get('username')}!</h1>
+        <h1>Welcome, {user.get('first_name')}!</h1>
         <NewsCardContainer />
         <ChatListHome />
-        <div className="centered">
-          <Link Button className="BlueButton link" to={`/NewMessage`}>
-            {" "}
-            Send new message{" "}
-          </Link>
-        </div>
         <NavbarBottom activeItem={"Home"} />
       </div>
     </Fragment>
