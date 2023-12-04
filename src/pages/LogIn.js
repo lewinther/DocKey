@@ -36,8 +36,7 @@ const doUserLogIn = async function () {
 
 	try {
 		const loggedInUser = await Parse.User.logIn(usernameValue, passwordValue);
-		alert(
-			`Success! User ${loggedInUser.get('username')} has successfully signed in!`);
+		alert(`Success! User ${loggedInUser.get('username')} has successfully signed in!`);
 
 		  const currentUser = await Parse.User.current();
 		  console.log(loggedInUser === currentUser);
