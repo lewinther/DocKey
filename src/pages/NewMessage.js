@@ -72,25 +72,22 @@ export default function NewMessage() {
       fileInputRef.current.click();
     };
 
-    const getBase64 = (file) => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-        reader.readAsDataURL(file);
-      });
-    }
-    
-    const handleImageChange = async (event) => {
+    const handleImageChange = (event) => {
       if (event.target.files[0]) {
         const file = event.target.files[0];
-        const base64 = await getBase64(file);
-        setImageFile(base64); // Save the base64 for preview
+        const previewUrl = URL.createObjectURL(file);
+        setImageFile({ file, previewUrl }); // stores the File object and the preview URL
+        event.target.value = null;
       }
     };
+    
+    
 
     const onDeleteImage = () => {
-      setImageFile(null); // This will remove the image preview
+      setImageFile(null); // removes image preview and file
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null; // resets the input file value - needed for refresh
+      }
     };
 
     // for when both dock number and message content are selected//
@@ -114,9 +111,9 @@ export default function NewMessage() {
       let ImageObject;
     
       try {
-        if (imageFile) {
-        
-          parseFile = new Parse.File(imageFile.name, imageFile); //uploads image if there is one first
+        if (imageFile && imageFile.file) {
+          
+          parseFile = new Parse.File(imageFile.file.name, imageFile.file);
           await parseFile.save();
     
           // adding image to image table in parse db
@@ -165,7 +162,7 @@ export default function NewMessage() {
       />
       <NewMessageCardContainer
         messageContent={messageContent}
-        imagePreview={imageFile}
+        imagePreview={imageFile ? imageFile.previewUrl : null}
         onContentChange={handleMessageContentChange}
         onDeleteImage={onDeleteImage}
       />

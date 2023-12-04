@@ -6,8 +6,12 @@ export default function ChatCard({
   messageDate,
   messageTime,
   messageText,
+  messageImagePointer,
 }) {
   async function getMessageData() {}
+  const imageUrl = messageImagePointer ? messageImagePointer.get("Image_File").url() : null;
+console.log("Image URL:", imageUrl); // Check if the URL is correct
+
 
   return (
     <Fragment>
@@ -21,6 +25,9 @@ export default function ChatCard({
             </div>
             <div className="meta-text">
               <p>{messageText}</p>
+            
+          {/* for rendering the image if there is one */}
+            {imageUrl && <img src={imageUrl} alt="Message Attachment" className="message-image" />}
             </div>
           </section>
       </div>

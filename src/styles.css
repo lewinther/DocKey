@@ -239,6 +239,19 @@ body{
 	align-self:self-end;
 }
 
+/*Images in chat*/
+.message-image-container {
+	margin-top: 10px; /* Add space above the image */
+  }
+  
+  .message-image {
+	max-width: 50%; /* Ensure the image does not overflow the chat card */
+	height: auto; /* Maintain aspect ratio */
+	border-radius: 5px; /* Optional: if you want rounded corners */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow for depth */
+  }
+  
+
 /* MessageCard and MessageCardContainer formatting */
 .in-line-message{
 	display: flex;

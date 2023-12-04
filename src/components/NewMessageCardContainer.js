@@ -19,7 +19,7 @@ export default function NewMessageCardContainer({
         {imagePreview && (
           <div className="image-preview-wrapper">
             <div className="image-preview-container">
-              <img src={imagePreview} alt="Preview" className="image-preview" />
+              <img src={imagePreview} alt="Preview" style={{ maxWidth: '100%', height: 'auto' }} /> 
             </div>
             <button className="delete-image-button" onClick={onDeleteImage}>Delete</button>
           </div>
