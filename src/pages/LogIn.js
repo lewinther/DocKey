@@ -16,14 +16,15 @@ Parse.serverURL = PARSE_HOST_URL;
 
 
 export const UserLogin = () => {
+	const navigate = useNavigate();
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [currentUser, setCurrentUser] = useState(null);
 
-	  // Function that will return current user and also update current username
+// Function that will return current user and also update current username
   const getCurrentUser = async function () {
     const currentUser = await Parse.User.current();
-    // Update state variable holding current user
+// Update state variable holding current user
     setCurrentUser(currentUser);
     return currentUser;
 
@@ -36,12 +37,14 @@ const doUserLogIn = async function () {
 	try {
 		const loggedInUser = await Parse.User.logIn(usernameValue, passwordValue);
 		alert(
-			`Success! User ${loggedInUser.get('username')} has successfully signed in!`
-		  );
+			`Success! User ${loggedInUser.get('username')} has successfully signed in!`);
+
 		  const currentUser = await Parse.User.current();
 		  console.log(loggedInUser === currentUser);
 		  setCurrentUser("");
 		  setPassword("");
+
+		  navigate('/Home')
 
 		  // Update state variables holding current user
 		  getCurrentUser();
