@@ -7,7 +7,7 @@ import "../../src/styles.css";
 //components import
 import ChatCard from "./MessageCard";
 
-export default function ChatContainer() {
+export default function ChatContainer({ currentUserID, chatPartnerID }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -16,6 +16,7 @@ export default function ChatContainer() {
       const query = new Parse.Query(Message);
 
       query.ascending("Message_Date");
+      query.include("Image");
       
       // Example: Fetch messages for a specific user
       query.equalTo(
@@ -25,6 +26,7 @@ export default function ChatContainer() {
 
       try {
         const results = await query.find();
+        console.log("Fetched messages with images:", results); 
         setMessages(results);
       } catch (error) {
         console.error("Error while fetching messages:", error);
@@ -32,7 +34,7 @@ export default function ChatContainer() {
     };
 
     fetchMessages();
-  }, []);
+  }, [currentUserID, chatPartnerID]);
 
   return (
     <div className="chat-container">
@@ -43,6 +45,7 @@ export default function ChatContainer() {
           messageRecieverNo={message.get("Receiver_User_ID").id}
           messageDate={message.get("Message_Date").toLocaleString()}
           messageText={message.get("Message_Text")}
+          messageImagePointer={message.get("Image")}
         />
       ))}
     </div>
