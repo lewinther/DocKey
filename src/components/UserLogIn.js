@@ -1,24 +1,24 @@
 import React, { Fragment, useEffect, useState} from "react";
 
 // Stores (has to be first)
-import useAuthenticationStore from '../stores/Authentication';
+import useUserStore from "../stores/UserStore";
 
 // CSS import
 import "../../src/styles.css";
 
-export const UserLogin = () => {
+export default () => {
 	const [dockNumber, setDockNumber] = useState('');
 	const [password, setPassword] = useState('');
-	const doLogin = useAuthenticationStore((state) => state.doLogin);
-	const isAuthenticated = useAuthenticationStore((state) => state.isAuthenticated);
+	const doLogin = useUserStore((state) => state.doLogin);
+	const user = useUserStore((state) => state.user);
 
 	// Watcher that clears fields on successful login 
 	useEffect(() => {
-		if(isAuthenticated) {
+		if(user) {
 			setDockNumber("");
 			setPassword("");
 		} 
-	}, [isAuthenticated])
+	}, [user])
 
 	return(
 		<div>
@@ -53,5 +53,3 @@ export const UserLogin = () => {
 	  </div>
   );
 }
-
-export default UserLogin;
