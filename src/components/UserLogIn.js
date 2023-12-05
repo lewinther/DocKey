@@ -1,4 +1,4 @@
-import React, { Fragment, useState} from "react";
+import React, { Fragment, useEffect, useState} from "react";
 
 // Stores (has to be first)
 import useAuthenticationStore from '../stores/Authentication';
@@ -9,19 +9,16 @@ import "../../src/styles.css";
 export const UserLogin = () => {
 	const [dockNumber, setDockNumber] = useState('');
 	const [password, setPassword] = useState('');
-	const [currentUser, setCurrentUser] = useState(null);
 	const doLogin = useAuthenticationStore((state) => state.doLogin);
+	const isAuthenticated = useAuthenticationStore((state) => state.isAuthenticated);
 
-/*
-	Function that will return current user and also update current username
-*/
-
-//   const getCurrentUser = async function () {
-//     const currentUser = await Parse.User.current();
-// // Update state variable holding current user
-//     setCurrentUser(currentUser);
-//     return currentUser;
-// };
+	// Watcher that clears fields on successful login 
+	useEffect(() => {
+		if(isAuthenticated) {
+			setDockNumber("");
+			setPassword("");
+		} 
+	}, [isAuthenticated])
 
 	return(
 		<div>
