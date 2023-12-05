@@ -1,6 +1,6 @@
 import React, { Fragment, useState} from "react";
 import Parse from "parse";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 // CSS import
 import "../../src/styles.css";
@@ -16,10 +16,10 @@ Parse.serverURL = PARSE_HOST_URL;
 
 
 export const UserLogin = () => {
-	const navigate = useNavigate();
-	const [username, setUsername] = useState('');
+	const [dockNumber, setDockNumber] = useState('');
 	const [password, setPassword] = useState('');
 	const [currentUser, setCurrentUser] = useState(null);
+	const navigate = useNavigate()
 
 // Function that will return current user and also update current username
   const getCurrentUser = async function () {
@@ -31,24 +31,23 @@ export const UserLogin = () => {
 };
 
 const doUserLogIn = async function () {
-	const usernameValue = username;
+	const usernameValue = dockNumber;
 	const passwordValue = password;
 
 	try {
 		const loggedInUser = await Parse.User.logIn(usernameValue, passwordValue);
-		alert(`Success! User ${loggedInUser.get('username')} has successfully signed in!`);
+		alert(`Success! User ${loggedInUser.get('dockNumber')} has successfully signed in!`);
 
 		  const currentUser = await Parse.User.current();
 		  console.log(loggedInUser === currentUser);
 		  setCurrentUser("");
 		  setPassword("");
-
-		  navigate('/Home')
-
+		
 		  // Update state variables holding current user
 		  getCurrentUser();
+		  navigate('/Home');
 		  return true; 
-	} catch (error){
+		} catch (error){
 		    // Error can be caused by wrong parameters or lack of Internet connection
 			alert(`Error! ${error.message}`);
 			return false;
@@ -66,8 +65,8 @@ const doUserLogIn = async function () {
 			<input
 			  type="text"
 			  placeholder="Dock Number"
-			  value={username}
-			  onChange={(e) => setUsername(e.target.value)}
+			  value={dockNumber}
+			  onChange={(e) => setDockNumber(e.target.value)}
 			/>
 			<input
 			  type="password"
