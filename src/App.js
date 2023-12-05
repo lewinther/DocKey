@@ -11,6 +11,7 @@ import MyInbox from "./pages/MyInbox";
 import NewMessage from "./pages/NewMessage";
 import Profile from "./pages/Profile";
 import UserLogin from "./pages/LogIn";
+import { useNavigate } from "react-router";
 
 // Components import
 import { useEffect, useState } from "react";
@@ -20,6 +21,7 @@ export default function App() {
   
   // Checking the authentication status
   const [authenticated, setAuthenticated] = useState(false);
+  const navigate = useNavigate();
  
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -45,6 +47,8 @@ export default function App() {
       if (currentUser === null) {
         alert('Success! No user is logged in anymore!');
       }
+      navigate('/Home')
+
       // Update state variable holding current user
       return true;
     } catch (error) {
