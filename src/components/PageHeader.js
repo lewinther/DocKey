@@ -25,7 +25,7 @@ export default function Header(){
 	return(
 		<>
 		{isAuthenticated && (
-			<h3 onClick={() => doLogout()} className="h3-home">Log out</h3>
+			<h3 onClick={async () => await doLogout()} className="h3-home">Log out</h3>
 		  )}
 		  {!isAuthenticated && (
 			<UserLogin/>
