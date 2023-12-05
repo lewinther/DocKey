@@ -9,6 +9,8 @@ import "../../src/styles.css";
 import NewsCardContainer from "../components/NewsCardContainer";
 import MessageCardContainer from "../components/ChatListHome";
 import NavbarBottom from '../components/NavbarBottom';
+import UserLogin from "../components/UserLogIn";
+import PageHeader from "../components/PageHeader";
 
 // Your Parse initialization configuration goes here
 const PARSE_APPLICATION_ID = 'l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ';
@@ -40,6 +42,7 @@ export default function Home() {
 
   return (
     <Fragment>
+      <PageHeader/>
       <div className="in-column">
         <h1>Welcome, {user.get('first_name')}!</h1>
         <NewsCardContainer />

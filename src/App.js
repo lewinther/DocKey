@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import MyInbox from "./pages/MyInbox";
 import NewMessage from "./pages/NewMessage";
 import Profile from "./pages/Profile";
-import UserLogin from "./pages/LogIn";
+import UserLogin from "./components/UserLogIn";
 
 // Components import
 import { useEffect, useState } from "react";
@@ -61,8 +61,8 @@ export default function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={authenticated ? <Navigate to="/Home" /> : <UserLogin />}/>
-          <Route path="/Home" element={<Home />} />
+          {/* <Route path="/" element={authenticated ? <Navigate to="/Home" /> : <UserLogin />}/> */}
+          <Route path="/" element={<Home />} />
           <Route path="/Inbox" element={<MyInbox />} />
           <Route path="/NewMessage" element={<NewMessage />} />
           <Route path="/Profile" element={<Profile />} />

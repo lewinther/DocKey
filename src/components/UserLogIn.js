@@ -2,6 +2,9 @@ import React, { Fragment, useState} from "react";
 import Parse from "parse";
 import { useNavigate } from "react-router-dom";
 
+// Stores (has to be first)
+import useAuthenticationStore from '../stores/Authentication';
+
 // CSS import
 import "../../src/styles.css";
 
@@ -15,11 +18,14 @@ Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
 Parse.serverURL = PARSE_HOST_URL;
 
 
+
+
 export const UserLogin = () => {
 	const [dockNumber, setDockNumber] = useState('');
 	const [password, setPassword] = useState('');
 	const [currentUser, setCurrentUser] = useState(null);
 	const navigate = useNavigate()
+	const doLogin = useAuthenticationStore((state) => state.doLogin);
 
 // Function that will return current user and also update current username
   const getCurrentUser = async function () {
@@ -30,29 +36,29 @@ export const UserLogin = () => {
 
 };
 
-const doUserLogIn = async function () {
-	const usernameValue = dockNumber;
-	const passwordValue = password;
+// const doUserLogIn = async function () {
+// 	const usernameValue = dockNumber;
+// 	const passwordValue = password;
 
-	try {
-		const loggedInUser = await Parse.User.logIn(usernameValue, passwordValue);
-		alert(`Success! User ${loggedInUser.get('dockNumber')} has successfully signed in!`);
+// 	try {
+// 		const loggedInUser = await Parse.User.logIn(usernameValue, passwordValue);
+// 		alert(`Success! User ${loggedInUser.get('dockNumber')} has successfully signed in!`);
 
-		  const currentUser = await Parse.User.current();
-		  console.log(loggedInUser === currentUser);
-		  setCurrentUser("");
-		  setPassword("");
+// 		  const currentUser = await Parse.User.current();
+// 		  console.log(loggedInUser === currentUser);
+// 		  setCurrentUser("");
+// 		  setPassword("");
 		
-		  // Update state variables holding current user
-		  getCurrentUser();
-		  navigate('/Home');
-		  return true; 
-		} catch (error){
-		    // Error can be caused by wrong parameters or lack of Internet connection
-			alert(`Error! ${error.message}`);
-			return false;
-	}
-};
+// 		  // Update state variables holding current user
+// 		  getCurrentUser();
+// 		  navigate('/Home');
+// 		  return true; 
+// 		} catch (error){
+// 		    // Error can be caused by wrong parameters or lack of Internet connection
+// 			alert(`Error! ${error.message}`);
+// 			return false;
+// 	}
+// };
 
 	return(
 		<div>
@@ -79,7 +85,7 @@ const doUserLogIn = async function () {
   
 		<div className="button-container">
 		  <div className="button-group">
-		  	<button className="BlueButton" onClick={() => doUserLogIn()}>
+		  	<button className="BlueButton" onClick={() => doLogin()}>
   			Log in
 			</button>
 		  </div>
