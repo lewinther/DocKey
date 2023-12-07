@@ -24,19 +24,15 @@ export default function Home() {
         {user && (
           <h1>Welcome, {user.get('first_name')}!</h1>
         )}
-        <NewsCardContainer />
         {user && (
-          <div>
-            <MessageCardContainer />
-            <div className="centered">
-              <Link Button className="BlueButton link" to={`/NewMessage`}>
-                {" "}
-                Send new message{" "}
-              </Link>
-            </div>
-          </div>
+        <NewsCardContainer />
         )}
+        {user && (
+            <MessageCardContainer />
+        )}
+        {user && (
         <NavbarBottom activeItem={"Home"} />
+        )}
       </div>
     </Fragment>
   );

@@ -22,34 +22,35 @@ export default () => {
 
 	return(
 		<div>
-		<div className="login-container">
+		<div className="in-column">
 		  <h1>Log into your account</h1>
-		  <div>
-
-		  </div>
 		  <div className="textarea">
 			<input
+			  className="search-input"
 			  type="text"
 			  placeholder="Dock Number"
 			  value={dockNumber}
 			  onChange={(e) => setDockNumber(e.target.value)}
 			/>
+			
 			<input
+			  className="search-input"
 			  type="password"
 			  placeholder="Password"
 			  value={password}
 			  onChange={(e) => setPassword(e.target.value)}
 			/>
-		  </div>
+		  
 		</div>
   
 		<div className="button-container">
 		  <div className="button-group">
-		  	<button className="BlueButton" onClick={async () => await doLogin(dockNumber, password)}>
+		  	<button className="attach-button" onClick={async () => await doLogin(dockNumber, password)}>
   			Log in
 			</button>
 		  </div>
 		</div>
+	  </div>
 	  </div>
   );
 }

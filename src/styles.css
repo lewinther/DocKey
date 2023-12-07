@@ -497,6 +497,18 @@ textarea {
 	background-color:rgba(216, 221, 229, 0.847);
 	border-color: #1D385C;
   }
+
+/* Add space below the text input */
+.textarea .search-input[type="text"] {
+	margin-top: 5%; /* Adjust as needed */
+    margin-bottom: 2%; /* Adjust as needed */
+}
+
+/* Or add space above the password input */
+.textarea .search-input[type="password"] {
+    margin-top: 2%; /* Adjust as needed */
+	margin-bottom: 2%;
+}
   
 html, body {
 	height: 100%;
