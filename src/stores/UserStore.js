@@ -11,14 +11,13 @@ Parse.serverURL = PARSE_HOST_URL;
 
 export default create ((set) => ({
 	user: undefined,
-	doRestoreSession: async (sessionToken) => {
+	doRestoreSession: async () => {
 		const currentUser = await Parse.User.current();
 		set((state) => ({user: currentUser === null ? undefined : currentUser}));
 	},
 	doLogin: async (username, password) => {
 		try {
 			const loggedInUser = await Parse.User.logIn(username, password);
-			console.log(loggedInUser.get('sessionToken'));
 			set((state) => ({user: loggedInUser}));
 		}
 		catch (error){
