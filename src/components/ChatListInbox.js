@@ -1,26 +1,31 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Parse from 'parse';
 import ChatCard from "./ChatCard";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import useUserStore from "../stores/UserStore";
+
+//CSS import
 import "../../src/styles.css";
 
 export default function ChatListHome({ searchTerm }) {
   const [chats, setChats] = useState([]);
-  const currentUser = 'YznbDiMrX1'; // temporary hard-coded user ID
   const navigate = useNavigate(); // Hook for programmatically navigating
+  const currentUser = useUserStore((state) => state.user);
 
   // Function to handle chat card click
   const handleChatClick = (chatPartnerID) => {
-    navigate(`/Chat`, { state: { chatPartnerID, currentUser } });
+    const userId = currentUser.id;
+    navigate(`/Chat`, { state: { chatPartnerID, userId } });
   };
 
   useEffect(() => {
     // Queries for messages where the current user is either sender or receiver.
     const sentMessagesQuery = new Parse.Query('Message');
-    sentMessagesQuery.equalTo('Sender_User_ID', currentUser);
+    sentMessagesQuery.equalTo('Sender_User_ID', currentUser.id);
 
     const receivedMessagesQuery = new Parse.Query('Message');
-    receivedMessagesQuery.equalTo('Receiver_User_ID', currentUser);
+    receivedMessagesQuery.equalTo('Receiver_User_ID', currentUser.id);
 
     // Combined query for either sent or received messages.
     const combinedQuery = Parse.Query.or(sentMessagesQuery, receivedMessagesQuery);
@@ -34,7 +39,7 @@ export default function ChatListHome({ searchTerm }) {
       results.forEach(message => {
         const senderId = message.get('Sender_User_ID').id;
         const receiverId = message.get('Receiver_User_ID').id;
-        const partnerId = senderId === currentUser ? receiverId : senderId;
+        const partnerId = senderId === currentUser.id ? receiverId : senderId;
 
         const existingMessage = chatPartnersMap.get(partnerId);
         if (!existingMessage || message.get('Message_Date') > existingMessage.get('Message_Date')) {
@@ -64,7 +69,7 @@ export default function ChatListHome({ searchTerm }) {
       
         // Add the usernames to the chat messages
         const chatsWithUsernames = filteredMessages.map((parseMessage) => {
-          const partnerId = parseMessage.get('Sender_User_ID').id === currentUser ? parseMessage.get('Receiver_User_ID').id : parseMessage.get('Sender_User_ID').id;
+          const partnerId = parseMessage.get('Sender_User_ID').id === currentUser.id ? parseMessage.get('Receiver_User_ID').id : parseMessage.get('Sender_User_ID').id;
           return {
             parseMessage,
             partnerUsername: userIdToUsernameMap[partnerId] || 'Unknown',
