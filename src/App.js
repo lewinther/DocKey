@@ -1,5 +1,6 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Parse from 'parse';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import useUserStore from "./stores/UserStore";
+
 
 // CSS import
 import './App.css';
@@ -17,7 +18,13 @@ import { useEffect, useState } from "react";
 import Chat from "./pages/Chat";
 
 export default function App() {
-
+  const user = useUserStore((state) => state.user);
+	const doRestoreSession = useUserStore((state) => state.doRestoreSession);
+  	useEffect(() => {
+		if(!user) {
+			doRestoreSession();
+		} 
+	}, [])
   return (
     <>
       <BrowserRouter>

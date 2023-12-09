@@ -4,6 +4,7 @@ import React, { useState, Fragment } from "react";
 import "../../src/styles.css";
 
 //Components import
+import PageHeader from "../components/PageHeader";
 import SearchBar from "../components/SearchBar";
 import ChatListInbox from "../components/ChatListInbox";
 import NavbarBottom from '../components/NavbarBottom';
@@ -17,6 +18,7 @@ export default function MyInbox() {
 
   return (
     <Fragment>
+      <PageHeader/>
       <div className="in-column">
         <h1>Inbox</h1>
         <SearchBar onSearch={handleSearch} />

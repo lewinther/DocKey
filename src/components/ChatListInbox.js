@@ -4,15 +4,19 @@ import ChatCard from "./ChatCard";
 import { useNavigate } from "react-router-dom";
 
 import useUserStore from "../stores/UserStore";
+import useChatStore from "../stores/ChatStore";
 
 //CSS import
 import "../../src/styles.css";
 
 export default function ChatListHome({ searchTerm }) {
   const [chats, setChats] = useState([]);
-  const navigate = useNavigate(); // Hook for programmatically navigating
+  // Hook for programmatically navigating
+  const navigate = useNavigate();
   const currentUser = useUserStore((state) => state.user);
-
+  const getCombinedQuery = useChatStore(
+    (state) => state.doGetMessagesForUser
+  );
   // Function to handle chat card click
   const handleChatClick = (chatPartnerID) => {
     const userId = currentUser.id;
@@ -20,17 +24,9 @@ export default function ChatListHome({ searchTerm }) {
   };
 
   useEffect(() => {
-    // Queries for messages where the current user is either sender or receiver.
-    const sentMessagesQuery = new Parse.Query('Message');
-    sentMessagesQuery.equalTo('Sender_User_ID', currentUser.id);
+    if(!currentUser) return;
 
-    const receivedMessagesQuery = new Parse.Query('Message');
-    receivedMessagesQuery.equalTo('Receiver_User_ID', currentUser.id);
-
-    // Combined query for either sent or received messages.
-    const combinedQuery = Parse.Query.or(sentMessagesQuery, receivedMessagesQuery);
-    combinedQuery.descending('Message_Date');
-    combinedQuery.select('Sender_User_ID', 'Receiver_User_ID', 'Message_Text', 'Message_Date'); // Make sure to select 'Message_Date' and 'Message_Text'.
+    const combinedQuery = getCombinedQuery(currentUser.id);
 
     combinedQuery.find().then(results => {
       // Use a Map to track the most recent message for each chat partner.
