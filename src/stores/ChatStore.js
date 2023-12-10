@@ -1,20 +1,18 @@
 import { create } from "zustand";
-
-import Parse from "parse";
-
-// Your Parse initialization configuration goes here
-const PARSE_APPLICATION_ID = "l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ";
-const PARSE_JAVASCRIPT_KEY = "h9PTAAitCJFul7XadjhQbXFaK1N8VGZdJodYl5Tx";
-const PARSE_HOST_URL = "https://parseapi.back4app.com/";
-Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
-Parse.serverURL = PARSE_HOST_URL;
-
-const _sender_user_id = 'Sender_User_ID';
-const _receiver_user_id = 'Receiver_User_ID';
-const _message_date = 'Message_Date';
-const _message = 'Message';
-const _message_text = "Message_Text";
-const _username = 'username';
+import {
+  //parse DB fields
+  _sender_user_id, 
+  _receiver_user_id,
+  _message_date,
+  _message,
+  _message_text,
+  _username,
+  //functions
+  getUserName,
+  getMessageDate,
+  getMessageText
+} from "../parse/parseHelper";
+import {createCombinedMessagesQueryInDescendingOrder} from '../parse/queryBuilder';
 
 export default create((set, get) => ({
     latestMessageInThreads:[],
@@ -78,50 +76,3 @@ async function createChatPartnerMapping(results, userId) {
   }));  
   return chatPartnersMap;
 }
-
-//Parse Helper starts
-async function getUserName(userId) {
-  const userQuery = new Parse.Query(Parse.User);
-  userQuery.equalTo('objectId', userId);
-  let result = await userQuery.first();
-  return result.get(_username);
-}
-
-function getMessageDate(msg) {
-  const messageDate = msg.get('Message_Date').toLocaleDateString();
-  return messageDate ? messageDate : 'Unknown date';
-}
-
-function getMessageText(msg) {
-  return msg.get('Message_Text');
-}
-//Parse Helper ends
-
-//Query Builder starts
-function createCombinedMessagesQueryInDescendingOrder(userId) {
-    //Create a combined query 
-    //returning all message where the user 
-    //is either sender or reciever in a descending order by date.
-    const sentMessagesQuery = 
-    createMessagesQuery(_sender_user_id, userId);
-    const receivedMessagesQuery = 
-    createMessagesQuery(_receiver_user_id, userId);
-    const combinedQuery = 
-    Parse.Query.or(sentMessagesQuery, receivedMessagesQuery);
-    combinedQuery.descending(_message_date);
-    // Make sure to select 'Message_Date' and 'Message_Text'.    
-    combinedQuery.select (
-        _sender_user_id, 
-        _receiver_user_id, 
-        _message_text, 
-        _message_date
-    ); 
-    return combinedQuery;
-}
-
-function createMessagesQuery(field, userId) {
-  const messagesQuery = new Parse.Query(_message);
-  messagesQuery.equalTo(field, userId);
-  return messagesQuery;
-}
-//Query Builder ends

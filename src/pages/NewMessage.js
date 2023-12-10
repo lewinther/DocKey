@@ -1,6 +1,15 @@
 import { Fragment, useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import Parse from "parse";
+import {
+    //parse DB fields
+  _sender_user_id, 
+  _receiver_user_id,
+  _messageFields,
+  _username
+} from "../parse/parseHelper";
+
+// stores
+import useUserStore from "../stores/UserStore";
 
 // CSS import
 import "../../src/styles.css";
@@ -18,7 +27,7 @@ Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
 Parse.serverURL = PARSE_HOST_URL;
 
 export default function NewMessage() {
-  //const dockNumbers = ["D1", "D2", "D3", "D4"];
+  const {user} = useUserStore();
   const [dockNumbers, setDockNumbers] = useState([]);
   //will store dock number and message text//
   const [selectedDock, setSelectedDock] = useState("");
@@ -99,8 +108,7 @@ export default function NewMessage() {
     
       // mapping dock number to user id
       const receiverId = dockNumberToUserIdMapping[selectedDock];
-      //const senderId = getCurrentUserId(); // **will be future task to put this fxn in 
-      const senderId = 'YznbDiMrX1';
+      const senderId = user.id;
     
       if (!receiverId) {
         alert("Invalid dock number selected");
@@ -128,11 +136,11 @@ export default function NewMessage() {
     
         // new message object
         const Message = new Parse.Object("Message");
-        Message.set('Message_Text', messageContent);
-        Message.set('Sender_User_ID', senderPointer);
-        Message.set('Receiver_User_ID', receiverPointer);       
+        Message.set(_messageFields.text, messageContent);
+        Message.set(_messageFields.senderId, senderPointer);
+        Message.set(_messageFields.receiverId, receiverPointer);       
         // Current date and time as message date 
-        Message.set('Message_Date', new Date());
+        Message.set(_messageFields.date, new Date());
 
          // if there is an image, add it to the Message object
         if (ImageObject) {

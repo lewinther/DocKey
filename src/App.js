@@ -1,6 +1,6 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import useUserStore from "./stores/UserStore";
-
 
 // CSS import
 import './App.css';
@@ -11,10 +11,8 @@ import Home from './pages/Home';
 import MyInbox from "./pages/MyInbox";
 import NewMessage from "./pages/NewMessage";
 import Profile from "./pages/Profile";
-import UserLogin from "./components/UserLogIn";
 
 // Components import
-import { useEffect, useState } from "react";
 import Chat from "./pages/Chat";
 
 export default function App() {
