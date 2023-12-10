@@ -252,11 +252,6 @@ body{
 	background-color: #FFFFFF;
 }
 
-.chats:nth-child(odd){
-	background-color: #CCD5DE;
-	align-self:self-end;
-}
-
 /*Images in chat*/
 .message-image-container {
 	margin-top: 10px; /* Add space above the image */

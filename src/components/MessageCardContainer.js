@@ -26,7 +26,6 @@ export default function ChatContainer({ currentUserID, chatPartnerID }) {
 
       try {
         const results = await query.find();
-        console.log("Fetched messages with images:", results); 
         setMessages(results);
       } catch (error) {
         console.error("Error while fetching messages:", error);
