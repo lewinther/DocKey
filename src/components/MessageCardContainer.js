@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Parse from "parse";
-
+//stores
+import useChatStore from '../stores/ChatStore';
 // CSS import
 import "../../src/styles.css";
 
@@ -8,21 +9,12 @@ import "../../src/styles.css";
 import ChatCard from "./MessageCard";
 
 export default function ChatContainer({ currentUserID, chatPartnerID }) {
+  const {doGetMessagesForThread} = useChatStore();
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const fetchMessages = async () => {
-      console.log("currentUserID: "+currentUserID);
-      console.log("ChatPartnerID: "+chatPartnerID);
-
-      let received = await GetAllMessageByFieldId('Receiver_User_ID', currentUserID);
-      received = received.filter(
-        (x) => x.get("Sender_User_ID").id == chatPartnerID);
-
-      let sent = await GetAllMessageByFieldId('Sender_User_ID', currentUserID);
-      sent = sent.filter((x) => x.get("Receiver_User_ID").id == chatPartnerID);
-      let tmpMessages = [...received, ...sent];
-      tmpMessages = tmpMessages.sort((a,b) => a.get("Message_Date") - b.get("Message_Date"));
+      let tmpMessages = await doGetMessagesForThread(chatPartnerID, currentUserID);
       setMessages(tmpMessages);
     };
 
@@ -46,23 +38,3 @@ export default function ChatContainer({ currentUserID, chatPartnerID }) {
 }
 
 
-async function GetAllMessageByFieldId(fieldId, userId) {
-  const Message = Parse.Object.extend("Message");
-  const query = new Parse.Query(Message);
-
-  query.ascending("Message_Date");
-  query.include("Image");
-  
-  // Example: Fetch messages for a specific user
-  query.equalTo(
-    fieldId,
-    Parse.Object.extend("_User").createWithoutData(userId)
-  );
-
-  try {
-    const results = await query.find();
-    return results;
-  } catch (error) {
-    console.error("Error while fetching messages:", error);
-  }
-}

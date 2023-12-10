@@ -12,7 +12,7 @@ import {
   getMessageDate,
   getMessageText
 } from "../parse/parseHelper";
-import {createCombinedMessagesQueryInDescendingOrder} from '../parse/queryBuilder';
+import {createCombinedMessagesQueryInDescendingOrder, GetAllMessagesByFieldId} from '../parse/queryBuilder';
 
 export default create((set, get) => ({
     latestMessageInThreads:[],
@@ -37,6 +37,18 @@ export default create((set, get) => ({
       : messages;
 
       return filteredChats;
+    },
+    //sender = chatpartner
+    //reciever = viewing user
+    doGetMessagesForThread: async (senderId, receiverId) => {
+      let received = await GetAllMessagesByFieldId('Receiver_User_ID', receiverId);
+      received = received.filter(
+        (x) => x.get("Sender_User_ID").id == senderId);
+
+      let sent = await GetAllMessagesByFieldId('Sender_User_ID', receiverId);
+      sent = sent.filter((x) => x.get("Receiver_User_ID").id == senderId);
+      let tmpMessages = [...received, ...sent];
+      return tmpMessages.sort((a,b) => a.get("Message_Date") - b.get("Message_Date"));
     }
 }));
 

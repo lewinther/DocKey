@@ -42,3 +42,24 @@ export function createMessagesQuery(field, userId) {
   messagesQuery.equalTo(field, userId);
   return messagesQuery;
 }
+
+export async function GetAllMessagesByFieldId(fieldId, userId) {
+  const Message = Parse.Object.extend("Message");
+  const query = new Parse.Query(Message);
+
+  query.ascending("Message_Date");
+  query.include("Image");
+  
+  // Example: Fetch messages for a specific user
+  query.equalTo(
+    fieldId,
+    Parse.Object.extend("_User").createWithoutData(userId)
+  );
+
+  try {
+    const results = await query.find();
+    return results;
+  } catch (error) {
+    console.error("Error while fetching messages:", error);
+  }
+}
