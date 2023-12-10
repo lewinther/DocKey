@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Parse from "parse";
 
 // CSS import
@@ -12,24 +12,18 @@ export default function ChatContainer({ currentUserID, chatPartnerID }) {
 
   useEffect(() => {
     const fetchMessages = async () => {
-      const Message = Parse.Object.extend("Message");
-      const query = new Parse.Query(Message);
+      console.log("currentUserID: "+currentUserID);
+      console.log("ChatPartnerID: "+chatPartnerID);
 
-      query.ascending("Message_Date");
-      query.include("Image");
-      
-      // Example: Fetch messages for a specific user
-      query.equalTo(
-        "Receiver_User_ID",
-        Parse.Object.extend("_User").createWithoutData("YznbDiMrX1")
-      );
+      let received = await GetAllMessageByFieldId('Receiver_User_ID', currentUserID);
+      received = received.filter(
+        (x) => x.get("Sender_User_ID").id == chatPartnerID);
 
-      try {
-        const results = await query.find();
-        setMessages(results);
-      } catch (error) {
-        console.error("Error while fetching messages:", error);
-      }
+      let sent = await GetAllMessageByFieldId('Sender_User_ID', currentUserID);
+      sent = sent.filter((x) => x.get("Receiver_User_ID").id == chatPartnerID);
+      let tmpMessages = [...received, ...sent];
+      tmpMessages = tmpMessages.sort((a,b) => a.get("Message_Date") - b.get("Message_Date"));
+      setMessages(tmpMessages);
     };
 
     fetchMessages();
@@ -49,4 +43,26 @@ export default function ChatContainer({ currentUserID, chatPartnerID }) {
       ))}
     </div>
   );
+}
+
+
+async function GetAllMessageByFieldId(fieldId, userId) {
+  const Message = Parse.Object.extend("Message");
+  const query = new Parse.Query(Message);
+
+  query.ascending("Message_Date");
+  query.include("Image");
+  
+  // Example: Fetch messages for a specific user
+  query.equalTo(
+    fieldId,
+    Parse.Object.extend("_User").createWithoutData(userId)
+  );
+
+  try {
+    const results = await query.find();
+    return results;
+  } catch (error) {
+    console.error("Error while fetching messages:", error);
+  }
 }

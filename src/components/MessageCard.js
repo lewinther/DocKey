@@ -11,8 +11,6 @@ export default function ChatCard({
   const imageUrl = messageImagePointer
     ? messageImagePointer.get("Image_File").url()
     : null;
-    // Check if the URL is correct
-    console.log("Image URL:", imageUrl); 
 
   return (
     <Fragment>
