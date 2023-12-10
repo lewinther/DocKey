@@ -15,7 +15,11 @@ export default function NewMessageCardContainer({
     //handle message change calls oncontentchange and updates parent//
     <Fragment>
       <section className="new-message-container">
-        <textarea onChange={handleMessageChange} value={messageContent} placeholder="Type in your message here..."></textarea> 
+        <textarea 
+        onChange={handleMessageChange} 
+        value={messageContent} 
+        placeholder="Type in your message here...">
+        </textarea> 
         {imagePreview && (
           <div className="image-preview-wrapper">
             <div className="image-preview-container">

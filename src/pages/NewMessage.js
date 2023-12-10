@@ -4,8 +4,8 @@ import {
     //parse DB fields
   _sender_user_id, 
   _receiver_user_id,
+  _username,
   _messageFields,
-  _username
 } from "../parse/parseHelper";
 
 // stores

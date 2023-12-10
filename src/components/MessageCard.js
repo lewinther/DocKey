@@ -4,7 +4,6 @@ export default function ChatCard({
   messageSenderNo,
   messageRecieverNo,
   messageDate,
-  messageTime,
   messageText,
   messageImagePointer,
 }) {

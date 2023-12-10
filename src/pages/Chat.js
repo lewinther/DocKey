@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Parse from "parse";
 import useUserStore from "../stores/UserStore";
@@ -19,14 +19,10 @@ Parse.serverURL = PARSE_HOST_URL;
 
 export default function Chat() {
   const {user} = useUserStore();
-
   // Hook to access the current location object
   const location = useLocation();
-
   // Retrieve the user ID and chat partner ID from the navigation state
   const { chatPartnerID } = location.state || {};
-
-
 
   useEffect(() => {
     if(!user) return;
