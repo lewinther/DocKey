@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Parse from "parse";
+import useUserStore from "../stores/UserStore";
 
 // CSS import
 import "../../src/styles.css";
@@ -17,31 +18,19 @@ Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
 Parse.serverURL = PARSE_HOST_URL;
 
 export default function Chat() {
-  const [user, setUser] = useState(null);
-  const location = useLocation(); // Hook to access the current location object
+  const {user} = useUserStore();
+
+  // Hook to access the current location object
+  const location = useLocation();
 
   // Retrieve the user ID and chat partner ID from the navigation state
-  const { currentUser, chatPartnerID } = location.state || {};
+  const { chatPartnerID } = location.state || {};
 
-  // console log the current user and chat partner ID
-  console.log("Current user ID: ", currentUser);
-  console.log("Chat partner ID: ", chatPartnerID);
+
 
   useEffect(() => {
-    if (currentUser) {
-      const User = Parse.Object.extend("_User");
-      const userQuery = new Parse.Query(User);
-
-      userQuery
-        .get(currentUser)
-        .then((user) => {
-          setUser(user);
-        })
-        .catch((error) => {
-          alert(`Failed to retrieve the object, with error code: ${error.message}`);
-        });
-    }
-  }, [currentUser]);
+    if(!user) return;
+  }, [user])
 
   if (!user) {
     return <div>Loading...</div>;
@@ -51,7 +40,7 @@ export default function Chat() {
     <Fragment>
       <div>
         <div className="">
-          <ChatContainer chatPartnerID={chatPartnerID} currentUserID={currentUser} />
+          <ChatContainer chatPartnerID={chatPartnerID} currentUserID={user.id} />
           <Link className="send-new-message-button link" to={`/NewMessage`}>
             Send new message
           </Link>
