@@ -9,12 +9,36 @@ const PARSE_HOST_URL = "https://parseapi.back4app.com/";
 Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
 Parse.serverURL = PARSE_HOST_URL;
 
-export default create((set) => ({
+const _sender_user_id = 'Sender_User_ID';
+const _receiver_user_id = 'Receiver_User_ID';
+const _message_date = 'Message_Date';
+const _message = 'Message';
+const _message_text = "Message_Text";
+const _username = 'username';
+
+export default create((set, get) => ({
+    displayMessages:[],
     doGetMessagesForUser: async (userId) => {
         // Combined query for either sent or received messages.
         const combinedQuery = createCombinedMessagesQueryInDescendingOrder(userId);
         const results = await combinedQuery.find();
-        return throwAway(results, userId);
+        // Map the most recent message for each chat partner.
+        // Ensure you have messages and that Message_Date is defined before setting state.
+        const messages = 
+        (await createChatPartnerMapping(results, userId))
+        .filter(msg => msg.message && msg.message.get(_message_date));
+        set({ displayMessages: messages });
+    },
+    filterDisplayMessagesForSearchTerm(searchTerm) {
+      const messages = get().displayMessages;
+      const filteredChats = searchTerm
+      ? messages.filter((msg) =>
+          msg.partnerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          msg.chatText.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      : messages;
+
+      return filteredChats;
     }
 }));
 
@@ -23,72 +47,75 @@ function createCombinedMessagesQueryInDescendingOrder(userId) {
     //returning all message where the user 
     //is either sender or reciever in a descending order by date.
     const sentMessagesQuery = 
-    createMessagesQuery('Sender_User_ID',userId);
+    createMessagesQuery(_sender_user_id, userId);
     const receivedMessagesQuery = 
-    createMessagesQuery('Receiver_User_ID',userId);
+    createMessagesQuery(_receiver_user_id, userId);
     const combinedQuery = 
     Parse.Query.or(sentMessagesQuery, receivedMessagesQuery);
-    combinedQuery.descending('Message_Date');
+    combinedQuery.descending(_message_date);
     // Make sure to select 'Message_Date' and 'Message_Text'.    
     combinedQuery.select (
-        'Sender_User_ID', 
-        'Receiver_User_ID', 
-        'Message_Text', 
-        'Message_Date'
+        _sender_user_id, 
+        _receiver_user_id, 
+        _message_text, 
+        _message_date
     ); 
     return combinedQuery;
 }
 
 function createMessagesQuery(field, userId) {
-  const messagesQuery = new Parse.Query("Message");
+  const messagesQuery = new Parse.Query(_message);
   messagesQuery.equalTo(field, userId);
   return messagesQuery;
 }
 
-function throwAway(results, userId) {
-        // Use a Map to track the most recent message for each chat partner.
-        const chatPartnersMap = new Map();
-  
-        results.forEach(message => {
-          const senderId = message.get('Sender_User_ID').id;
-          const receiverId = message.get('Receiver_User_ID').id;
-          const partnerId = senderId === userId ? receiverId : senderId;
-  
-          const existingMessage = chatPartnersMap.get(partnerId);
-          if (!existingMessage || message.get('Message_Date') > existingMessage.get('Message_Date')) {
-            chatPartnersMap.set(partnerId, message);
-          }
-        });
-  
-        // Convert to an array of messages to set in state.
-        const latestMessages = Array.from(chatPartnersMap.values());
-        // Ensure you have messages and Message_Date is not undefined before setting state.
-        const filteredMessages = latestMessages.filter(msg => msg && msg.get('Message_Date'));
-        // Now, fetch usernames for each chat partner ID using the user IDs gathered
-        const chatPartnerUsernamesPromises = Array.from(chatPartnersMap.keys()).map((partnerId) => {
-          const userQuery = new Parse.Query(Parse.User);
-          userQuery.equalTo('objectId', partnerId);
-          return userQuery.first().then((user) => {
-            return user ? { id: partnerId, username: user.get('username') } : null;
-          });
-        });
-  
-        return Promise.all(chatPartnerUsernamesPromises).then((usernames) => {
-          // Create a map of user IDs to usernames
-          const userIdToUsernameMap = usernames.reduce((acc, user) => {
-            if (user) acc[user.id] = user.username;
-            return acc;
-          }, {});
-        
-          // Add the usernames to the chat messages
-          const chatsWithUsernames = filteredMessages.map((parseMessage) => {
-            const partnerId = parseMessage.get('Sender_User_ID').id === userId ? parseMessage.get('Receiver_User_ID').id : parseMessage.get('Sender_User_ID').id;
-            return {
-              parseMessage,
-              partnerUsername: userIdToUsernameMap[partnerId] || 'Unknown',
-            };
-          });
-        
-          return chatsWithUsernames;
-        });
+async function createChatPartnerMapping(results, userId) {
+  const chatPartnersMap = [];
+
+  results.forEach(message => {
+    const senderId = message.get(_sender_user_id).id;
+    const receiverId = message.get(_receiver_user_id).id;
+    const isSender = senderId === userId;
+    const partnerId = isSender ? receiverId : senderId;
+    //Finding the correct object to get the username from, using the same logic as above.
+    const existingMessageIndex =  chatPartnersMap.findIndex(msgObj => msgObj.partnerId === partnerId);
+    const existingMessage = existingMessageIndex !== -1;
+    if (!existingMessage || message.get(_message_date) > chatPartnersMap[existingMessageIndex].message.get(_message_date)) {
+     
+      const messageObject = {
+        isSender,
+        partnerId,
+        chatDate: getMessageDate(message),
+        chatText: getMessageText(message),
+        message
+      }
+
+      if(!existingMessage)
+        chatPartnersMap.push(messageObject);
+      else chatPartnersMap[existingMessageIndex]=messageObject;
+  }})
+
+  await Promise.all(chatPartnersMap.map(async message => {
+    const _partner_id = message.isSender ? _receiver_user_id : _sender_user_id;
+    let partnerName = message.message.get(_partner_id).get(_username);
+    if(!partnerName)
+      partnerName = await getPartnerName(message.partnerId);
+    message.partnerName = partnerName;
+  }));  
+  return chatPartnersMap;
+}
+
+async function getPartnerName(partnerId) {
+  const userQuery = new Parse.Query(Parse.User);
+  userQuery.equalTo('objectId', partnerId);
+  let result = await userQuery.first();
+  return result.get(_username);
+}
+
+function getMessageDate(msg) {
+  return msg.get('Message_Date').toLocaleDateString() ? msg.get('Message_Date').toLocaleDateString() : 'Unknown date';
+}
+
+function getMessageText(msg) {
+  return msg.get('Message_Text');
 }

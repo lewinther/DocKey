@@ -14,7 +14,7 @@ export default function ChatListInbox({ searchTerm }) {
   // Hook for programmatically navigating
   const navigate = useNavigate();
   const {user} = useUserStore();
-  const {doGetMessagesForUser} = useChatStore();
+  const {doGetMessagesForUser, filterDisplayMessagesForSearchTerm} = useChatStore();
   // Function to handle chat card click
   const handleChatClick = (chatPartnerID) => {
     const userId = user.id;
@@ -24,19 +24,13 @@ export default function ChatListInbox({ searchTerm }) {
   useEffect(() => {
     if(!user) return;
     async function updateViewData() {
-      try {
-        const chatsWithUsernames = await doGetMessagesForUser(user.id);
-        const filteredChats = searchTerm
-        ? chatsWithUsernames.filter(({ parseMessage, partnerUsername }) =>
-            partnerUsername.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            parseMessage.get('Message_Text').toLowerCase().includes(searchTerm.toLowerCase())
-          )
-        : chatsWithUsernames;
-        setChats(filteredChats);
-      }
-      catch(error) {
-        console.error('Error fetching chat partners or messages: ', error);
-      }
+      // try {
+        await doGetMessagesForUser(user.id);
+        setChats(filterDisplayMessagesForSearchTerm(searchTerm.toLowerCase()));
+      // }
+      // catch(error) {
+      //   console.error('Error fetching chat partners or messages: ', error);
+      // }
     }
     (async () => {
       await updateViewData();
@@ -47,16 +41,16 @@ export default function ChatListInbox({ searchTerm }) {
 
 return (
   <div className="message-list">
-    {chats.map(({ parseMessage, partnerUsername }, index) => {
-      const chatPartnerID = parseMessage.id; // Assuming you have the id property available.
-      const chatDate = parseMessage.get('Message_Date').toLocaleDateString() ? parseMessage.get('Message_Date').toLocaleDateString() : 'Unknown date';
-      const chatPreviewText = parseMessage.get('Message_Text'); // Use the correct key for message text.
-
+    {chats.map((msg, index) => {
+      const chatPartnerID = msg.partnerId;
+      const chatDate = msg.chatDate;
+      const chatPreviewText = msg.chatText;
+      const chatPartnerUsername = msg.partnerName;
       return (
         <ChatCard
           key={index}
           chatPartnerID={chatPartnerID}
-          chatPartnerUsername={partnerUsername}
+          chatPartnerUsername={chatPartnerUsername}
           chatDate={chatDate}
           chatPreviewText={chatPreviewText}
           onClick={() => handleChatClick(chatPartnerID)}
@@ -64,7 +58,4 @@ return (
       );
     })}
   </div>
-)
-  
-  
-};
+)};
