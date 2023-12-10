@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Parse from 'parse';
 import ChatCard from "./ChatCard";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +13,7 @@ export default function ChatListInbox({ searchTerm }) {
   // Hook for programmatically navigating
   const navigate = useNavigate();
   const {user} = useUserStore();
-  const {doGetMessagesForUser, filterDisplayMessagesForSearchTerm} = useChatStore();
+  const {doGetLatestMessageInEachUniqueThread, filterLatestMessageInThreadsBySearchTerm} = useChatStore();
   // Function to handle chat card click
   const handleChatClick = (chatPartnerID) => {
     const userId = user.id;
@@ -24,13 +23,13 @@ export default function ChatListInbox({ searchTerm }) {
   useEffect(() => {
     if(!user) return;
     async function updateViewData() {
-      // try {
-        await doGetMessagesForUser(user.id);
-        setChats(filterDisplayMessagesForSearchTerm(searchTerm.toLowerCase()));
-      // }
-      // catch(error) {
-      //   console.error('Error fetching chat partners or messages: ', error);
-      // }
+      try {
+        await doGetLatestMessageInEachUniqueThread(user.id);
+        setChats(filterLatestMessageInThreadsBySearchTerm(searchTerm.toLowerCase()));
+      }
+      catch(error) {
+        console.error('Error fetching chat partners or messages: ', error);
+      }
     }
     (async () => {
       await updateViewData();

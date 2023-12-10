@@ -17,8 +17,8 @@ const _message_text = "Message_Text";
 const _username = 'username';
 
 export default create((set, get) => ({
-    displayMessages:[],
-    doGetMessagesForUser: async (userId) => {
+    latestMessageInThreads:[],
+    doGetLatestMessageInEachUniqueThread: async (userId) => {
         // Combined query for either sent or received messages.
         const combinedQuery = createCombinedMessagesQueryInDescendingOrder(userId);
         const results = await combinedQuery.find();
@@ -27,10 +27,10 @@ export default create((set, get) => ({
         const messages = 
         (await createChatPartnerMapping(results, userId))
         .filter(msg => msg.message && msg.message.get(_message_date));
-        set({ displayMessages: messages });
+        set({ latestMessageInThreads: messages });
     },
-    filterDisplayMessagesForSearchTerm(searchTerm) {
-      const messages = get().displayMessages;
+    filterLatestMessageInThreadsBySearchTerm(searchTerm) {
+      const messages = get().latestMessageInThreads;
       const filteredChats = searchTerm
       ? messages.filter((msg) =>
           msg.partnerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -41,33 +41,6 @@ export default create((set, get) => ({
       return filteredChats;
     }
 }));
-
-function createCombinedMessagesQueryInDescendingOrder(userId) {
-    //Create a combined query 
-    //returning all message where the user 
-    //is either sender or reciever in a descending order by date.
-    const sentMessagesQuery = 
-    createMessagesQuery(_sender_user_id, userId);
-    const receivedMessagesQuery = 
-    createMessagesQuery(_receiver_user_id, userId);
-    const combinedQuery = 
-    Parse.Query.or(sentMessagesQuery, receivedMessagesQuery);
-    combinedQuery.descending(_message_date);
-    // Make sure to select 'Message_Date' and 'Message_Text'.    
-    combinedQuery.select (
-        _sender_user_id, 
-        _receiver_user_id, 
-        _message_text, 
-        _message_date
-    ); 
-    return combinedQuery;
-}
-
-function createMessagesQuery(field, userId) {
-  const messagesQuery = new Parse.Query(_message);
-  messagesQuery.equalTo(field, userId);
-  return messagesQuery;
-}
 
 async function createChatPartnerMapping(results, userId) {
   const chatPartnersMap = [];
@@ -95,27 +68,60 @@ async function createChatPartnerMapping(results, userId) {
       else chatPartnersMap[existingMessageIndex]=messageObject;
   }})
 
+  //await all partnername queries.
   await Promise.all(chatPartnersMap.map(async message => {
     const _partner_id = message.isSender ? _receiver_user_id : _sender_user_id;
     let partnerName = message.message.get(_partner_id).get(_username);
     if(!partnerName)
-      partnerName = await getPartnerName(message.partnerId);
+      partnerName = await getUserName(message.partnerId);
     message.partnerName = partnerName;
   }));  
   return chatPartnersMap;
 }
 
-async function getPartnerName(partnerId) {
+//Parse Helper starts
+async function getUserName(userId) {
   const userQuery = new Parse.Query(Parse.User);
-  userQuery.equalTo('objectId', partnerId);
+  userQuery.equalTo('objectId', userId);
   let result = await userQuery.first();
   return result.get(_username);
 }
 
 function getMessageDate(msg) {
-  return msg.get('Message_Date').toLocaleDateString() ? msg.get('Message_Date').toLocaleDateString() : 'Unknown date';
+  const messageDate = msg.get('Message_Date').toLocaleDateString();
+  return messageDate ? messageDate : 'Unknown date';
 }
 
 function getMessageText(msg) {
   return msg.get('Message_Text');
 }
+//Parse Helper ends
+
+//Query Builder starts
+function createCombinedMessagesQueryInDescendingOrder(userId) {
+    //Create a combined query 
+    //returning all message where the user 
+    //is either sender or reciever in a descending order by date.
+    const sentMessagesQuery = 
+    createMessagesQuery(_sender_user_id, userId);
+    const receivedMessagesQuery = 
+    createMessagesQuery(_receiver_user_id, userId);
+    const combinedQuery = 
+    Parse.Query.or(sentMessagesQuery, receivedMessagesQuery);
+    combinedQuery.descending(_message_date);
+    // Make sure to select 'Message_Date' and 'Message_Text'.    
+    combinedQuery.select (
+        _sender_user_id, 
+        _receiver_user_id, 
+        _message_text, 
+        _message_date
+    ); 
+    return combinedQuery;
+}
+
+function createMessagesQuery(field, userId) {
+  const messagesQuery = new Parse.Query(_message);
+  messagesQuery.equalTo(field, userId);
+  return messagesQuery;
+}
+//Query Builder ends
