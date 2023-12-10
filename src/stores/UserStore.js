@@ -18,7 +18,7 @@ export default create ((set) => ({
 	doLogin: async (username, password) => {
 		try {
 			const loggedInUser = await Parse.User.logIn(username, password);
-			console.log(loggedInUser.get('sessionToken'));
+			//console.log(loggedInUser.get('sessionToken'));
 			set((state) => ({user: loggedInUser}));
 		}
 		catch (error){

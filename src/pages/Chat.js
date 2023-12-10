@@ -21,7 +21,12 @@ export default function Chat() {
   const location = useLocation(); // Hook to access the current location object
 
   // Retrieve the user ID and chat partner ID from the navigation state
-  const { currentUser, chatPartnerID } = location.state || {};
+  const {chatPartnerID } = location.state || {};
+
+  // get item from local storage 'Parse/ Application ID / currentUser'
+  const localStorageUserData = localStorage.getItem('Parse/' + Parse.applicationId + '/currentUser');
+  const userData = localStorageUserData ? JSON.parse(localStorageUserData) : {};
+  const currentUser = userData.objectId 
 
   // console log the current user and chat partner ID
   console.log("Current user ID: ", currentUser);

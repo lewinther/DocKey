@@ -6,12 +6,18 @@ import "../../src/styles.css";
 
 export default function ChatListHome() {
   const [chats, setChats] = useState([]);
-  const currentUser = 'YznbDiMrX1'; // temporary hard-coded user ID
-  const navigate = useNavigate(); // Hook for programmatically navigating
+  
+  // get item from local storage 'Parse/ Application ID / currentUser'
+  const localStorageUserData = localStorage.getItem('Parse/' + Parse.applicationId + '/currentUser');
+  const userData = localStorageUserData ? JSON.parse(localStorageUserData) : {};
+  
+  // Use the objectId from local storage or a default value
+  const currentUser = userData.objectId 
 
   // Function to handle chat card click
+  const navigate = useNavigate(); // Hook for programmatically navigating
   const handleChatClick = (chatPartnerID) => {
-    navigate(`/Chat`, { state: { chatPartnerID, currentUser } });
+    navigate(`/Chat`, { state: {chatPartnerID} });
   };
 
   useEffect(() => {
@@ -80,7 +86,7 @@ export default function ChatListHome() {
     }).catch(error => {
       console.error('Error fetching chat partners or messages: ', error);
     });
-  }, []);
+  }, [currentUser]);
 
 // ... (The rest of the ChatListInbox component)
 

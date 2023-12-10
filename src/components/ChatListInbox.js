@@ -1,17 +1,24 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Parse from 'parse';
 import ChatCard from "./ChatCard";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import "../../src/styles.css";
 
-export default function ChatListHome({ searchTerm }) {
+export default function ChatListInbox({ searchTerm }) {
   const [chats, setChats] = useState([]);
-  const currentUser = 'YznbDiMrX1'; // temporary hard-coded user ID
+  
+  // get item from local storage 'Parse/ Application ID / currentUser'
+  const localStorageUserData = localStorage.getItem('Parse/' + Parse.applicationId + '/currentUser');
+  const userData = localStorageUserData ? JSON.parse(localStorageUserData) : {};
+  
+  // Use the objectId from local storage or a default value
+  const currentUser = userData.objectId 
+
   const navigate = useNavigate(); // Hook for programmatically navigating
 
   // Function to handle chat card click
   const handleChatClick = (chatPartnerID) => {
-    navigate(`/Chat`, { state: { chatPartnerID, currentUser } });
+    navigate(`/Chat`, { state: { chatPartnerID} });
   };
 
   useEffect(() => {
@@ -87,28 +94,30 @@ export default function ChatListHome({ searchTerm }) {
       }).catch(error => {
         console.error('Error fetching chat partners or messages: ', error);
       });
-    }, [searchTerm]); 
+    }, [searchTerm, currentUser]); 
 
 
 return (
-  <div className="message-list">
-    {chats.map(({ parseMessage, partnerUsername }, index) => {
-      const chatPartnerID = parseMessage.id; // Assuming you have the id property available.
-      const chatDate = parseMessage.get('Message_Date').toLocaleDateString() ? parseMessage.get('Message_Date').toLocaleDateString() : 'Unknown date';
-      const chatPreviewText = parseMessage.get('Message_Text'); // Use the correct key for message text.
+  <Fragment>
+    <div className="message-list">
+      {chats.map(({ parseMessage, partnerUsername }, index) => {
+        const chatPartnerID = parseMessage.id; // Assuming you have the id property available.
+        const chatDate = parseMessage.get('Message_Date').toLocaleDateString() ? parseMessage.get('Message_Date').toLocaleDateString() : 'Unknown date';
+        const chatPreviewText = parseMessage.get('Message_Text'); // Use the correct key for message text.
 
-      return (
-        <ChatCard
-          key={index}
-          chatPartnerID={chatPartnerID}
-          chatPartnerUsername={partnerUsername}
-          chatDate={chatDate}
-          chatPreviewText={chatPreviewText}
-          onClick={() => handleChatClick(chatPartnerID)}
-        />
-      );
-    })}
-  </div>
+        return (
+          <ChatCard
+            key={index}
+            chatPartnerID={chatPartnerID}
+            chatPartnerUsername={partnerUsername}
+            chatDate={chatDate}
+            chatPreviewText={chatPreviewText}
+            onClick={() => handleChatClick(chatPartnerID)}
+          />
+        );
+      })}
+    </div>
+  </Fragment>
 )
   
   
