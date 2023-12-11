@@ -257,6 +257,14 @@ body{
 	background-color: #bdd3f5;
 }
 
+.meta-text{
+	align-self: flex-start;
+}
+
+.chat-date{
+	align-self: flex-end;
+}
+
 /*Images in chat*/
 .message-image-container {
 	margin-top: 10px; /* Add space above the image */

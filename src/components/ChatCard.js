@@ -34,7 +34,7 @@ export default function ChatCard({
             />
           )}
         </div>
-        <div className="metaText chatDate">
+        <div className="meta-text chat-date">
           <h5>{messageDate}</h5>
           </div>
       </div> 
@@ -58,7 +58,7 @@ export default function ChatCard({
               />
             )}
           </div>
-          <div className="metaText chatDate">
+          <div className="meta-text chat-date">
             <h5>{messageDate}</h5>
             </div>
         </div> 
