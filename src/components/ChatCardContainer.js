@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 // importstores
-import useChatStore from '../stores/ChatStore';
+import useChatStore from "../stores/ChatStore";
 
 // CSS import
 import "../../src/styles.css";
@@ -10,12 +10,15 @@ import "../../src/styles.css";
 import ChatCard from "./ChatCard";
 
 export default function ChatContainer({ currentUserID, chatPartnerID }) {
-  const {doGetMessagesForThread} = useChatStore();
+  const { doGetMessagesForThread } = useChatStore();
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const fetchMessages = async () => {
-      let tmpMessages = await doGetMessagesForThread(chatPartnerID, currentUserID);
+      let tmpMessages = await doGetMessagesForThread(
+        chatPartnerID,
+        currentUserID
+      );
       setMessages(tmpMessages);
     };
 
@@ -37,5 +40,3 @@ export default function ChatContainer({ currentUserID, chatPartnerID }) {
     </div>
   );
 }
-
-

@@ -12,7 +12,11 @@ import {
   getMessageDate,
   getMessageText
 } from "../parse/parseHelper";
-import {createCombinedMessagesQueryInDescendingOrder, GetAllMessagesByFieldId} from '../parse/queryBuilder';
+
+import {
+  createCombinedMessagesQueryInDescendingOrder, 
+  GetAllMessagesByFieldId
+} from '../parse/queryBuilder';
 
 export default create((set, get) => ({
     latestMessageInThreads:[],
@@ -48,7 +52,7 @@ export default create((set, get) => ({
       sent = sent.filter((x) => x.get("Receiver_User_ID").id == senderId);
       let tmpMessages = [...received, ...sent];
       return tmpMessages.sort((a,b) => a.get("Message_Date") - b.get("Message_Date")).reverse();
-    }
+    },
 }));
 
 async function createChatPartnerMapping(results, userId) {

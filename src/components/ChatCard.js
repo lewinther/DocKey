@@ -9,29 +9,46 @@ export default function ChatCard({
   messageText,
   messageImagePointer,
 }) {
-  const {user} = useUserStore();
+  const { user } = useUserStore();
 
-  async function getMessageData() {}
   const imageUrl = messageImagePointer
     ? messageImagePointer.get("Image_File").url()
     : null;
 
-
-  return (
+  function sortData(){
+    let sortedData=[];
+  if (messageSenderNo===user.id){
+  sortedData.push(
     <Fragment>
-      <div
-        className="chat-card chats"
-        id={messageSenderNo + messageRecieverNo}
-      >
-        <section className="chat-card-body">
-          <div className="in-line-message">
-            <p className="bold" id="messageSender">
-              {"Sender: " + messageSenderNo + " Receiver: " + messageRecieverNo}
-            </p>
-            <h5 id="messageDate">{messageDate}</h5>
-          </div>
-          <div className="meta-text">
+      <div className="chat-card chats right" id={messageSenderNo + messageRecieverNo}>
+        <div className="chat-card-body">
+          <div className="metaText">
             <p>{messageText}</p>
+          </div>
+          {/* for rendering the image if there is one */}
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt="Message Attachment"
+              className="message-image"
+            />
+          )}
+        </div>
+        <div className="metaText chatDate">
+          <h5>{messageDate}</h5>
+          </div>
+      </div> 
+    </Fragment>
+  );
+  }
+  if (messageSenderNo!==user.id){
+    sortedData.push (
+      <Fragment>
+        <div className="chat-card chats" id={messageSenderNo + messageRecieverNo}>
+          <div className="chat-card-body">
+            <div className="metaText">
+              <p>{messageText}</p>
+            </div>
             {/* for rendering the image if there is one */}
             {imageUrl && (
               <img
@@ -41,9 +58,16 @@ export default function ChatCard({
               />
             )}
           </div>
-        </section>
-      </div>
-    </Fragment>
-  );
-  
+          <div className="metaText chatDate">
+            <h5>{messageDate}</h5>
+            </div>
+        </div> 
+      </Fragment>
+    );
+    }
+    return sortedData;
+  }
+
+  return sortData();
+
 }
