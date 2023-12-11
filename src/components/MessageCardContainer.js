@@ -23,8 +23,7 @@ export default function ChatContainer({ currentUserID, chatPartnerID }) {
   }, [currentUserID, chatPartnerID]);
 
   return (
-    <div 
-    className="chat-container">
+    <div className="chat-container">
       {messages.map((message, index) => (
         <ChatCard
           key={index}

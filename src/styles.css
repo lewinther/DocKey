@@ -249,8 +249,12 @@ body{
 
 .chats {
 	padding-top: 2px;
-	align-self: self-start;
 	background-color: #FFFFFF;
+}
+.chats.right {
+	padding-top: 2px;
+	background-color: #39649b;
+	align-self: flex-end;
 }
 
 /*Images in chat*/

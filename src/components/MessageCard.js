@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import useUserStore from "../stores/UserStore";
+
 export default function ChatCard({
   messageSenderNo,
   messageRecieverNo,
@@ -7,16 +9,19 @@ export default function ChatCard({
   messageText,
   messageImagePointer,
 }) {
+  const {user} = useUserStore();
+
   async function getMessageData() {}
   const imageUrl = messageImagePointer
     ? messageImagePointer.get("Image_File").url()
     : null;
 
+
   return (
     <Fragment>
       <div
         className="chat-card chats"
-        id={messageRecieverNo + messageRecieverNo}
+        id={messageSenderNo + messageRecieverNo}
       >
         <section className="chat-card-body">
           <div className="in-line-message">
@@ -40,4 +45,5 @@ export default function ChatCard({
       </div>
     </Fragment>
   );
+  
 }
