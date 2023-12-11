@@ -16,7 +16,28 @@ export default function ChatCardCreateNew({
   return(
     <Fragment>
         <section className="new-message-container-small">
-            
+            <textarea
+            onChange={handleMessageChange}
+            value={messageText}
+            placeholder="Type in your message here...">
+            </textarea>
+            {imagePreview && (
+                <div className="image-preview-wrapper">
+                    <div className="image-preview-container">
+                        <img 
+                        src={imagePreview} 
+                        alt="Preview" 
+                        style={{ maxWidth: '100%', height: 'auto' }}
+                        /> 
+                        <button 
+                        className="delete-image-button" 
+                        onClick={onDeleteImage}>
+                            Delete
+                        </button>
+                    </div>
+
+                </div>
+            )}
         </section>
     </Fragment>
   )
