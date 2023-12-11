@@ -48,9 +48,7 @@ export default function NewMessage() {
   
         for (const user of results) {
           const dock = user.get('dock');
-          const userId = user.id;
-          console.log(`Dock: ${dock}, User ID: ${userId}`);
-  
+          const userId = user.id;  
           if (dock) {
             docks.push(dock);
             dockToUserId[dock] = userId;
