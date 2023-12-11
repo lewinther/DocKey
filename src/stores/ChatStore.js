@@ -44,11 +44,10 @@ export default create((set, get) => ({
       let received = await GetAllMessagesByFieldId('Receiver_User_ID', receiverId);
       received = received.filter(
         (x) => x.get("Sender_User_ID").id == senderId);
-
       let sent = await GetAllMessagesByFieldId('Sender_User_ID', receiverId);
       sent = sent.filter((x) => x.get("Receiver_User_ID").id == senderId);
       let tmpMessages = [...received, ...sent];
-      return tmpMessages.sort((a,b) => a.get("Message_Date") - b.get("Message_Date"));
+      return tmpMessages.sort((a,b) => a.get("Message_Date") - b.get("Message_Date")).reverse();
     }
 }));
 

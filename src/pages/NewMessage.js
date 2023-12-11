@@ -148,8 +148,7 @@ export default function NewMessage() {
         }
     
         await Message.save();
-    
-        alert(`Message sent to ${selectedDock}!`);
+
         setMessageContent(""); 
         setImageFile(null); // reset the image file state after sending
     

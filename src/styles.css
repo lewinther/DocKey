@@ -219,7 +219,7 @@ body{
 /* ChatCard and ChatContainer formatting */
 .chat-container{
 	display: flex;
-	flex-direction: column;
+	flex-direction: column-reverse;
 	overflow-y: auto !important;
 	row-gap:15px;
 	max-width: 100%;
@@ -233,6 +233,7 @@ body{
 	/* Hide scrollbar for IE, Edge and Firefox */
 	-ms-overflow-style: none;  /* IE and Edge */
 	scrollbar-width: none;  /* Firefox */
+
 }
 
 .chat-card {
