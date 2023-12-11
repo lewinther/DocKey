@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Parse from "parse";
 
 //import stores
@@ -11,6 +11,7 @@ import "../../src/styles.css";
 // Components
 import ChatContainer from "../components/ChatCardContainer";
 import NavbarBottom from "../components/NavbarBottom";
+import ChatCardCreate from "../components/ChatCardCreateNew";
 
 // Your Parse initialization configuration
 const PARSE_APPLICATION_ID = "l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ";
@@ -36,17 +37,15 @@ export default function Chat() {
 
   return (
     <Fragment>
-      <div>
         <div className="">
           <ChatContainer
             chatPartnerID={chatPartnerID}
             currentUserID={user.id}
           />
-          <Link className="send-new-message-button link" to={`/NewMessage`}>
-            Send new message
-          </Link>
+          <div className="ChatCardNew-chat">
+          <ChatCardCreate />
+          </div>
         </div>
-      </div>
       <NavbarBottom activeItem={"Inbox"} />
     </Fragment>
   );
