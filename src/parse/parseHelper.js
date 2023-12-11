@@ -39,3 +39,71 @@ export function getMessageDate(msg) {
 export function getMessageText(msg) {
     return msg.get(_message_text);
   }
+
+
+  export async function fetchDockNumbers() {
+    const User = Parse.Object.extend("_User");
+    const query = new Parse.Query(Parse.User);
+    try {
+      const results = await query.find();
+      const docks = [];
+      const dockToUserId = {};
+  
+      for (const user of results) {
+        const dock = user.get('dock');
+        const userId = user.id;  
+        if (dock) {
+          docks.push(dock);
+          dockToUserId[dock] = userId;
+        }
+      }
+  
+      return { docks, dockToUserId };
+    } catch (error) {
+      console.error('Error while fetching dock numbers', error);
+      throw error; // Re-throw the error to be handled by the caller
+    }
+  }
+
+  export async function sendMessage(receiverId, senderId, messageContent, imageObject) {
+    const Message = Parse.Object.extend("Message");
+  
+    // Creating pointers for sender and receiver
+    const senderPointer = Parse.Object.extend('_User').createWithoutData(senderId);
+    const receiverPointer = Parse.Object.extend('_User').createWithoutData(receiverId);
+  
+    // Creating a new message object
+    const message = new Message();
+    message.set(_messageFields.text, messageContent);
+    message.set(_messageFields.senderId, senderPointer);
+    message.set(_messageFields.receiverId, receiverPointer);
+    message.set(_messageFields.date, new Date());
+  
+    if (imageObject) {
+      message.set('Image', imageObject); // Adding image pointer if image is provided
+    }
+  
+    try {
+      await message.save();
+    } catch (error) {
+      console.error('Error while sending message:', error);
+      throw error; // Re-throw the error to be handled by the caller
+    }
+  }
+
+  
+  export async function uploadImage(file) {
+    const parseFile = new Parse.File(file.name, file);
+    try {
+      await parseFile.save();
+      const ImageObject = new Parse.Object("Image");
+      ImageObject.set('Image_File', parseFile);
+      await ImageObject.save();
+      return ImageObject;
+    } catch (error) {
+      console.error('Error while uploading image:', error);
+      throw error; // Re-throw the error to be handled by the caller
+    }
+  }
+  
+  
