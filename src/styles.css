@@ -219,7 +219,7 @@ body{
 /* ChatCard and ChatContainer formatting */
 .chat-container{
 	display: flex;
-	flex-direction: column;
+	flex-direction: column-reverse;
 	overflow-y: auto !important;
 	row-gap:15px;
 	max-width: 100%;
@@ -252,9 +252,9 @@ body{
 	background-color: #FFFFFF;
 }
 
-.chats:nth-child(odd){
-	background-color: #CCD5DE;
-	align-self:self-end;
+.chats.right{
+	align-self: self-end;
+	background-color: #cdd3f0;
 }
 
 /*Images in chat*/
