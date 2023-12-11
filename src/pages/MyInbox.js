@@ -6,7 +6,7 @@ import "../../src/styles.css";
 //Components import
 import PageHeader from "../components/PageHeader";
 import SearchBar from "../components/SearchBar";
-import ChatListInbox from "../components/ChatListInbox";
+import ChatListInbox from "../components/ChatListCardContainer";
 import NavbarBottom from '../components/NavbarBottom';
 
 export default function MyInbox() {

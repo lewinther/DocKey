@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import ChatCard from "./ChatCard";
 import { useNavigate } from "react-router-dom";
 
+//import stores
 import useUserStore from "../stores/UserStore";
 import useChatStore from "../stores/ChatStore";
+
+//Import components
+import ChatCard from "./ChatListCard";
 
 //CSS import
 import "../../src/styles.css";

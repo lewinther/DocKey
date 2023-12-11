@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-//stores
+// importstores
 import useChatStore from '../stores/ChatStore';
 
 // CSS import
 import "../../src/styles.css";
 
 //components import
-import ChatCard from "./MessageCard";
+import ChatCard from "./ChatCard";
 
 export default function ChatContainer({ currentUserID, chatPartnerID }) {
   const {doGetMessagesForThread} = useChatStore();

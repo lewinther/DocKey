@@ -1,13 +1,15 @@
 import React, { Fragment, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Parse from "parse";
+
+//import stores
 import useUserStore from "../stores/UserStore";
 
 // CSS import
 import "../../src/styles.css";
 
 // Components
-import ChatContainer from "../components/MessageCardContainer";
+import ChatContainer from "../components/ChatCardContainer";
 import NavbarBottom from "../components/NavbarBottom";
 
 // Your Parse initialization configuration

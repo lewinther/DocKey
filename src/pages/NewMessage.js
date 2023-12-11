@@ -15,7 +15,7 @@ import useUserStore from "../stores/UserStore";
 import "../../src/styles.css";
 
 // Components
-import NewMessageCardContainer from "../components/NewMessageCardContainer";
+import NewMessageCardContainer from "../components/ChatCardNew";
 import DockFilter from "../components/DockFilter";
 import NavbarBottom from '../components/NavbarBottom';
 
