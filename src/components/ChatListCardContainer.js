@@ -8,6 +8,7 @@ import useChatStore from "../stores/ChatStore";
 //Import components
 import ChatCard from "./ChatListCard";
 
+
 //CSS import
 import "../../src/styles.css";
 
@@ -18,12 +19,15 @@ export default function ChatListInbox({ searchTerm }) {
   const {user} = useUserStore();
   const {doGetLatestMessageInEachUniqueThread, filterLatestMessageInThreadsBySearchTerm} = useChatStore();
   // Function to handle chat card click
-  const handleChatClick = (chatPartnerID) => {
-    const userId = user.id;
-    navigate(`/Chat`, { state: { chatPartnerID, userId } });
-    
+  const { markMessageAsRead } = useChatStore();
 
+  const handleChatClick = async (chatPartnerID, messageId) => {
+      await markMessageAsRead(messageId);
+      // Navigate to the chat view
+      const userId = user.id;
+      navigate(`/Chat`, { state: { chatPartnerID, userId } });
   };
+
 
   useEffect(() => {
     if(!user) return;

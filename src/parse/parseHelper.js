@@ -119,4 +119,16 @@ export function getMessageId(msg) {
     }
   }
   
+  export async function markMessageAsRead(messageId) {
+    const Message = Parse.Object.extend("Message");
+    const query = new Parse.Query(Message);
+    try {
+        const message = await query.get(messageId);
+        message.set(_unread, false);
+        await message.save();
+    } catch (error) {
+        console.error('Error while marking message as read:', error);
+        throw error;
+    }
+}
   

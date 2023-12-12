@@ -11,11 +11,22 @@ import {
   getUserName,
   getMessageDate,
   getMessageText,
-  isMessageUnread
+  isMessageUnread,
+  markMessageAsRead
 } from "../parse/parseHelper";
 import {createCombinedMessagesQueryInDescendingOrder, GetAllMessagesByFieldId} from '../parse/queryBuilder';
 
 export default create((set, get) => ({
+
+    markMessageAsRead: async (messageId) => {
+        try {
+            // Call parseHelper function to update the message
+            await markMessageAsRead(messageId);
+            // Optionally, update any relevant state in ChatStore
+        } catch (error) {
+            console.error('Error updating message read status:', error);
+        }
+    },
     latestMessageInThreads:[],
     doGetLatestMessageInEachUniqueThread: async (userId) => {
         // Combined query for either sent or received messages.
