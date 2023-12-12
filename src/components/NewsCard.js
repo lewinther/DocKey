@@ -1,63 +1,36 @@
-import { Fragment, useState, useEffect } from "react";
-import Parse from 'parse';
+import { Fragment, useState } from "react";
 
-export default function NewsCard(props) {
-  const [data, setData] = useState(null);
+export default function NewsCard({ newsData, isFeatured, onClick }) {
+  const [showFullText, setShowFullText] = useState(false);
+  const newsImg = newsData.get('News_Img') ? newsData.get('News_Img').url() : null;
+  const newsTitle = newsData.get('News_Title');
+  const newsDate = newsData.get('News_Date').toLocaleDateString();
+  const newsText = newsData.get('News_Text');
+  const cardStyle = isFeatured ? "card featured" : "card";
+  const newsPreview = newsText.length > 100 ? `${newsText.substring(0, 100)}...` : newsText;
+  const newsContent = showFullText ? newsText : (newsText.length > 100 ? `${newsText.substring(0, 100)}...` : newsText);
 
-  useEffect(() => {
-    async function fetchData() {
-      const News = Parse.Object.extend("News");
-      const query = new Parse.Query(News);
-      query.descending("createdAt"); // Assuming you want the latest news article
-      query.first().then((latestNews) => {
-        if (latestNews) {
-          const newsData = {
-            newsImg: latestNews.get('News_Img') ? latestNews.get('News_Img').url() : null,
-            newsTitle: latestNews.get('News_Title'),
-            newsDate: latestNews.get('News_Date').toLocaleDateString(),
-            newsTekst: latestNews.get('News_Text')
-          };
-          setData(newsData);
-        }
-      }).catch(error => {
-        console.error('Error fetching latest news:', error);
-      });
-    }
-    fetchData();
-  }, []);
-
-  if (!data) {
-    return (
-      <div>
-        <h2 className="load">Loading...</h2>
-      </div>
-    );
-  }
-
-  const { newsImg, newsTitle, newsDate, newsTekst } = data;
+  const handleCardClick = () => {
+    setShowFullText(!showFullText); // Toggle between preview and full text
+    if (onClick) onClick();
+  };
 
   return (
     <Fragment>
-      <div className="card" id={props.newsId}>
-          {newsImg && (
-            <img
-              className="news-card-img"
-              src={newsImg}
-              alt={newsTitle + " image"}
-            />
-          )}
-          <section className="news-card-body">
-            <div className="in-line">
-              <p className="bold" id="newsTitle">
-                {newsTitle}
-              </p>
-              <h5 id="newsDate">{newsDate}</h5>
-            </div>
-            <div className="meta-text">
-              <p>{newsTekst}</p>
-            </div>
-          </section>
-        </div>
+      <div className={cardStyle} onClick={handleCardClick}>
+        {newsImg && (
+          <img className="news-card-img" src={newsImg} alt={newsTitle + " image"} />
+        )}
+        <section className="news-card-body">
+          <div className="in-line">
+            <p className="bold" id="newsTitle">{newsTitle}</p>
+            <h5 id="newsDate">{newsDate}</h5>
+          </div>
+          <div className="meta-text">
+            <p>{newsContent}</p>
+          </div>
+        </section>
+      </div>
     </Fragment>
   );
 }

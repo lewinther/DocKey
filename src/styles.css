@@ -203,6 +203,7 @@ body{
 	background-color:rgba(216, 221, 229, 0.847);
 	border-radius: 15px;
 	box-sizing: border-box;
+	overflow-y: auto;
     /*box-shadow: 0 15px 25px rgba(0,0,0,0.3);*/
 	height: 33%;
 }
@@ -215,6 +216,29 @@ body{
 	margin-left: 25%;
 	align-items: center;
 }
+
+/* Reduced space between title and body */
+.news-card-body .in-line {
+	margin-bottom: 0; /* Reduced bottom margin */
+	padding-top: 0; /* Reduced top padding if needed */
+  }
+
+/* Line between cards */
+.card {
+border-bottom: 0.01px solid #919191; /* Line at the bottom of each card */
+}
+
+
+/* Last card shouldn't have a border */
+.card:last-child {
+border-bottom: none;
+}
+  
+
+.card.featured {
+	font-size: 1.2em; 
+}
+  
 
 /* ChatCard and ChatContainer formatting */
 .chat-container{
@@ -256,6 +280,51 @@ body{
 	background-color: #39649b;
 	align-self: flex-end;
 }
+
+.modal-overlay {
+	position: fixed; /* Positioned relative to the viewport */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000; /* High z-index to be on top of other elements */
+  }
+  
+  .modal-content {
+	background: rgba(216, 221, 229, 0.847);
+	padding: 20px;
+	border-radius: 5px;
+	max-width: 80%; /* Adjust as needed */
+	max-height: 80%;
+	overflow-y: auto; /* Make it scrollable */
+	position: relative;
+  }
+  
+  .modal-close-button {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background-color: rgba(216, 221, 229, 0.847);
+	color: #012657;
+	border: 1px solid #012657;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: bold;
+  }
+  
+  .modal-close-button:hover {
+	background-color: #f1f1f1;
+	border-color: #888;
+  }
+  
 
 /*Images in chat*/
 .message-image-container {
