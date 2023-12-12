@@ -50,8 +50,12 @@ export default function NewsCardContainer() {
     <Fragment>
       <h3 className="h3-home">Harbor News</h3>
       <section className="news-card-container">
-        {newsArticles.map((article, index) => (
-          <NewsCard key={index} newsData={article} onClick={() => setSelectedArticle(article)} />
+      {newsArticles.map((article) => (
+          <NewsCard
+            key={article.id}
+            newsData={article}
+            onClick={() => setSelectedArticle(article)}
+          />
         ))}
       </section>
       {renderModal()}
