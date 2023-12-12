@@ -6,7 +6,8 @@ _receiver_user_id,
 _message_date,
 _message,
 _message_text,
-_username
+_username,
+_unread
 } from "./parseHelper";
 
 // Your Parse initialization configuration goes here
@@ -32,7 +33,8 @@ export function createCombinedMessagesQueryInDescendingOrder(userId) {
         _sender_user_id, 
         _receiver_user_id, 
         _message_text, 
-        _message_date
+        _message_date,
+        _unread
     ); 
     return combinedQuery;
 }

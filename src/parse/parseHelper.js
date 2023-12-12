@@ -13,14 +13,18 @@ export const _message_date = 'Message_Date';
 export const _message = 'Message';
 export const _message_text = "Message_Text";
 export const _username = 'username';
+export const _unread = 'Unread_Message';
+export const _messageId = 'objectId';
 
 export const _messageFields = {
+    messageId: 'objectId',
     message: 'Message',
     date: 'Message_Date',
     text: 'Message_Text',
     senderId: 'Sender_User_ID',
     receiverId: 'Receiver_User_ID',
-
+    unread: 'Unread_Message',
+    img : 'Image'
 }
 
 
@@ -39,3 +43,92 @@ export function getMessageDate(msg) {
 export function getMessageText(msg) {
     return msg.get(_message_text);
   }
+
+export function isMessageUnread(msg) {
+    return msg.get(_unread);
+  }
+
+export function getMessageId(msg) {
+    return msg.get(_messageId);
+  }
+
+
+  export async function fetchDockNumbers() {
+    const User = Parse.Object.extend("_User");
+    const query = new Parse.Query(Parse.User);
+    try {
+      const results = await query.find();
+      const docks = [];
+      const dockToUserId = {};
+  
+      for (const user of results) {
+        const dock = user.get('dock');
+        const userId = user.id;  
+        if (dock) {
+          docks.push(dock);
+          dockToUserId[dock] = userId;
+        }
+      }
+  
+      return { docks, dockToUserId };
+    } catch (error) {
+      console.error('Error while fetching dock numbers', error);
+      throw error; // Re-throw the error to be handled by the caller
+    }
+  }
+
+  export async function sendMessage(receiverId, senderId, messageContent, imageObject) {
+    const Message = Parse.Object.extend("Message");
+  
+    // Creating pointers for sender and receiver
+    const senderPointer = Parse.Object.extend('_User').createWithoutData(senderId);
+    const receiverPointer = Parse.Object.extend('_User').createWithoutData(receiverId);
+  
+    // Creating a new message object
+    const message = new Message();
+    message.set(_messageFields.text, messageContent);
+    message.set(_messageFields.senderId, senderPointer);
+    message.set(_messageFields.receiverId, receiverPointer);
+    message.set(_messageFields.date, new Date());
+    message.set(_messageFields.unread, true);
+  
+    if (imageObject) {
+      message.set(_messageFields.img, imageObject); // Adding image pointer if image is provided
+    }
+  
+    try {
+      await message.save();
+    } catch (error) {
+      console.error('Error while sending message:', error);
+      throw error; // Re-throw the error to be handled by the caller
+    }
+  }
+
+  
+  export async function uploadImage(file) {
+    const parseFile = new Parse.File(file.name, file);
+    try {
+      await parseFile.save();
+      const ImageObject = new Parse.Object("Image");
+      ImageObject.set('Image_File', parseFile);
+      await ImageObject.save();
+      return ImageObject;
+    } catch (error) {
+      console.error('Error while uploading image:', error);
+      throw error; // Re-throw the error to be handled by the caller
+    }
+  }
+  
+  export async function markMessageAsRead(messageId) {
+    const Message = Parse.Object.extend("Message");
+    const query = new Parse.Query(Message);
+    try {
+        const message = await query.get(messageId);
+        message.set(_unread, false);
+        await message.save();
+    } catch (error) {
+        console.error('Error while marking message as read:', error);
+        throw error;
+    }
+}
+  
