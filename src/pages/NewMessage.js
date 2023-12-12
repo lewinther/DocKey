@@ -42,8 +42,10 @@ export default function NewMessage() {
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-    fetchAndSetDockNumbers();
-  }, []);
+    if (user) {
+    fetchAndSetDockNumbers(user.id);
+    }
+  }, [user]);
 
   const handleDockSelection = (selectedDockNumber) => {
     setSelectedDock(selectedDockNumber);
