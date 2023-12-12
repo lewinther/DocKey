@@ -349,7 +349,7 @@ form {
     padding: 6px;
     margin: 0 4%; 
     /*background-color: rgba(216, 221, 229, 0.847);*/
-	background-color: #FFFFFF;
+	background-color: rgba(216, 221, 229, 0.932);
     box-sizing: border-box;
     width: 92%;
 }

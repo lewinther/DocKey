@@ -53,7 +53,7 @@ export function getMessageId(msg) {
   }
 
 
-  export async function fetchDockNumbers() {
+  export async function fetchDockNumbers(currentUserId) {
     const User = Parse.Object.extend("_User");
     const query = new Parse.Query(Parse.User);
     try {
@@ -64,7 +64,7 @@ export function getMessageId(msg) {
       for (const user of results) {
         const dock = user.get('dock');
         const userId = user.id;  
-        if (dock) {
+        if (dock && userId !== currentUserId) {
           docks.push(dock);
           dockToUserId[dock] = userId;
         }

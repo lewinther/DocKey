@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { fetchDockNumbers, sendMessage, uploadImage } from '../parse/parseHelper';
 
 const useNewMessageStore = create((set,get) => ({
@@ -7,9 +7,9 @@ const useNewMessageStore = create((set,get) => ({
   imageFile: null,
 
   // Fetching dock numbers
-  fetchAndSetDockNumbers: async () => {
+  fetchAndSetDockNumbers: async (currentUserId) => {
     try {
-      const { docks, dockToUserId } = await fetchDockNumbers();
+      const { docks, dockToUserId } = await fetchDockNumbers(currentUserId);
       set({ dockNumbers: docks, dockNumberToUserIdMapping: dockToUserId });
     } catch (error) {
       console.error('Error fetching dock numbers:', error);
