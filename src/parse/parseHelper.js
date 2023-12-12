@@ -13,14 +13,18 @@ export const _message_date = 'Message_Date';
 export const _message = 'Message';
 export const _message_text = "Message_Text";
 export const _username = 'username';
+export const _unread = 'Unread_Message';
+export const _messageId = 'objectId';
 
 export const _messageFields = {
+    messageId: 'objectId',
     message: 'Message',
     date: 'Message_Date',
     text: 'Message_Text',
     senderId: 'Sender_User_ID',
     receiverId: 'Receiver_User_ID',
-
+    unread: 'Unread_Message',
+    img : 'Image'
 }
 
 
@@ -38,6 +42,14 @@ export function getMessageDate(msg) {
 
 export function getMessageText(msg) {
     return msg.get(_message_text);
+  }
+
+export function isMessageUnread(msg) {
+    return msg.get(_unread);
+  }
+
+export function getMessageId(msg) {
+    return msg.get(_messageId);
   }
 
 
@@ -78,9 +90,10 @@ export function getMessageText(msg) {
     message.set(_messageFields.senderId, senderPointer);
     message.set(_messageFields.receiverId, receiverPointer);
     message.set(_messageFields.date, new Date());
+    message.set(_messageFields.unread, true);
   
     if (imageObject) {
-      message.set('Image', imageObject); // Adding image pointer if image is provided
+      message.set(_messageFields.img, imageObject); // Adding image pointer if image is provided
     }
   
     try {

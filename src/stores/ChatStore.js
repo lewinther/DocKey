@@ -10,7 +10,8 @@ import {
   //functions
   getUserName,
   getMessageDate,
-  getMessageText
+  getMessageText,
+  isMessageUnread
 } from "../parse/parseHelper";
 import {createCombinedMessagesQueryInDescendingOrder, GetAllMessagesByFieldId} from '../parse/queryBuilder';
 
@@ -65,11 +66,13 @@ async function createChatPartnerMapping(results, userId) {
     if (!existingMessage || message.get(_message_date) > chatPartnersMap[existingMessageIndex].message.get(_message_date)) {
      
       const messageObject = {
+        messageId: message.id,
         isSender,
         partnerId,
         chatDate: getMessageDate(message),
         chatText: getMessageText(message),
-        message
+        message,
+        unread: isMessageUnread(message)
       }
 
       if(!existingMessage)

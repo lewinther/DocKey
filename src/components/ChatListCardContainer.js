@@ -21,6 +21,8 @@ export default function ChatListInbox({ searchTerm }) {
   const handleChatClick = (chatPartnerID) => {
     const userId = user.id;
     navigate(`/Chat`, { state: { chatPartnerID, userId } });
+    
+
   };
 
   useEffect(() => {
@@ -48,6 +50,10 @@ return (
       const chatDate = msg.chatDate;
       const chatPreviewText = msg.chatText;
       const chatPartnerUsername = msg.partnerName;
+      const chatUnreadMessages = msg.unread;
+      const chatPartnerIsSender = msg.isSender;
+      const chatMessageId = msg.messageId;
+
       return (
         <ChatCard
           key={index}
@@ -55,7 +61,9 @@ return (
           chatPartnerUsername={chatPartnerUsername}
           chatDate={chatDate}
           chatPreviewText={chatPreviewText}
-          onClick={() => handleChatClick(chatPartnerID)}
+          // if msg.isSender is False and chatUnreadMessages is True, then the message is unread and chatTextStyle is bold else chatTextStyle is empty
+          chatTextStyle={chatPartnerIsSender ? "" : chatUnreadMessages ? "bold" : ""}
+          onClick={() => handleChatClick(chatPartnerID, chatMessageId)}
         />
       );
     })}

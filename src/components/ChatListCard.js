@@ -5,6 +5,7 @@ export default function ChatCard({
   chatPartnerUsername,
   chatDate,
   chatPreviewText,
+  chatTextStyle,
   onClick, // Add this line to include the onClick prop
 }) {
   return (
@@ -19,7 +20,7 @@ export default function ChatCard({
                 <h5 id={`newsDate date-${chatPartnerID}`}>{chatDate}</h5>
               </div>
               <div className="meta-text">
-                <p>{chatPreviewText}</p>
+                <p className={`${chatTextStyle}`}>{chatPreviewText}</p>
               </div>
             </section>
           </div>
