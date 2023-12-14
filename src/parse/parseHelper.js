@@ -53,32 +53,33 @@ export function getMessageId(msg) {
   }
 
 
-  export async function fetchDockNumbers(currentUserId) {
-    const User = Parse.Object.extend("_User");
-    const query = new Parse.Query(Parse.User);
-    try {
-      const results = await query.find();
-      const docks = [];
-      const dockToUserId = {};
-  
-      for (const user of results) {
-        const dock = user.get('dock');
-        const userId = user.id;  
-        if (dock && userId !== currentUserId) {
-          docks.push(dock);
-          dockToUserId[dock] = userId;
-        }
+export async function fetchDockNumbers(currentUserId) {
+  const User = Parse.Object.extend("_User");
+  const query = new Parse.Query(Parse.User);
+  try {
+    const results = await query.find();
+    const docks = [];
+    const dockToUserId = {};
+
+    for (const user of results) {
+      const dock = user.get('dock');
+      const userId = user.id;  
+      if (dock && userId !== currentUserId) {
+        docks.push(dock);
+        dockToUserId[dock] = userId;
       }
-  
-      return { docks, dockToUserId };
-    } catch (error) {
-      console.error('Error while fetching dock numbers', error);
-      throw error; // Re-throw the error to be handled by the caller
     }
+
+    return { docks, dockToUserId };
+  } catch (error) {
+    console.error('Error while fetching dock numbers', error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
   }
 
   export async function sendMessage(receiverId, senderId, messageContent, imageObject) {
     const Message = Parse.Object.extend("Message");
+
   
     // Creating pointers for sender and receiver
     const senderPointer = Parse.Object.extend('_User').createWithoutData(senderId);
@@ -102,6 +103,7 @@ export function getMessageId(msg) {
       console.error('Error while sending message:', error);
       throw error; // Re-throw the error to be handled by the caller
     }
+    return "message sent successfully";
   }
 
   

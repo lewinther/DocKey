@@ -540,6 +540,7 @@ label {
 .new-message-container-small {
 	display: flex;
 	flex-direction: column;
+	position: relative;
 	padding: 2% 4% 2% 4%;
 }
 

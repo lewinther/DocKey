@@ -32,13 +32,13 @@ export default function ChatListInbox({ searchTerm }) {
   useEffect(() => {
     if(!user) return;
     async function updateViewData() {
-      try {
+      // try {
         await doGetLatestMessageInEachUniqueThread(user.id);
         setChats(filterLatestMessageInThreadsBySearchTerm(searchTerm.toLowerCase()));
-      }
-      catch(error) {
-        console.error('Error fetching chat partners or messages: ', error);
-      }
+      // }
+      // catch(error) {
+      //   console.error('Error fetching chat partners or messages: ', error);
+      // }
     }
     (async () => {
       await updateViewData();
