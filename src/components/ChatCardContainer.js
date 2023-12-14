@@ -22,14 +22,11 @@ export default function ChatContainer({ currentUserID, chatPartnerID }) {
       );
       setMessages(tmpMessages);
     };
-
     fetchMessages();
   }, [currentUserID, chatPartnerID]);
 
 const renderModal = () => {
   if (!selectedImage) return null;
-
- 
 
   const imageFile = 
   selectedImage.get('Image') ? 
@@ -37,7 +34,7 @@ const renderModal = () => {
   const image = imageFile ? imageFile.url() : null;
 
   return(
-    <div className="modal-overlay" >
+    <div className="modal-overlay">
       <div className="modal-content">
         <button 
           className="modal-close-button" 
@@ -45,7 +42,12 @@ const renderModal = () => {
           setSelectedImage(null)}>x
         </button>
         <div className="modal-image">
-        {image && <img src={image}/>}
+        {image && 
+          <img 
+          src={image} 
+          style={{ maxWidth: '40vh', height: 'auto' }}
+          />
+        }
         </div>
       </div>
     </div>
