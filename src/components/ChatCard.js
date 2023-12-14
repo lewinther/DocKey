@@ -8,6 +8,7 @@ export default function ChatCard({
   messageDate,
   messageText,
   messageImagePointer,
+  onClick
 }) {
   const { user } = useUserStore();
 
@@ -28,6 +29,7 @@ export default function ChatCard({
           {/* for rendering the image if there is one */}
           {imageUrl && (
             <img
+              onClick={onClick}
               src={imageUrl}
               alt="Message Attachment"
               className="message-image"
@@ -52,6 +54,7 @@ export default function ChatCard({
             {/* for rendering the image if there is one */}
             {imageUrl && (
               <img
+                onClick={onClick}
                 src={imageUrl}
                 alt="Message Attachment"
                 className="message-image"
