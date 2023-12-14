@@ -79,8 +79,8 @@ p {
   .news-title {
 	margin-bottom: 1px; /* Reduced bottom margin */
 	
-	font-weight: bold; /* If you want to keep the bold style */
-	/* Add other styles specific to news title here */
+	font-weight: bold;
+	
   }
 
 /* p in bold */
@@ -198,22 +198,33 @@ body{
 	height: 100%;
 }
 
-.news-card-img{
-    max-width: 160px;
-    max-height: 150px;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 15px;
-	margin-bottom: 15px;
-	padding: 10px;
-	border-radius: 15%;
-}
+.news-image-container {
+	float: left; 
+	width: 25%; 
+	height: 25%;
 
+  }
+  
+  .news-card-img {
+	width: 100%; 
+	height: 100%;
+	object-fit: cover; 
+	border-radius: 15px; 
+  }
+
+
+  .news-image-container.featured {
+	margin-right: 0px; 
+	margin-left: 10px;
+	flex-shrink: 0; 
+  }
+  
 .news-card-body{
 	max-width: 100%;
-	padding-left: 5%;
-	padding-right: 5%;
+	padding-left: 3%;
+	padding-right: 3%;
 	text-align: left;
+	overflow: hidden;
 }
 
 .news-card-container {
@@ -224,7 +235,7 @@ body{
 	box-sizing: border-box;
 	overflow-y: auto;
     /*box-shadow: 0 15px 25px rgba(0,0,0,0.3);*/
-	height: 40%;
+	height: 50%;
 }
 
 .container-container{
@@ -236,15 +247,11 @@ body{
 	align-items: center;
 }
 
-/* Reduced space between title and body */
-.news-card-body .in-line {
-	margin-bottom: 0; /* Reduced bottom margin */
-	padding-top: 0; /* Reduced top padding if needed */
-  }
-
 /* Line between cards */
 .card {
-border-bottom: 0.01px solid #919191; /* Line at the bottom of each card */
+border-bottom: 1px solid #b6b3b3; /* line at bottom of card */
+display: flex;
+align-items: center;
 }
 
 
@@ -252,12 +259,7 @@ border-bottom: 0.01px solid #919191; /* Line at the bottom of each card */
 .card:last-child {
 border-bottom: none;
 }
-  
 
-.card.featured {
-	font-size: 1.2em; 
-}
-  
 
 /* ChatCard and ChatContainer formatting */
 .chat-container{
@@ -301,25 +303,25 @@ border-bottom: none;
 }
 
 .modal-overlay {
-	position: fixed; /* Positioned relative to the viewport */
+	position: fixed; /* relative to main view */
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+	background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 1000; /* High z-index to be on top of other elements */
+	z-index: 1000; 
   }
   
   .modal-content {
 	background: rgba(216, 221, 229, 0.847);
 	padding: 20px;
-	border-radius: 5px;
-	max-width: 80%; /* Adjust as needed */
+	border-radius: 10px;
+	max-width: 80%; 
 	max-height: 80%;
-	overflow-y: auto; /* Make it scrollable */
+	overflow-y: auto; 
 	position: relative;
   }
   
@@ -329,14 +331,14 @@ border-bottom: none;
 	right: 0px;
 	background-color: rgba(216, 221, 229, 0.847);
 	color: #012657;
-	border: 1px solid #012657;
+	border: 2px solid #012657;
 	border-radius: 50%;
 	width: 30px;
 	height: 30px;
 	text-align: center;
 	cursor: pointer;
-	font-size: 18px;
-	font-weight: bold;
+	font-size: 20px;
+	
   }
   
   .modal-close-button:hover {
