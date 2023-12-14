@@ -11,6 +11,8 @@ export default () => {
 	const [password, setPassword] = useState('');
 	const doLogin = useUserStore((state) => state.doLogin);
 	const user = useUserStore((state) => state.user);
+	const dockNumberError = useUserStore((state) => state.dockNumberError);
+	const passwordError = useUserStore((state) => state.passwordError);
 
 	// Watcher that clears fields on successful login 
 	useEffect(() => {
@@ -31,7 +33,8 @@ export default () => {
 			  placeholder="Dock Number"
 			  value={dockNumber}
 			  onChange={(e) => setDockNumber(e.target.value.toLocaleUpperCase())}
-			/>
+       		 />
+       		{dockNumberError && <p style={{ color: 'red' }}>{dockNumberError}</p>}
 			
 			<input
 			  className="search-input"
@@ -39,7 +42,8 @@ export default () => {
 			  placeholder="Password"
 			  value={password}
 			  onChange={(e) => setPassword(e.target.value)}
-			/>
+       	 	/>
+        	{passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
 		  
 		</div>
   
@@ -53,4 +57,5 @@ export default () => {
 	  </div>
 	  </div>
   );
-}
+};
+
