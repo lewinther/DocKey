@@ -27,7 +27,7 @@ export default function ChatCardCreateNew({
                         <img 
                         src={imagePreview} 
                         alt="Preview" 
-                        style={{ maxWidth: '100%', height: 'auto' }}
+                        style={{ maxWidth: '5vh', height: 'auto' }}
                         /> 
                         <button 
                         className="delete-image-button" 

@@ -97,7 +97,7 @@ export default function Chat() {
             />
             <div className="button-container">
               <div className="wrapper">
-                <div>
+                <div className="in-line">
                   <button className="attach-button" onClick={handleAttachClick}>
                     Attach Photo
                   </button>
