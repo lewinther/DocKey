@@ -65,6 +65,17 @@ export default function Chat() {
     setMessageContent(""); // Reset message content after sending
   };
 
+  function refresh(){
+    window.location.reload("Refresh")
+  }
+
+  async function clickOnSendMessage(){
+      onSendMessage();
+      if (onSendMessage){
+        refresh();
+      }
+  };
+
   if(user) {
     return (
       <Fragment>
@@ -90,7 +101,7 @@ export default function Chat() {
                   <button className="attach-button" onClick={handleAttachClick}>
                     Attach Photo
                   </button>
-                  <button className="send-button" onClick={onSendMessage}>
+                  <button className="send-button" onClick={clickOnSendMessage}>
                     Send
                   </button>
                 </div>
