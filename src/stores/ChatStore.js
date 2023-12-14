@@ -10,7 +10,9 @@ import {
   //functions
   getUserName,
   getMessageDate,
-  getMessageText
+  getMessageText,
+  isMessageUnread,
+  markMessageAsRead
 } from "../parse/parseHelper";
 
 import {
@@ -19,6 +21,16 @@ import {
 } from '../parse/queryBuilder';
 
 export default create((set, get) => ({
+
+    markMessageAsRead: async (messageId) => {
+        try {
+            // Call parseHelper function to update the message
+            await markMessageAsRead(messageId);
+            // Optionally, update any relevant state in ChatStore
+        } catch (error) {
+            console.error('Error updating message read status:', error);
+        }
+    },
     latestMessageInThreads:[],
     doGetLatestMessageInEachUniqueThread: async (userId) => {
         // Combined query for either sent or received messages.
@@ -69,11 +81,13 @@ async function createChatPartnerMapping(results, userId) {
     if (!existingMessage || message.get(_message_date) > chatPartnersMap[existingMessageIndex].message.get(_message_date)) {
      
       const messageObject = {
+        messageId: message.id,
         isSender,
         partnerId,
         chatDate: getMessageDate(message),
         chatText: getMessageText(message),
-        message
+        message,
+        unread: isMessageUnread(message)
       }
 
       if(!existingMessage)
