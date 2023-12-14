@@ -79,7 +79,6 @@ export default function Chat() {
   if(user) {
     return (
       <Fragment>
-        <div className="">
           <ChatContainer chatPartnerID={chatPartnerID} currentUserID={user.id} />
           <div className="ChatCardNew-chat">
             <ChatCardCreate
@@ -97,19 +96,17 @@ export default function Chat() {
               style={{display:'none'}}
             />
             <div className="button-container">
-              <div className="wrapper">
-                <div className="in-line">
-                  <button className="attach-button" onClick={handleAttachClick}>
-                    Attach Photo
-                  </button>
-                  <button className="send-button" onClick={clickOnSendMessage}>
-                    Send
-                  </button>
-                </div>
+              <div className="wrapper" style={{paddingTop: '1vh'}}>
+                <button className="attach-button" onClick={handleAttachClick}>
+                  Attach Photo
+                </button>
+                <button className="send-button" onClick={clickOnSendMessage}>
+                  Send
+                </button>
               </div>
             </div>
           </div>
-        </div>
+
         <NavbarBottom activeItem={"Inbox"} />
       </Fragment>
     );
