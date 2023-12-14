@@ -87,6 +87,7 @@ export default function Chat() {
               imagePreview={imageFile ? imageFile.previewUrl : null}
               onContentChange={handleMessageContentChange}
               onDeleteImage={onDeleteImage}
+              onSendMessage={clickOnSendMessage}
             />
             <input
               type="file"
