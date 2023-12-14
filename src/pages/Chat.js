@@ -61,7 +61,7 @@ export default function Chat() {
   };
 
   async function onSendMessage() {
-    alert(await handleSendMessage_Lena(user.id, chatPartnerID, messageText));
+    await handleSendMessage_Lena(user.id, chatPartnerID, messageText);
     setMessageContent(""); // Reset message content after sending
   };
 
@@ -70,7 +70,7 @@ export default function Chat() {
   }
 
   async function clickOnSendMessage(){
-      onSendMessage();
+      await onSendMessage();
       if (onSendMessage){
         refresh();
       }
