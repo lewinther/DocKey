@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Parse from "parse";
-import { getUserName } from "../parse/parseHelper";
 
 //import stores
 import useUserStore from "../stores/UserStore";
