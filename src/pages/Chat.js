@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Parse from "parse";
+import { getUserName } from "../parse/parseHelper";
 
 //import stores
 import useUserStore from "../stores/UserStore";
@@ -28,13 +29,20 @@ export default function Chat() {
   const location = useLocation();
   // Retrieve the user ID and chat partner ID from the navigation state
   const { chatPartnerID } = location.state || {};
+  const [ userName, setUserName ] = React.useState("");
   
   const [messageText, setMessageContent] = React.useState("");
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-    if (!user) return;
-  }, [user]);
+    if (!chatPartnerID) return;
+    async function updateUserName(){
+      setUserName(await getUserName(chatPartnerID));
+    }
+    (async () => {
+      await updateUserName();
+    })();
+  }, [chatPartnerID]);
 
   function handleMessageContentChange(content){
     setMessageContent(content);
@@ -79,6 +87,9 @@ export default function Chat() {
   if(user) {
     return (
       <Fragment>
+          {userName && (
+          <h1>Your conversation with {userName}</h1>
+        )}
           <ChatContainer chatPartnerID={chatPartnerID} currentUserID={user.id} />
           <div className="ChatCardNew-chat">
             <ChatCardCreate
