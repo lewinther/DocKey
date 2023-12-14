@@ -30,7 +30,7 @@ export default () => {
 			  type="text"
 			  placeholder="Dock Number"
 			  value={dockNumber}
-			  onChange={(e) => setDockNumber(e.target.value)}
+			  onChange={(e) => setDockNumber(e.target.value.toLocaleUpperCase())}
 			/>
 			
 			<input
