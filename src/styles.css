@@ -331,14 +331,14 @@ border-bottom: none;
 	right: 0px;
 	background-color: rgba(216, 221, 229, 0.847);
 	color: #012657;
-	border: 2px solid #012657;
 	border-radius: 50%;
-	width: 30px;
+	width: 30px; 
 	height: 30px;
-	text-align: center;
 	cursor: pointer;
-	font-size: 20px;
-	
+	font-size: 20px; 
+	padding: 0; 
+	line-height: 30px; 
+	border: none; 
   }
   
   .modal-close-button:hover {
