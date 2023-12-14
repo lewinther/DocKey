@@ -88,12 +88,12 @@ export default function Chat() {
             <div className="button-container">
               <div className="wrapper">
                 <div>
-                <button className="attach-button" onClick={handleAttachClick}>
-                  Attach Photo
-                </button>
-                <button className="send-button" onClick={onSendMessage}>
-                  Send
-                </button>
+                  <button className="attach-button" onClick={handleAttachClick}>
+                    Attach Photo
+                  </button>
+                  <button className="send-button" onClick={onSendMessage}>
+                    Send
+                  </button>
                 </div>
               </div>
             </div>
