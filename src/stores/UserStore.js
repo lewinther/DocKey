@@ -15,16 +15,28 @@ export default create ((set) => ({
 		const currentUser = await Parse.User.current();
 		set((state) => ({user: currentUser === null ? undefined : currentUser}));
 	},
+
+	// login error state
+	dockNumberError: null,
+	passwordError: null,
+
 	doLogin: async (username, password) => {
 		try {
+			// Clear previous errors
+			set((state) => ({ dockNumberError: null, passwordError: null }));
+	  
 			const loggedInUser = await Parse.User.logIn(username, password);
-			set((state) => ({user: loggedInUser}));
-		}
-		catch (error){
-			// Error can be caused by wrong parameters or lack of Internet connection
-			alert(`Error! ${error.message}`);
-		}
-	},
+			set((state) => ({ user: loggedInUser, loginError: null }));
+		  } catch (error) {
+			// Set errors based on the type of error
+			if (error.code === 101) {
+			  // Incorrect username/password
+			  set((state) => ({ dockNumberError: "Invalid username", passwordError: "Invalid password" }));
+			} else {
+			  set((state) => ({ loginError: error.message }));
+			}
+		  }
+		},
 	doLogout: async () => {
 		try {
 			await Parse.User.logOut();
