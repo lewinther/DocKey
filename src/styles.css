@@ -37,8 +37,6 @@ h3 {
 	margin: 2% 4% ;
 }
 
-
-
 /* dock number in picture */
 h4 {
 	color: #FFFF;
@@ -205,7 +203,7 @@ body{
 
   }
   
-  .news-card-img {
+.news-card-img {
 	width: 100%; 
 	height: 100%;
 	object-fit: cover; 
@@ -213,7 +211,7 @@ body{
   }
 
 
-  .news-image-container.featured {
+.news-image-container.featured {
 	margin-right: 0px; 
 	margin-left: 10px;
 	flex-shrink: 0; 
@@ -254,12 +252,10 @@ display: flex;
 align-items: center;
 }
 
-
 /* Last card shouldn't have a border */
 .card:last-child {
 border-bottom: none;
 }
-
 
 /* ChatCard and ChatContainer formatting */
 .chat-container{
@@ -324,7 +320,7 @@ border-bottom: none;
 	z-index: 1000; 
   }
   
-  .modal-content {
+.modal-content {
 	background: rgba(216, 221, 229, 0.847);
 	padding: 20px;
 	border-radius: 10px;
@@ -334,7 +330,7 @@ border-bottom: none;
 	position: relative;
   }
   
-  .modal-close-button {
+.modal-close-button {
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -350,12 +346,12 @@ border-bottom: none;
 	border: none; 
   }
   
-  .modal-close-button:hover {
+.modal-close-button:hover {
 	background-color: #f1f1f1;
 	border-color: #888;
   }
   
-  .modal-image {
+.modal-image {
 	max-height: 60vh;
 	max-width: fit-content;
   }
@@ -371,6 +367,7 @@ border-bottom: none;
 	border-radius: 5px; /* Optional: if you want rounded corners */
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow for depth */
   }
+
   
 .in-line-message{
 	display: flex;
@@ -629,4 +626,73 @@ html, body {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+  }
+
+.profile-img-container{
+	float: right;
+	width: 15%;
+	height: 100%;
+	margin: 2% 5% 2% 1%;
+	}
+  
+.square {
+	position: relative;
+	width: 100%;
+	background-color: #9FAABC;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 15%;
+	}
+  
+.square:after {
+	content: "";
+	display: block;
+	padding-bottom: 60%;
+	}
+  
+.content {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	}
+  
+.profile-img-alt-font {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 100%;
+	font-weight: 400;
+	color: #012657;  
+	top: 50%;
+	  transform: translate(0, 70%);
+  }
+  
+.chatlist-card-title{
+	justify-content: space-between; /* Align children at each end of the container */
+	width: 100%;
+  }
+  
+.chatlist-card-username {
+	color: #012657;
+	font-size: 90%;
+	font-family: 'Source Sans Pro', sans-serif;
+  }
+  
+.chatlist-card-date {
+	color: #919191;
+	font-size: 90%;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	order: 1;
+  }
+  
+.width-75 {
+	width: 75%;
+	margin: 2% 0% 0% 0%;
+  }
+  
+.chatlist-card-preview {
+	color: #012657;
+	font-size: 90%;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	margin: 5% 0% 0% 0%;
   }
