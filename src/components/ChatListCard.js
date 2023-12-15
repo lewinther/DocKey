@@ -13,7 +13,6 @@ export default function ChatCard({
     <Fragment>
       <div className="message-card-container" id={`chat-${chatPartnerID}`} onClick={onClick}>
         {/* The rest of your ChatCard contents */}
-        <div>
           <div className="in-line">
             <section className="message-card-body">
               <div className="in-line">
@@ -46,7 +45,6 @@ export default function ChatCard({
 
             </section>
           </div>
-        </div>
       </div>
     </Fragment>
   );

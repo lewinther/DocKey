@@ -210,7 +210,7 @@ body{
 
 .news-image-container.featured {
 	margin-right: 0px; 
-	margin-left: 10px;
+	margin-left: 3%;
 	flex-shrink: 0; 
   }
   
@@ -378,7 +378,7 @@ border-bottom: none;
 
 .message-card-body{
 	width: 100%;
-	padding: 2%;
+	padding: 2% 3% 2% 3%;
 }
 
 .message-list {
@@ -440,14 +440,15 @@ form {
 
 /* searchbar */
 .search-input {
-    font-size: 90%;
-	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 90%;
+    font-family: 'Source Sans Pro', sans-serif;
     border-radius: 10px;
-    border: 1px solid #ccc;
-    padding: 6px;
-    margin: 0 4%; 
+    border: 1px solid;
+    border-color: #1D385C;
+    padding: 2%;
+    margin: 0% 4%; 
     /*background-color: rgba(216, 221, 229, 0.847);*/
-	background-color: rgba(216, 221, 229, 0.932);
+    background-color: rgba(216, 221, 229, 0.932);
     box-sizing: border-box;
     width: 92%;
 }
@@ -466,7 +467,7 @@ form {
 	color: #1D385C;
 	background-color:rgba(216, 221, 229, 0.932);
 	border-color: #1D385C;
-	margin: 2% 4%;
+	margin: 0% 4%;
 	position: inherit;
 	width: 92%;
   }
@@ -648,7 +649,7 @@ html, body {
 .square:after {
 	content: "";
 	display: block;
-	padding-bottom: 58.89%;
+	padding-bottom: 55.33%;
 	}
   
 .content {
@@ -657,15 +658,13 @@ html, body {
 	height: 100%;
 }
 
-
-  
 .profile-img-alt-font {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 100%;
 	font-weight: 400;
 	color: #012657;  
 	top: 50%;
-	  transform: translate(0, 70%);
+	  transform: translate(0, 60%);
   }
   
 .chatlist-card-title{
@@ -688,7 +687,7 @@ html, body {
   }
   
 .width-75 {
-	width: 75%;
+	width: 85%;
 	margin: 2% 0% 0% 0%;
   }
   
@@ -697,5 +696,5 @@ html, body {
 	font-size: 90%;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
-	margin: 5% 0% 0% 0%;
+	margin: 3% 0% 0% 0%;
   }
