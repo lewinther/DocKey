@@ -19,13 +19,11 @@ export default function ChatCard({
               <div className="in-line">
               {chatPartnerImg && (
                 <div className='profile-img-container'>
-                  <div className='square'>
                   <img
-                    className="profile-img-container"
+                    className="news-card-img"
                     src={chatPartnerImg}
                     alt={chatPartnerUsername + " image"}
                   />
-                  </div>
                 </div>
               )}
               {!chatPartnerImg && (

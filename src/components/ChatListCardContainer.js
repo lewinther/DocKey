@@ -57,6 +57,7 @@ return (
       const chatUnreadMessages = msg.unread;
       const chatPartnerIsSender = msg.isSender;
       const chatMessageId = msg.messageId;
+      const chatPartnerProfileImage = msg.profileImage;
 
       return (
         <ChatCard
@@ -64,6 +65,7 @@ return (
           chatPartnerID={chatPartnerID}
           chatPartnerUsername={chatPartnerUsername}
           chatDate={chatDate}
+          chatPartnerImg={chatPartnerProfileImage}
           chatPreviewText={chatPreviewText}
           // if msg.isSender is False and chatUnreadMessages is True, then the message is unread and chatTextStyle is bold else chatTextStyle is empty
           chatTextStyle={chatPartnerIsSender ? "" : chatUnreadMessages ? "bold" : ""}

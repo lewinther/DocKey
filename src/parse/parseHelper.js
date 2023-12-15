@@ -15,6 +15,7 @@ export const _message_text = "Message_Text";
 export const _username = 'username';
 export const _unread = 'Unread_Message';
 export const _messageId = 'objectId';
+export const _profile_image = 'profile_image';
 
 export const _messageFields = {
     messageId: 'objectId',
@@ -26,7 +27,6 @@ export const _messageFields = {
     unread: 'Unread_Message',
     img : 'Image'
 }
-
 
 export async function getUserName(userId) {
     const userQuery = new Parse.Query(Parse.User);
@@ -106,7 +106,6 @@ export async function fetchDockNumbers(currentUserId) {
     return "message sent successfully";
   }
 
-  
   export async function uploadImage(file) {
     const parseFile = new Parse.File(file.name, file);
     try {
@@ -133,4 +132,10 @@ export async function fetchDockNumbers(currentUserId) {
         throw error;
     }
 }
-  
+
+export async function getProfileImage(userId) {
+  const userQuery = new Parse.Query(Parse.User);
+  userQuery.equalTo('objectId', userId);
+  let result = await userQuery.first();
+  return result.get(_profile_image);
+}
