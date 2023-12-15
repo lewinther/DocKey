@@ -361,7 +361,7 @@ border-bottom: none;
 	margin-top: 10px; /* Add space above the image */
   }
   
-  .message-image {
+.message-image {
 	max-width: 50%; /* Ensure the image does not overflow the chat card */
 	height: auto; /* Maintain aspect ratio */
 	border-radius: 5px; /* Optional: if you want rounded corners */
@@ -411,17 +411,20 @@ border-bottom: none;
 	padding: 0.5%;
 	padding-top: 0.5%;
 	height: 33%;
+}
+
+.scrollbar-hidden {
 	/* Hide scrollbar for IE, Edge and Firefox */
 	-ms-overflow-style: none;  /* IE and Edge */
 	scrollbar-width: none;  /* Firefox */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.message-list::-webkit-scrollbar {
+.scrollbar-hidden::-webkit-scrollbar {
 	display: none;
   }
 
-.message-list-small::-webkit-scrollbar {
+.scrollbar-hidden::-webkit-scrollbar {
 	display: none;
   }
 

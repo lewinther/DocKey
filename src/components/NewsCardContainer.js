@@ -53,7 +53,7 @@ export default function NewsCardContainer() {
   return (
     <Fragment>
       <h3 className="h3-home">Harbor News</h3>
-      <section className="news-card-container">
+      <section className="news-card-container scrollbar-hidden">
         {newsArticles.map((article, index) => (
           <NewsCard
             key={article.id}

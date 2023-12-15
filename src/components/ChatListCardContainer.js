@@ -48,7 +48,7 @@ export default function ChatListInbox({ searchTerm }) {
 
 
 return (
-  <div className="message-list">
+  <div className="message-list scrollbar-hidden">
     {chats.map((msg, index) => {
       const chatPartnerID = msg.partnerId;
       const chatDate = msg.chatDate;
