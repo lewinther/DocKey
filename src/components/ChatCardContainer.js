@@ -56,7 +56,7 @@ const renderModal = () => {
 
   return (
     <Fragment>
-    <div className="chat-container">
+    <div className="chat-container scrollbar-hidden">
       {messages.map((message, index) => (
         <ChatCard
           onClick={() => setSelectedImage(message)}
