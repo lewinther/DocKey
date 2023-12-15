@@ -52,7 +52,7 @@ return (
     {chats.map((msg, index) => {
       const chatPartnerID = msg.partnerId;
       const chatDate = msg.chatDate;
-      const chatPreviewText = msg.chatText;
+      const chatPreviewText = msg.chatText.length > 35 ? `${msg.chatText.substring(0, 35)}...` : msg.chatText;
       const chatPartnerUsername = msg.partnerName;
       const chatUnreadMessages = msg.unread;
       const chatPartnerIsSender = msg.isSender;

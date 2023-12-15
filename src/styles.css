@@ -61,7 +61,6 @@ p {
 	font-size: 90%;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
-	
 }
 
 .news-content {
@@ -72,14 +71,12 @@ p {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
 	/* Add other styles specific to news content here */
-  }
+}
 
-  .news-title {
+.news-title {
 	margin-bottom: 1px; /* Reduced bottom margin */
-	
 	font-weight: bold;
-	
-  }
+}
 
 /* p in bold */
 .bold {
