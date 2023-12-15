@@ -380,7 +380,7 @@ border-bottom: none;
 }
 
 .message-card-body{
-	width: 300px;
+	width: 100%;
 	padding: 2%;
 }
 
@@ -678,7 +678,7 @@ html, body {
   
 .chatlist-card-date {
 	color: #919191;
-	font-size: 90%;
+	font-size: 70%;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
 	order: 1;
