@@ -21,16 +21,15 @@ export default function Home() {
 
       <div className="in-column">
         {user && (
-          <h1>Welcome, {user.get('first_name')}!</h1>
-        )}
-        {user && (
-        <NewsCardContainer />
-        )}
-        {user && (
-            <MessageCardContainer />
-        )}
-        {user && (
-        <NavbarBottom activeItem={"Home"} />
+          <>
+          <h1>Welcome, {user.get('first_name')}! </h1>
+          <NewsCardContainer />
+          <div className='wrapper'>
+            <h3 className='h3-home'> Your Messages </h3>
+          </div>
+          <MessageCardContainer />
+          <NavbarBottom activeItem={"Home"} />
+          </>
         )}
       </div>
     </Fragment>
