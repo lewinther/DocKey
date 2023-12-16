@@ -12,7 +12,7 @@ import ChatCard from "./ChatListCard";
 //CSS import
 import "../../src/styles.css";
 
-export default function ChatListInbox({ searchTerm }) {
+export default function ChatListInbox({ searchTerm, activePage }) {
   const [chats, setChats] = useState([]);
   // Hook for programmatically navigating
   const navigate = useNavigate();
@@ -20,6 +20,8 @@ export default function ChatListInbox({ searchTerm }) {
   const {doGetLatestMessageInEachUniqueThread, filterLatestMessageInThreadsBySearchTerm} = useChatStore();
   // Function to handle chat card click
   const { markMessageAsRead } = useChatStore();
+  // Determine the CSS class based on the activePage
+  const chatListCSS = activePage === "Home" ? "message-list-small" : "message-list";
 
   const handleChatClick = async (chatPartnerID, messageId) => {
       await markMessageAsRead(messageId);
@@ -48,7 +50,7 @@ export default function ChatListInbox({ searchTerm }) {
 
 
 return (
-  <div className="message-list scrollbar-hidden">
+  <div className={chatListCSS + " scrollbar-hidden"}>
     {chats.map((msg, index) => {
       const chatPartnerID = msg.partnerId;
       const chatDate = msg.chatDate;

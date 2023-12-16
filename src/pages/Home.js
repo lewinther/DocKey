@@ -8,7 +8,7 @@ import "../../src/styles.css";
 
 // Components
 import NewsCardContainer from "../components/NewsCardContainer";
-import MessageCardContainer from "../components/ChatListHome";
+import ChatListInbox from "../components/ChatListCardContainer";
 import NavbarBottom from '../components/NavbarBottom';
 import PageHeader from "../components/PageHeader";
 
@@ -27,7 +27,7 @@ export default function Home() {
           <div className='wrapper'>
             <h3 className='h3-home'> Your Messages </h3>
           </div>
-          <MessageCardContainer />
+          <ChatListInbox searchTerm={""} activePage={"Home"} />
           <NavbarBottom activeItem={"Home"} />
           </>
         )}
