@@ -1,6 +1,8 @@
 import { Fragment, useState, useEffect } from "react";
 import Parse from 'parse';
 import NewsCard from "./NewsCard";
+import CloseButton from "../assets/IconCloseButton";
+
 
 export default function NewsCardContainer() {
   const [newsArticles, setNewsArticles] = useState([]);
@@ -37,10 +39,12 @@ export default function NewsCardContainer() {
     const imageFile = selectedArticle.get('News_Img') ? selectedArticle.get('News_Img').get('Image_File') : null;
     const newsImg = imageFile ? imageFile.url() : null;
 
+
+
     return (
       <div className="modal-overlay">
         <div className="modal-content">
-          <button className="modal-close-button" onClick={() => setSelectedArticle(null)}>x</button>
+          <button className="modal-close-button" onClick={() => setSelectedArticle(null)}><CloseButton /></button>
           {newsImg && <img src={newsImg} alt={newsTitle} />}
           <p className="news-title">{newsTitle}</p>
           <p>{newsDate}</p>
