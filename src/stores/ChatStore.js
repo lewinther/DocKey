@@ -14,7 +14,8 @@ import {
   getMessageText,
   isMessageUnread,
   markMessageAsRead,
-  getProfileImage
+  getProfileImage,
+  getUnreadMessagesCount
 } from "../parse/parseHelper";
 
 import {
@@ -90,6 +91,7 @@ async function createChatPartnerMapping(results, userId) {
         chatText: getMessageText(message),
         message,
         unread: isMessageUnread(message),
+        userId
       };
 
       if (!existingMessage)
@@ -108,8 +110,20 @@ async function createChatPartnerMapping(results, userId) {
       partnerName = await getUserName(message.partnerId);
     }
     const profileImage = await getProfileImage(message.partnerId);
+
+        // Fetch count of unread messages
+    let unreadMessagesCount = message.unreadMessagesCount;
+    if (!unreadMessagesCount) {
+      unreadMessagesCount = await getUnreadMessagesCount(message.userId, message.partnerId);
+    }
+    
+    // Update message object
     message.partnerName = partnerName;
     message.profileImage = profileImage ? (typeof profileImage.url === 'function' ? profileImage.url() : null) : null;
+    message.unreadMessagesCount = unreadMessagesCount;
+    message.partnerName = partnerName;
+    message.profileImage = profileImage ? (typeof profileImage.url === 'function' ? profileImage.url() : null) : null;
+    message.unreadMessagesCount = unreadMessagesCount;
   }));
   
 

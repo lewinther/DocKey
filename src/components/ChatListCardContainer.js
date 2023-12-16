@@ -52,12 +52,13 @@ return (
     {chats.map((msg, index) => {
       const chatPartnerID = msg.partnerId;
       const chatDate = msg.chatDate;
-      const chatPreviewText = msg.chatText.length > 35 ? `${msg.chatText.substring(0, 35)}...` : msg.chatText;
+      const chatPreviewText = msg.chatText.length > 60 ? `${msg.chatText.substring(0, 60)}...` : msg.chatText;
       const chatPartnerUsername = msg.partnerName;
       const chatUnreadMessages = msg.unread;
       const chatPartnerIsSender = msg.isSender;
       const chatMessageId = msg.messageId;
       const chatPartnerProfileImage = msg.profileImage;
+      const chatUnreadMessagesCount = msg.unreadMessagesCount;
 
       return (
         <ChatCard
@@ -70,6 +71,8 @@ return (
           // if msg.isSender is False and chatUnreadMessages is True, then the message is unread and chatTextStyle is bold else chatTextStyle is empty
           chatTextStyle={chatPartnerIsSender ? "" : chatUnreadMessages ? "bold" : ""}
           onClick={() => handleChatClick(chatPartnerID, chatMessageId)}
+          chatUnreadMessages={chatPartnerIsSender ? "" : chatUnreadMessages ? true : false}
+          chatCountUnreadMessages={chatUnreadMessagesCount}
         />
       );
     })}

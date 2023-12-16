@@ -34,7 +34,15 @@ export async function getUserName(userId) {
     let result = await userQuery.first();
     return result.get(_username);
   }
-  
+
+export async function getUnreadMessagesCount(userId, chatPartnerId) {
+  const query = new Parse.Query('Message');
+  query.equalTo(_receiver_user_id, userId);
+  query.equalTo(_sender_user_id, chatPartnerId);
+  query.equalTo(_unread, true); 
+  return query.count();
+}
+
 export function getMessageDate(msg) {
     const messageDate = msg.get(_message_date).toLocaleDateString();
     return messageDate ? messageDate : 'Unknown date';

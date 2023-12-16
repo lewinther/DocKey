@@ -695,6 +695,33 @@ html, body {
 	color: #012657;
 	font-size: 90%;
 	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400;
-	margin: 3% 0% 0% 0%;
+	margin: 0% 0% 0% 0%;
+	width: 93%;
   }
+
+.chatlist-card-unread-count {
+	color: #919191;
+	font-size: 70%;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	order: 1;
+	margin: 5% 0% 0% 0%;
+  }
+
+  .chatlist-card-unread-count {
+    color: rgba(216, 221, 229, 1); /* Updated font color */
+    font-size: 70%; /* Unchanged */
+    font-family: 'Source Sans Pro', sans-serif; /* Unchanged */ 
+    font-weight: 400; /* Unchanged */
+    order: 1; /* Unchanged */
+    margin: 3% 0% 0% 0%; /* Updated margin */
+    background-color: #012657; /* New background color */
+    border-radius: 50%; /* Makes the background a circle */
+    display: inline-flex; /* Changed to inline-flex for better centering */
+    justify-content: center; /* Horizontally centers the content */
+    align-items: center; /* Vertically centers the content */
+    width: 1.5em; /* Fixed width */
+    height: 1.5em; /* Fixed height */
+    min-width: 1.5em; /* Ensures the circle shape even with single digit */
+}
+
