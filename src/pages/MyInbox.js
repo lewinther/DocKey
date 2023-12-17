@@ -22,7 +22,7 @@ export default function MyInbox() {
       <div className="in-column">
         <h1>Inbox</h1>
         <SearchBar onSearch={handleSearch} />
-        <ChatListInbox searchTerm={searchTerm} />
+        <ChatListInbox searchTerm={searchTerm} activePage={"Inbox"} />
         <NavbarBottom activeItem={"Inbox"} />
       </div>
     </Fragment>

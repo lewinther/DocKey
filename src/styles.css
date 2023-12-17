@@ -37,8 +37,6 @@ h3 {
 	margin: 2% 4% ;
 }
 
-
-
 /* dock number in picture */
 h4 {
 	color: #FFFF;
@@ -63,7 +61,6 @@ p {
 	font-size: 90%;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
-	
 }
 
 .news-content {
@@ -74,14 +71,12 @@ p {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
 	/* Add other styles specific to news content here */
-  }
+}
 
-  .news-title {
+.news-title {
 	margin-bottom: 1px; /* Reduced bottom margin */
-	
 	font-weight: bold;
-	
-  }
+}
 
 /* p in bold */
 .bold {
@@ -205,17 +200,17 @@ body{
 
   }
   
-  .news-card-img {
+.news-card-img {
 	width: 100%; 
 	height: 100%;
 	object-fit: cover; 
-	border-radius: 15px; 
+	border-radius: 15%; 
   }
 
 
-  .news-image-container.featured {
+.news-image-container.featured {
 	margin-right: 0px; 
-	margin-left: 10px;
+	margin-left: 3%;
 	flex-shrink: 0; 
   }
   
@@ -254,12 +249,10 @@ display: flex;
 align-items: center;
 }
 
-
 /* Last card shouldn't have a border */
 .card:last-child {
 border-bottom: none;
 }
-
 
 /* ChatCard and ChatContainer formatting */
 .chat-container{
@@ -324,38 +317,32 @@ border-bottom: none;
 	z-index: 1000; 
   }
   
-  .modal-content {
-	background: rgba(216, 221, 229, 0.847);
-	padding: 20px;
-	border-radius: 10px;
-	max-width: 80%; 
-	max-height: 80%;
-	overflow-y: auto; 
-	position: relative;
-  }
-  
-  .modal-close-button {
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	background-color: rgba(216, 221, 229, 0.847);
-	color: #012657;
-	border-radius: 50%;
-	width: 30px; 
-	height: 30px;
-	cursor: pointer;
-	font-size: 20px; 
-	padding: 0; 
-	line-height: 30px; 
-	border: none; 
-  }
-  
-  .modal-close-button:hover {
-	background-color: #f1f1f1;
-	border-color: #888;
-  }
-  
-  .modal-image {
+.modal-content {
+    background: rgba(216, 221, 229);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 80%; 
+    max-height: 80%;
+    overflow-y: auto; 
+    position: relative;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 2%; /* Adjust as needed */
+    right: 2%; /* Adjust as needed */
+    background: transparent; /* Transparent background */
+    border: none;
+    padding: 0;
+    cursor: pointer; /* Changes the cursor on hover */
+}
+
+.modal-close-button svg {
+    fill: #012657; /* Change color as needed */
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+}
+.modal-image {
 	max-height: 60vh;
 	max-width: fit-content;
   }
@@ -365,12 +352,13 @@ border-bottom: none;
 	margin-top: 10px; /* Add space above the image */
   }
   
-  .message-image {
+.message-image {
 	max-width: 50%; /* Ensure the image does not overflow the chat card */
 	height: auto; /* Maintain aspect ratio */
 	border-radius: 5px; /* Optional: if you want rounded corners */
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow for depth */
   }
+
   
 .in-line-message{
 	display: flex;
@@ -383,8 +371,8 @@ border-bottom: none;
 }
 
 .message-card-body{
-	width: 300px;
-	padding: 2%;
+	width: 100%;
+	padding: 2% 3% 2% 3%;
 }
 
 .message-list {
@@ -414,17 +402,20 @@ border-bottom: none;
 	padding: 0.5%;
 	padding-top: 0.5%;
 	height: 33%;
+}
+
+.scrollbar-hidden {
 	/* Hide scrollbar for IE, Edge and Firefox */
 	-ms-overflow-style: none;  /* IE and Edge */
 	scrollbar-width: none;  /* Firefox */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.message-list::-webkit-scrollbar {
+.scrollbar-hidden::-webkit-scrollbar {
 	display: none;
   }
 
-.message-list-small::-webkit-scrollbar {
+.scrollbar-hidden::-webkit-scrollbar {
 	display: none;
   }
 
@@ -434,6 +425,7 @@ border-bottom: none;
 	box-sizing: border-box;
 	display: block;
 	border-radius: 10px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Adjust shadow as needed */
 
 }
 
@@ -443,14 +435,15 @@ form {
 
 /* searchbar */
 .search-input {
-    font-size: 90%;
-	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 90%;
+    font-family: 'Source Sans Pro', sans-serif;
     border-radius: 10px;
-    border: 1px solid #ccc;
-    padding: 6px;
-    margin: 0 4%; 
+    border: 1px solid;
+    border-color: #1D385C;
+    padding: 2%;
+    margin: 0% 4%; 
     /*background-color: rgba(216, 221, 229, 0.847);*/
-	background-color: rgba(216, 221, 229, 0.932);
+    background-color: rgba(216, 221, 229, 0.932);
     box-sizing: border-box;
     width: 92%;
 }
@@ -469,7 +462,7 @@ form {
 	color: #1D385C;
 	background-color:rgba(216, 221, 229, 0.932);
 	border-color: #1D385C;
-	margin: 2% 4%;
+	margin: 0% 4%;
 	position: inherit;
 	width: 92%;
   }
@@ -630,3 +623,100 @@ html, body {
 	display: flex;
 	flex-direction: column;
   }
+
+.profile-img-container{
+	float: right;
+	width: 15%;
+	height: 100%;
+	margin: 2% 5% 2% 1%;
+	}
+  
+.square {
+	position: relative;
+	width: 100%;
+	background-color: #9FAABC;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 15%;
+	object-fit: cover; 
+}
+
+.square:after {
+	content: "";
+	display: block;
+	padding-bottom: 55.33%;
+	}
+  
+.content {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.profile-img-alt-font {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 100%;
+	font-weight: 400;
+	color: #012657;  
+	top: 50%;
+	  transform: translate(0, 60%);
+  }
+  
+.chatlist-card-title{
+	justify-content: space-between; /* Align children at each end of the container */
+	width: 100%;
+  }
+  
+.chatlist-card-username {
+	color: #012657;
+	font-size: 90%;
+	font-family: 'Source Sans Pro', sans-serif;
+  }
+  
+.chatlist-card-date {
+	color: #919191;
+	font-size: 70%;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	order: 1;
+  }
+  
+.width-75 {
+	width: 85%;
+	margin: 2% 0% 0% 0%;
+  }
+  
+.chatlist-card-preview {
+	color: #012657;
+	font-size: 90%;
+	font-family: 'Source Sans Pro', sans-serif;
+	margin: 0% 0% 0% 0%;
+	width: 94%;
+  }
+
+.chatlist-card-unread-count {
+	color: #919191;
+	font-size: 70%;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	order: 1;
+	margin: 5% 0% 0% 0%;
+  }
+
+  .chatlist-card-unread-count {
+    color: rgba(216, 221, 229, 1); /* Updated font color */
+    font-size: 70%; /* Unchanged */
+    font-family: 'Source Sans Pro', sans-serif; /* Unchanged */ 
+    font-weight: 400; /* Unchanged */
+    order: 1; /* Unchanged */
+    margin: 3% 0% 0% 0%; /* Updated margin */
+    background-color: #012657; /* New background color */
+    border-radius: 50%; /* Makes the background a circle */
+    display: inline-flex; /* Changed to inline-flex for better centering */
+    justify-content: center; /* Horizontally centers the content */
+    align-items: center; /* Vertically centers the content */
+    width: 1.5em; /* Fixed width */
+    height: 1.5em; /* Fixed height */
+    min-width: 1.5em; /* Ensures the circle shape even with single digit */
+}
+

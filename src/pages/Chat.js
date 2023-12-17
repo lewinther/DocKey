@@ -88,7 +88,7 @@ export default function Chat() {
     return (
       <Fragment>
           {userName && (
-          <h1>Your conversation with {userName}</h1>
+          <h1>Conversation with {userName}</h1>
         )}
           <ChatContainer chatPartnerID={chatPartnerID} currentUserID={user.id} />
           <div className="ChatCardNew-chat">

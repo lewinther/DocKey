@@ -12,7 +12,7 @@ import ChatCard from "./ChatListCard";
 //CSS import
 import "../../src/styles.css";
 
-export default function ChatListInbox({ searchTerm }) {
+export default function ChatListInbox({ searchTerm, activePage }) {
   const [chats, setChats] = useState([]);
   // Hook for programmatically navigating
   const navigate = useNavigate();
@@ -20,6 +20,8 @@ export default function ChatListInbox({ searchTerm }) {
   const {doGetLatestMessageInEachUniqueThread, filterLatestMessageInThreadsBySearchTerm} = useChatStore();
   // Function to handle chat card click
   const { markMessageAsRead } = useChatStore();
+  // Determine the CSS class based on the activePage
+  const chatListCSS = activePage === "Home" ? "message-list-small" : "message-list";
 
   const handleChatClick = async (chatPartnerID, messageId) => {
       await markMessageAsRead(messageId);
@@ -48,15 +50,17 @@ export default function ChatListInbox({ searchTerm }) {
 
 
 return (
-  <div className="message-list">
+  <div className={chatListCSS + " scrollbar-hidden"}>
     {chats.map((msg, index) => {
       const chatPartnerID = msg.partnerId;
       const chatDate = msg.chatDate;
-      const chatPreviewText = msg.chatText;
+      const chatPreviewText = msg.chatText.length > 60 ? `${msg.chatText.substring(0, 60)}...` : msg.chatText;
       const chatPartnerUsername = msg.partnerName;
       const chatUnreadMessages = msg.unread;
       const chatPartnerIsSender = msg.isSender;
       const chatMessageId = msg.messageId;
+      const chatPartnerProfileImage = msg.profileImage;
+      const chatUnreadMessagesCount = msg.unreadMessagesCount;
 
       return (
         <ChatCard
@@ -64,10 +68,13 @@ return (
           chatPartnerID={chatPartnerID}
           chatPartnerUsername={chatPartnerUsername}
           chatDate={chatDate}
+          chatPartnerImg={chatPartnerProfileImage}
           chatPreviewText={chatPreviewText}
           // if msg.isSender is False and chatUnreadMessages is True, then the message is unread and chatTextStyle is bold else chatTextStyle is empty
           chatTextStyle={chatPartnerIsSender ? "" : chatUnreadMessages ? "bold" : ""}
           onClick={() => handleChatClick(chatPartnerID, chatMessageId)}
+          chatUnreadMessages={chatPartnerIsSender ? "" : chatUnreadMessages ? true : false}
+          chatCountUnreadMessages={chatUnreadMessagesCount}
         />
       );
     })}

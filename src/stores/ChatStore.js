@@ -7,12 +7,15 @@ import {
   _message,
   _message_text,
   _username,
+  _profile_image,
   //functions
   getUserName,
   getMessageDate,
   getMessageText,
   isMessageUnread,
-  markMessageAsRead
+  markMessageAsRead,
+  getProfileImage,
+  getUnreadMessagesCount
 } from "../parse/parseHelper";
 
 import {
@@ -70,16 +73,16 @@ export default create((set, get) => ({
 async function createChatPartnerMapping(results, userId) {
   const chatPartnersMap = [];
 
-  results.forEach(message => {
+  for (const message of results) {
     const senderId = message.get(_sender_user_id).id;
     const receiverId = message.get(_receiver_user_id).id;
     const isSender = senderId === userId;
     const partnerId = isSender ? receiverId : senderId;
-    //Finding the correct object to get the username from, using the same logic as above.
-    const existingMessageIndex =  chatPartnersMap.findIndex(msgObj => msgObj.partnerId === partnerId);
+
+    const existingMessageIndex = chatPartnersMap.findIndex(msgObj => msgObj.partnerId === partnerId);
     const existingMessage = existingMessageIndex !== -1;
+
     if (!existingMessage || message.get(_message_date) > chatPartnersMap[existingMessageIndex].message.get(_message_date)) {
-     
       const messageObject = {
         messageId: message.id,
         isSender,
@@ -87,21 +90,42 @@ async function createChatPartnerMapping(results, userId) {
         chatDate: getMessageDate(message),
         chatText: getMessageText(message),
         message,
-        unread: isMessageUnread(message)
-      }
+        unread: isMessageUnread(message),
+        userId
+      };
 
-      if(!existingMessage)
+      if (!existingMessage)
         chatPartnersMap.push(messageObject);
-      else chatPartnersMap[existingMessageIndex]=messageObject;
-  }})
+      else
+        chatPartnersMap[existingMessageIndex] = messageObject;
+    }
+  }
 
-  //await all partnername queries.
-  await Promise.all(chatPartnersMap.map(async message => {
+  await Promise.all(chatPartnersMap.map(async (message) => {
     const _partner_id = message.isSender ? _receiver_user_id : _sender_user_id;
+  
+    // Fetch partner name
     let partnerName = message.message.get(_partner_id).get(_username);
-    if(!partnerName)
+    if (!partnerName) {
       partnerName = await getUserName(message.partnerId);
+    }
+    const profileImage = await getProfileImage(message.partnerId);
+
+        // Fetch count of unread messages
+    let unreadMessagesCount = message.unreadMessagesCount;
+    if (!unreadMessagesCount) {
+      unreadMessagesCount = await getUnreadMessagesCount(message.userId, message.partnerId);
+    }
+    
+    // Update message object
     message.partnerName = partnerName;
-  }));  
+    message.profileImage = profileImage ? (typeof profileImage.url === 'function' ? profileImage.url() : null) : null;
+    message.unreadMessagesCount = unreadMessagesCount;
+    message.partnerName = partnerName;
+    message.profileImage = profileImage ? (typeof profileImage.url === 'function' ? profileImage.url() : null) : null;
+    message.unreadMessagesCount = unreadMessagesCount;
+  }));
+  
+
   return chatPartnersMap;
 }

@@ -3,27 +3,52 @@ import { Fragment } from 'react';
 export default function ChatCard({
   chatPartnerID,
   chatPartnerUsername,
+  chatPartnerImg,
   chatDate,
   chatPreviewText,
-  chatTextStyle,
-  onClick, // Add this line to include the onClick prop
+  onClick,
+  chatUnreadMessages,
+  chatCountUnreadMessages
 }) {
   return (
     <Fragment>
       <div className="message-card-container" id={`chat-${chatPartnerID}`} onClick={onClick}>
         {/* The rest of your ChatCard contents */}
-        <div className="card">
-          <div className="in-line">
-            <section className="message-card-body">
-              <div className="in-line">
-                <p className="bold" id={`newsTitle username-${chatPartnerID}`}>{chatPartnerUsername}</p>
-                <h5 id={`newsDate date-${chatPartnerID}`}>{chatDate}</h5>
+        <div className="in-line">
+          <section className="message-card-body">
+            <div className="in-line">
+              {chatPartnerImg && (
+                <div className='profile-img-container'>
+                  <img
+                    className="news-card-img"
+                    src={chatPartnerImg}
+                    alt={chatPartnerUsername + " image"}
+                  />
+                </div>
+              )}
+              {!chatPartnerImg && (
+                <div className='profile-img-container'>
+                  <div className='square'>
+                    <div className='profile-img-alt-font'>{chatPartnerUsername}</div>
+                  </div>
+                </div>
+              )}
+              <div className="width-75">
+                <div className="in-line chatlist-card-title">
+                  <div className="chatlist-card-username bold" id={`username-${chatPartnerID}`}>{chatPartnerUsername}</div>
+                  <div className="chatlist-card-date" id={`newsDate date-${chatPartnerID}`}>{chatDate}</div>
+                </div>
+                <div className="in-line">
+                  <div className={`chatlist-card-preview ${chatUnreadMessages ? 'bold' : ''}`}>{chatPreviewText}</div>
+                  {chatUnreadMessages && (
+                    <div className="chatlist-card-unread-count">
+                      {chatCountUnreadMessages}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="meta-text">
-                <p className={`${chatTextStyle}`}>{chatPreviewText}</p>
-              </div>
-            </section>
-          </div>
+            </div>
+          </section>
         </div>
       </div>
     </Fragment>
