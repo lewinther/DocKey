@@ -335,17 +335,22 @@ border-bottom: none;
     border: none;
     padding: 0;
     cursor: pointer; /* Changes the cursor on hover */
+	margin: 1% 1% 0% 0%;
 }
 
 .modal-close-button svg {
     fill: #012657; /* Change color as needed */
     width: 24px; /* Adjust size as needed */
     height: 24px; /* Adjust size as needed */
+	background: rgba(110, 158, 223, 0.5);
+	border-radius: 50%;
+	padding: 10%;
 }
-.modal-image {
+
+.modal-image img {
 	max-height: 60vh;
-	max-width: fit-content;
-  }
+	width: fit-content;
+ }
 
 /*Images in chat*/
 .message-image-container {

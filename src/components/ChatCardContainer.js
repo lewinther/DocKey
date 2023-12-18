@@ -8,6 +8,7 @@ import "../../src/styles.css";
 
 //components import
 import ChatCard from "./ChatCard";
+import CloseButton from "../assets/IconCloseButton";
 
 export default function ChatContainer({ currentUserID, chatPartnerID }) {
   const { doGetMessagesForThread } = useChatStore();
@@ -39,8 +40,9 @@ const renderModal = () => {
         <button 
           className="modal-close-button" 
           onClick={() => 
-          setSelectedImage(null)}>x
+          setSelectedImage(null)}> <CloseButton/>
         </button>
+
         <div className="modal-image">
         {image && 
           <img 
