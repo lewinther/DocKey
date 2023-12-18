@@ -39,8 +39,7 @@ export async function getUnreadMessagesCount(userId, chatPartnerId) {
   const query = new Parse.Query('Message');
   query.equalTo(_receiver_user_id, userId);
   query.equalTo(_sender_user_id, chatPartnerId);
-  query.equalTo(_unread, true); 
-  console.log(query.count())
+  query.equalTo(_unread, true);
   return query.count();
 }
 

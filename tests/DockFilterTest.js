@@ -17,7 +17,7 @@ import DockFilter from "./components/DockFilter";
 export default function App() {
   const dockNumbers = ["D1", "D2", "D3", "D4"];
   const handleDockSelection = (selectedDockNumber) => {
-    console.log(`Selected dock number: ${selectedDockNumber}`);
+    return(`Selected dock number: ${selectedDockNumber}`);
   };
 
   return (

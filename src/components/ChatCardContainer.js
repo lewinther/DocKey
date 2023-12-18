@@ -63,7 +63,7 @@ const renderModal = () => {
           key={index}
           messageSenderNo={message.get("Sender_User_ID").id}
           messageRecieverNo={message.get("Receiver_User_ID").id}
-          messageDate={message.get("Message_Date").toLocaleString()}
+          messageDate={message.get("Message_Date").toLocaleTimeString()}
           messageText={message.get("Message_Text")}
           messageImagePointer={message.get("Image")}
         />

@@ -22,9 +22,9 @@ user.set("password", "1234");
 
 user.save().then(
 	(userObject) => {
-		console.log("saved with id: " + userObject.id);
+		return("saved with id: " + userObject.id);
 }, (error) => {
-	console.log(error.message);
+		return(error.message);
 })
 // END - CREATE NEW USER
 
@@ -51,9 +51,9 @@ const createMessage = async function(senderId, receiverId, messageText) {
   
 	  // Save the message to Back4App
 	  await Message.save();
-	  console.log('Message sent successfully!');
+	  	return('Message sent successfully!');
 	} catch (error) {
-	  console.error('Error sending message:', error.message);
+	  	return('Error sending message:', error.message);
 	}
   };
   
@@ -83,9 +83,9 @@ const createSampleNewsArticle = async (title, text, date, imgURL) => {
   
 	try {
 	  let result = await newsArticle.save();
-	  console.log('News Article created', result);
+		return('News Article created', result);
 	} catch (error) {
-	  console.error('Error while creating News Article: ', error);
+	  return('Error while creating News Article: ', error);
 	}
   };
   
