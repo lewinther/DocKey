@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import useUserStore from "../stores/UserStore";
 import "../../src/styles.css";
 import CloseButton from "../assets/IconCloseButton"; 
-import logo from "../assets/logo.png";
+import logo5 from "../assets/logo5.png";
 
 
 export default function UserLogin() {
@@ -64,8 +64,8 @@ export default function UserLogin() {
         <Fragment>
             <div className="login-container">
                 <h1>Welcome to Dockey</h1>
-                <div className="image-container">
-                    <img src={logo1} alt="Logo" />
+                <div className="image-container-logo">
+                    <img src={logo5} alt="Logo" />
                 </div>
 
                 <div className="login-fields-container">
