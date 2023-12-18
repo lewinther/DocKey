@@ -799,3 +799,8 @@ html, body {
     min-width: 1.5em; /* Ensures the circle shape even with single digit */
 }
 
+.image-container-logo img {
+	max-width: 250px;
+	opacity: 0.8; 
+}
+
