@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Parse from "parse";
 import {
     //parse DB fields
@@ -27,12 +28,14 @@ const PARSE_HOST_URL = 'https://parseapi.back4app.com/';
 Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
 Parse.serverURL = PARSE_HOST_URL;
 
+
 export default function NewMessage() {
   const { user } = useUserStore();
   const {
     dockNumbers,
     fetchAndSetDockNumbers,
     handleSendMessage,
+    dockNumberToUserIdMapping,
     setImageFile,
     imageFile
   } = useNewMessageStore();
@@ -40,6 +43,9 @@ export default function NewMessage() {
   const [selectedDock, setSelectedDock] = React.useState("");
   const [messageContent, setMessageContent] = React.useState("");
   const fileInputRef = useRef(null);
+  // Hook for programmatically navigating
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (user) {
@@ -78,7 +84,15 @@ export default function NewMessage() {
   const onSendMessage = async () => {
     await handleSendMessage(selectedDock, messageContent, user);
     setMessageContent(""); // Reset message content after sending
-  };
+
+    const receiverId = dockNumberToUserIdMapping[selectedDock];
+    if (receiverId) {
+        navigate(`/Chat`, { state: { chatPartnerID: receiverId, userId: user.id } });
+    } else {
+        console.error("Invalid dock number or mapping not found for selectedDock:", selectedDock);
+        // Handle the error case appropriately
+    }
+};
 
   return (
     <Fragment>
