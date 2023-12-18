@@ -1,3 +1,5 @@
+import { useNavigate, Link } from "react-router-dom";
+
 //Stores
 import useUserStore from "../stores/UserStore";
 
@@ -11,6 +13,12 @@ import NavbarBottom from "../components/NavbarBottom";
 export default function Profile() {
   const user = useUserStore((state) => state.user);
   const doLogout = useUserStore((state) => state.doLogout);
+  const navigate = useNavigate();
+
+  async function clickDoLogout() {
+    try{await doLogout();}
+    finally{navigate("/")}
+  };
 
   return (
     <div>
@@ -23,11 +31,12 @@ export default function Profile() {
       )}
       {user !== undefined && (
         <section className="centered">
-        <button className="blue-button"
+        <Link to="/"
+          className="blue-button link"
           style={{	position: 'absolute', marginTop: '20vh'}}
-          onClick={async () => await doLogout()}>
+          onClick={clickDoLogout}>
           Log out
-        </button>
+        </Link>
         </section>
       )}
     </div>
