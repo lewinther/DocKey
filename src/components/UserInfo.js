@@ -1,32 +1,28 @@
 import { Fragment } from "react";
 
-export default function UserInfo({
-  profileImage,
-  dockNr,
-  fullName,
-  phoneNr,
-  eMail,
+//import default profile image
+import defaultProfileImage from "../assets/logo6.png";
+
+export default function UserInfo({ 
+  profileImage, 
+  fullName, 
+  phoneNr, 
+  eMail 
 }) {
   return (
     <Fragment>
       <div className="user-container">
-        <div className="user-image">
-          {profileImage &&(
-          <img 
-          className="news-card-img"
-          src={profileImage}
-          />
-          )}
-          {!profileImage &&(
-            <div style={{
-              width: '100%', 
-              height: '100%', 
-              backgroundColor: 'rgba(216, 221, 229, 0.847)',
-              borderRadius: '10%'
-              }}>
-              <big>{dockNr}</big>
-            </div>
-          )}
+        <div className="user-image-container">
+        {profileImage && (
+          <div className="user-image">
+            <img className="news-card-img" src={profileImage} />
+          </div>
+        )}
+        {!profileImage && (
+          <div className="user-image-empty">
+            <img src={defaultProfileImage} style={{ width: "100%" }} />
+          </div>
+        )}
         </div>
         <div className="user-info">
           <p>

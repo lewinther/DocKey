@@ -153,7 +153,7 @@ export async function collectProfileData(userId) {
     userQuery.equalTo('objectId', userId);
     let query = await userQuery.first();
   let profile = {
-    profileImage: query.get('profile_image')._url,
+    profileImage: query.get('profile_image')?._url,
     dockNr: query.get('dock'),
     firstName: query.get('first_name'),
     lastName: query.get('last_name'),

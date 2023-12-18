@@ -268,15 +268,25 @@ body{
 	align-self: flex-end;
 	align-items: flex-start;
 	width: 50%;
-	padding: 1%;
+}
+
+.user-image-container{
+	width: 50%;
+	margin: 4% 6% 4%  4% ;
 }
 
 .user-image{
 	display: flex;
 	align-self: flex-start;
 	align-items: center;
-	width: 50%;
-	padding: 1%;
+}
+
+.user-image-empty{
+	display: flex;
+	background-color: aliceblue;
+	border-radius: 10%;
+	height: 25vh;
+	align-items: center;
 }
 
 

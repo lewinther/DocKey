@@ -24,25 +24,30 @@ export default function Profile() {
   }
 
   return (
-    <div style={{ alignContent: "center" }}>
+    <div style={{ alignContent: "center", marginTop: '6%' }}>
       {user && (
         <div className="">
           <h1>Contact information</h1>
-          <UserInfo 
-          profileImage={profile.profileImage}
-          dockNr={profile.userName}
-          fullName={getFullName()}
-          phoneNr={profile.phoneNr}
-          eMail={profile.email}
+          <div style={{margin: '8% 0%'}}>
+          <UserInfo
+            profileImage={profile.profileImage}
+            dockNr={profile.dockNr}
+            fullName={getFullName()}
+            phoneNr={profile.phoneNr}
+            eMail={profile.email}
           />
+          </div>
         </div>
       )}
-      <div style={{ justifyItems: "center", alignContent: "center" }}>
-      {user !== undefined && (
-          <Link to="/" className="blue-button link"  onClick={clickDoLogout}>
-            Log out
-          </Link>
-      )}
+      <div className="button-container" style={{margin: '8% 0%'}}>
+        <Link
+          to="/"
+          className="blue-button link"
+          style={{ padding: '2% 8%' }}
+          onClick={clickDoLogout}
+        >
+          Log out
+        </Link>
       </div>
       <div style={{ alignSelf: "center" }}>
         <p style={{ textAlign: "center" }}>
@@ -51,7 +56,7 @@ export default function Profile() {
           <br />
           Email: dockey@itu.dk
           <br />
-          Give us a call on: +45 123456
+          Give us a call on: +45 12345678
           <br />
           in hour opening hours:
           <br />
