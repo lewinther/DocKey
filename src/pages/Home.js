@@ -10,15 +10,16 @@ import "../../src/styles.css";
 import NewsCardContainer from "../components/NewsCardContainer";
 import ChatListInbox from "../components/ChatListCardContainer";
 import NavbarBottom from '../components/NavbarBottom';
-import PageHeader from "../components/PageHeader";
+import UserLogin from "../components/UserLogIn";
 
 export default function Home() {
 	const user = useUserStore((state) => state.user);
 
   return (
     <Fragment>
-      <PageHeader/>
-
+		  {user === undefined && (
+			<UserLogin/>
+		  )} 
       <div className="in-column">
         {user && (
           <>
