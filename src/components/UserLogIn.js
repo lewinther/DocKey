@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 
 // Stores (has to be first)
 import useUserStore from "../stores/UserStore";

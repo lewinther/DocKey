@@ -98,6 +98,18 @@ p {
 
 
 /* buttons */
+.blue-button{
+	background-color: #1D385C;
+	border: 2px solid #1D385C;
+	color: #FFFF;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 90%;
+	font-weight: 400;
+	border-radius: 10px;
+	margin: 2% 4%;
+	padding: 2% 4%;
+}
+
 .send-button{
 	background-color: #1D385C;
 	border: 2px solid #1D385C;
@@ -240,6 +252,12 @@ body{
 	margin-top: 10px;
 	margin-left: 25%;
 	align-items: center;
+}
+
+.user-container{
+	background-color:rgba(216, 221, 229, 0.847);
+	border-radius: 15px;
+	max-width: 90%;
 }
 
 /* Line between cards */

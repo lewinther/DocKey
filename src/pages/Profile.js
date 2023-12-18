@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 //Stores
 import useUserStore from "../stores/UserStore";
 
@@ -9,26 +7,29 @@ import "../../src/styles.css";
 //components import
 import UserInfo from "../components/UserInfo";
 import NavbarBottom from "../components/NavbarBottom";
-import PageHeader from "../components/PageHeader";
 
-export default function Profile({ userName }) {
+export default function Profile() {
   const user = useUserStore((state) => state.user);
-	const doLogout = useUserStore((state) => state.doLogout);
+  const doLogout = useUserStore((state) => state.doLogout);
 
   return (
-    <Fragment>
-      {user !== undefined && (
-        <h3 onClick={async () => await doLogout()} className="h3-home">
-          Log out
-        </h3>
+    <div>
+      {user && (
+        <section className="in-column centered">
+          <h1>Contact information</h1>
+          <UserInfo />
+          <NavbarBottom activeItem={"Profile"} />
+        </section>
       )}
-      <div className="container-container">
-        <h1>Welcome {userName}</h1>
-        <h2 className="bold">Contact information</h2>
-        <UserInfo />
-        <h2 className="bold">Privacy settings</h2>
-      </div>
-      <NavbarBottom activeItem={"Profile"} />
-    </Fragment>
+      {user !== undefined && (
+        <section className="centered">
+        <button className="blue-button"
+          style={{	position: 'absolute', marginTop: '20vh'}}
+          onClick={async () => await doLogout()}>
+          Log out
+        </button>
+        </section>
+      )}
+    </div>
   );
 }
