@@ -76,7 +76,6 @@ export default function UserLogin() {
 						value={dockNumber}
 						onChange={(e) => setDockNumber(e.target.value.toUpperCase())}
 					/>
-					{dockNumberError && <p style={{ color: 'red' }}>{dockNumberError}</p>}
 
 					<input
 						className="login-input"
@@ -85,7 +84,7 @@ export default function UserLogin() {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					{passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
+					{passwordError && <p className="error-messages">{"*" + passwordError}</p>}
 				</div>
 
                 <div className="login-options">

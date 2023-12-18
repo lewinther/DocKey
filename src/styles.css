@@ -799,3 +799,7 @@ html, body {
     min-width: 1.5em; /* Ensures the circle shape even with single digit */
 }
 
+.error-messages {
+	color: #9C2E2B;
+}
+

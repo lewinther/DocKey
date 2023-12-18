@@ -20,23 +20,19 @@ export default create ((set) => ({
 	dockNumberError: null,
 	passwordError: null,
 
-	doLogin: async (username, password) => {
-		try {
-			// Clear previous errors
-			set((state) => ({ dockNumberError: null, passwordError: null }));
-	  
-			const loggedInUser = await Parse.User.logIn(username, password);
-			set((state) => ({ user: loggedInUser, loginError: null }));
-		  } catch (error) {
-			// Set errors based on the type of error
-			if (error.code === 101) {
-			  // Incorrect username/password
-			  set((state) => ({ dockNumberError: "Invalid username", passwordError: "Invalid password" }));
-			} else {
-			  set((state) => ({ loginError: error.message }));
-			}
-		  }
-		},
+doLogin: async (username, password) => {
+  try {
+    // Clear previous errors
+    set((state) => ({ dockNumberError: null, passwordError: null }));
+  
+    const loggedInUser = await Parse.User.logIn(username, password);
+    set((state) => ({ user: loggedInUser, loginError: null }));
+  } catch (error) {
+    // Set a generic error message for invalid username or password
+    set((state) => ({ dockNumberError: "Invalid username or password", passwordError: "Invalid username or password" }));
+  }
+},
+	
 	doLogout: async () => {
 		try {
 			await Parse.User.logOut();
