@@ -8,7 +8,6 @@ import useChatStore from "../stores/ChatStore";
 //Import components
 import ChatCard from "./ChatListCard";
 
-
 //CSS import
 import "../../src/styles.css";
 
