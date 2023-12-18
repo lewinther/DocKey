@@ -1,11 +1,10 @@
 import { Fragment } from "react";
 
 export default function NewsCard({ newsData, isFeatured, onClick }) {
-  const imageObject = newsData.get('News_Img');
-  const newsImg = imageObject ? imageObject.get('Image_File').url() : null;
-  const newsTitle = newsData.get('News_Title');
-  const newsDate = newsData.get('News_Date').toLocaleDateString();
-  const newsText = newsData.get('News_Text');
+  const newsImg = newsData.News_Img; // Directly the URL
+  const newsTitle = newsData.News_Title;
+  const newsDate = newsData.News_Date; // Already formatted
+  const newsText = newsData.News_Text;
   const newsPreview = newsText.length > 100 ? `${newsText.substring(0, 100)}...` : newsText;
   const imageContainerClass = isFeatured ? "news-image-container featured" : "news-image-container";
 

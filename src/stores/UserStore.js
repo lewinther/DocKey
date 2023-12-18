@@ -42,6 +42,8 @@ export default create ((set) => ({
 			await Parse.User.logOut();
 			// To verify that current user is now empty, currentAsync can be used
 			const currentUser = await Parse.User.current();
+			localStorage.removeItem('newsArticles');
+			localStorage.removeItem('lastFetchTime');
 			if (currentUser === null) {
 				set((state) => ({user: undefined}));
 			}
