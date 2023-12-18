@@ -304,7 +304,7 @@ body{
 	box-sizing: border-box;
 	overflow-y: auto;
     /*box-shadow: 0 15px 25px rgba(0,0,0,0.3);*/
-	height: 50%;
+	height: 43%;
 }
 
 .container-container{
@@ -409,17 +409,22 @@ border-bottom: none;
     border: none;
     padding: 0;
     cursor: pointer; /* Changes the cursor on hover */
+	margin: 1% 1% 0% 0%;
 }
 
 .modal-close-button svg {
     fill: #012657; /* Change color as needed */
     width: 24px; /* Adjust size as needed */
     height: 24px; /* Adjust size as needed */
+	background: rgba(111, 128, 155, 0.75);
+	border-radius: 50%;
+	padding: 10%;
 }
-.modal-image {
+
+.modal-image img {
 	max-height: 60vh;
-	max-width: fit-content;
-  }
+	width: fit-content;
+ }
 
 /*Images in chat*/
 .message-image-container {
@@ -460,7 +465,7 @@ border-bottom: none;
 	padding: 0.5%;
 	padding-top: 0.5%;
 	height: 73%;
-	/* Hide scrollbar for IE, Edge and Firefox */
+	/* Hide scrollbar  for IE, Edge and Firefox */
 	-ms-overflow-style: none;  /* IE and Edge */
 	scrollbar-width: none;  /* Firefox */
 }
@@ -475,7 +480,7 @@ border-bottom: none;
 	box-sizing: border-box;
 	padding: 0.5%;
 	padding-top: 0.5%;
-	height: 33%;
+	height: 23%;
 }
 
 .scrollbar-hidden {
