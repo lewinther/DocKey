@@ -106,7 +106,6 @@ p {
 	font-size: 90%;
 	font-weight: 400;
 	border-radius: 10px;
-	margin: 2% 4%;
 	padding: 2% 4%;
 }
 
@@ -179,7 +178,6 @@ p {
 .centered{
 	display: flex;
 	justify-content: center;
-	align-items: center;
 }
 
 /* Background picture */
@@ -201,8 +199,6 @@ body{
 .in-column{
 	display: flex;
 	flex-direction: column;
-	width: 100%;
-	height: 100%;
 }
 
 .news-image-container {
@@ -254,11 +250,35 @@ body{
 	align-items: center;
 }
 
+/* profile content formatting*/
 .user-container{
+	display: flex;
+	flex-direction: row;
 	background-color:rgba(216, 221, 229, 0.847);
 	border-radius: 15px;
-	max-width: 90%;
+	width: 90%;
+	max-height: 50%;
+	margin: 1% 4%;
+	padding: 1%;
 }
+
+.user-info{
+	display: flex;
+	flex-direction: column;
+	align-self: flex-end;
+	align-items: flex-start;
+	width: 50%;
+	padding: 1%;
+}
+
+.user-image{
+	display: flex;
+	align-self: flex-start;
+	align-items: center;
+	width: 50%;
+	padding: 1%;
+}
+
 
 /* Line between cards */
 .card {

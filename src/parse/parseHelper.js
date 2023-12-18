@@ -61,7 +61,6 @@ export function getMessageId(msg) {
     return msg.get(_messageId);
   }
 
-
 export async function fetchDockNumbers(currentUserId) {
   const User = Parse.Object.extend("_User");
   const query = new Parse.Query(Parse.User);
@@ -147,4 +146,19 @@ export async function getProfileImage(userId) {
   userQuery.equalTo('objectId', userId);
   let result = await userQuery.first();
   return result.get(_profile_image);
+}
+
+export async function collectProfileData(userId) {
+  const userQuery = new Parse.Query(Parse.User);
+    userQuery.equalTo('objectId', userId);
+    let query = await userQuery.first();
+  let profile = {
+    profileImage: query.get('profile_image')._url,
+    dockNr: query.get('dock'),
+    firstName: query.get('first_name'),
+    lastName: query.get('last_name'),
+    phoneNr: query.get('phone_no'),
+    email: query.get('email'),
+  }
+  return profile;
 }

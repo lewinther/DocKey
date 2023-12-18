@@ -16,12 +16,16 @@ import Profile from "./pages/Profile";
 import Chat from "./pages/Chat";
 
 export default function App() {
-  const user = useUserStore((state) => state.user);
-	const doRestoreSession = useUserStore((state) => state.doRestoreSession);
+  const {user, doRestoreSession} = useUserStore();
   	useEffect(() => {
-		if(!user) {
-			doRestoreSession();
-		} 
+      async function onMounted() {
+        if(!user) {
+          doRestoreSession();
+        } 
+      }
+      (async () => {
+          await onMounted();
+      })();
 	}, [])
   return (
     <>

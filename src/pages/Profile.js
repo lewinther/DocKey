@@ -11,34 +11,54 @@ import UserInfo from "../components/UserInfo";
 import NavbarBottom from "../components/NavbarBottom";
 
 export default function Profile() {
-  const user = useUserStore((state) => state.user);
+  const { user, profile, getFullName } = useUserStore();
   const doLogout = useUserStore((state) => state.doLogout);
   const navigate = useNavigate();
 
   async function clickDoLogout() {
-    try{await doLogout();}
-    finally{navigate("/")}
-  };
+    try {
+      await doLogout();
+    } finally {
+      navigate("/");
+    }
+  }
 
   return (
-    <div>
+    <div style={{ alignContent: "center" }}>
       {user && (
-        <section className="in-column centered">
+        <div className="">
           <h1>Contact information</h1>
-          <UserInfo />
-          <NavbarBottom activeItem={"Profile"} />
-        </section>
+          <UserInfo 
+          profileImage={profile.profileImage}
+          dockNr={profile.userName}
+          fullName={getFullName()}
+          phoneNr={profile.phoneNr}
+          eMail={profile.email}
+          />
+        </div>
       )}
+      <div style={{ justifyItems: "center", alignContent: "center" }}>
       {user !== undefined && (
-        <section className="centered">
-        <Link to="/"
-          className="blue-button link"
-          style={{	position: 'absolute', marginTop: '20vh'}}
-          onClick={clickDoLogout}>
-          Log out
-        </Link>
-        </section>
+          <Link to="/" className="blue-button link"  onClick={clickDoLogout}>
+            Log out
+          </Link>
       )}
+      </div>
+      <div style={{ alignSelf: "center" }}>
+        <p style={{ textAlign: "center" }}>
+          {" "}
+          <b>Contact the harbor office:</b>
+          <br />
+          Email: dockey@itu.dk
+          <br />
+          Give us a call on: +45 123456
+          <br />
+          in hour opening hours:
+          <br />
+          Mon-Fri 10-14
+        </p>
+      </div>
+      <NavbarBottom activeItem={"Profile"} />
     </div>
   );
 }
