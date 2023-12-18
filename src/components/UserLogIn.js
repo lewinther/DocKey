@@ -65,7 +65,7 @@ export default function UserLogin() {
             <div className="login-container">
                 <h1>Welcome to Dockey</h1>
                 <div className="image-container">
-                    <img src={logo} alt="Logo" />
+                    <img src={logo1} alt="Logo" />
                 </div>
 
                 <div className="login-fields-container">
