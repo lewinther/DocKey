@@ -180,6 +180,80 @@ body{
 	height: 100%;
 }
 
+/* Login page*/
+.login-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.login-input, .search-input { /* Combined both classes */
+    font-size: 90%;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 10px;
+    border: 0px solid;
+    border-color: #1D385C;
+    padding: 3%;
+    margin: 3% 4%;
+    background-color: rgba(216, 221, 229, 0.932);
+    box-sizing: border-box;
+    width: 90%;
+}
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-button {
+    background-color: #1D385C;
+	font-family: 'Ubuntu', sans-serif;
+    color: #FFFF;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 10px;
+	margin-top: 20px;
+    font-size: larger;
+    cursor: pointer;
+}
+
+.remember-me {
+    color: #1D385C;
+    font-size: small;
+	margin-bottom: 2px;
+}
+
+
+.forgot-password {
+    cursor: pointer;
+    color: #1D385C;
+    font-size: smaller;
+    text-decoration: underline;
+	margin-left: 70px;
+}
+
+.account-info {
+    margin-top: 20px;
+    font-size: small;
+	color: #1D385C;
+}
+
+
+.modal-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
 /* NewsCard and NewsCardContainer formatting */
 .in-line{
 	display: flex;
