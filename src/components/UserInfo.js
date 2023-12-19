@@ -112,14 +112,14 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
         {changePhoto === true && (
         <>
           <div className="in-line" style={{marginTop:'3%', height:'11vh'}}>
-            <div style={{width:'50%'}}>
+            <div style={{ width:'50%', display: 'flex', flexDirection: 'row', alignContent: 'center' }}>
             {imagePreview && (
-                <div className="image-preview-container" style={{ maxWidth: "100%", maxHeight:'100%' }}>
-                  <img
-                    src={imagePreview}
-                    alt="Preview"
-                    style={{ maxWidth: "90%", maxHeight:'90%' }}
-                  />
+                <div style={{ display: 'flex',flexDirection:'column', alignContent: 'center' }} >
+                    <img
+                      src={imagePreview}
+                      alt="Preview"
+                      style={{ display: 'block', marginLeft: 'auto', marginRight:'auto', width:'52%' }}
+                    />
                 </div>
             )}
             </div>
