@@ -3,65 +3,149 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
 
 
+/* TEXT */
 /* Welcome Flemming */
 h1 {
-	color: #FFFF;
-	font-size: 130%;
-	font-family: 'Ubuntu', sans-serif;
-	font-weight: 400;
-	text-align: center;
+    color: #FFFF;
+    font-size: 130%;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+    text-align: center;
 }
 
 /* buttons */
 h2 { 
-	color: #FFFF;
-	font-size: 16px;
-	font-family: 'Ubuntu', sans-serif;
-	font-weight: 400;
+    color: #FFFF;
+    font-size: 16px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
 }
 
 /* h3 */
 h3 { 
-	color: #FFFF;
-	font-size: 90%;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400;
+    color: #FFFF;
+    font-size: 90%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
 }
 
 .h3-home { 
-	color: #FFFF;
-	font-size: 90%;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400;
-	display: inline-block;
-	margin: 2% 4% ;
+    color: #FFFF;
+    font-size: 90%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    display: inline-block;
+    margin: 2% 4% ;
 }
 
 /* dock number in picture */
 h4 {
-	color: #FFFF;
-	font-size: 20px;
-	font-family: 'Source Sans Variable', sans-serif;
-	font-weight: 400;
+    color: #FFFF;
+    font-size: 20px;
+    font-family: 'Source Sans Variable', sans-serif;
+    font-weight: 400;
 }
 
 /* date in message */
 h5 {
-	color: #919191;
-	font-size: 9px;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400;
-	text-align: right;
-	padding-left: 20px;
+    color: #919191;
+    font-size: 11px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    text-align: right;
+    padding-left: 20px;
 }
 
 /* meta text (in messages etc.) */
 p {
-	color: #012657;
-	font-size: 90%;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400;
+    color: #012657;
+    font-size: 90%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
 }
+
+/* p in bold */
+.bold {
+    font-weight: 800;
+}
+
+/* No underlining in a link */
+.link{
+    text-decoration: none;
+}
+
+.forgot-password {
+    cursor: pointer;
+    color: #1D385C;
+    font-size: smaller;
+    text-decoration: underline;
+}
+
+.error-messages {
+	color: #9C2E2B;
+}
+
+
+
+
+
+
+
+
+
+/* BUTTONS */
+.button-large{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 90%;
+    font-weight: 400;
+    text-align: center;
+}
+
+.button-small{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 90%;
+    font-weight: 400;
+    text-align: center;
+    width: 40%;
+    margin: 2% 4%;
+    padding: 2%;
+    border-radius: 10px;
+}
+
+.blue-button{
+    background-color: #1D385C;
+    border: 2px solid #1D385C;
+    color: #FFFF;
+
+}
+
+.white-button{
+    background-color:rgba(216, 221, 229, 0.847);
+    border: 2px solid #1D385C;
+    color: #1D385C;
+}
+
+.delete-image-button:hover {
+	/* A darker red on hover for better user experience */
+	background-color: #9e1e15; 
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .news-content {
 	margin-bottom: 10px; 
@@ -70,23 +154,14 @@ p {
 	font-size: 90%;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
-	/* Add other styles specific to news content here */
 }
 
 .news-title {
-	margin-bottom: 1px; /* Reduced bottom margin */
+	margin-bottom: 1px; 
 	font-weight: bold;
 }
 
-/* p in bold */
-.bold {
-	font-weight: 800;
-}
 
-/* No underlining in a link */
-.link{
-	text-decoration: none;
-}
 
 /*wrapper with margins2% 4%*/
 .wrapper{
@@ -134,7 +209,7 @@ p {
 	width: 40%;
     padding: 2%;
     border-radius: 10px;
-    border: 2px solid #1D385C; /* Add border to make it similar to BlueButton */
+    border: 2px solid #1D385C;
 	display: inline-block;
 	left: 0%;
 	position: fixed;
@@ -190,6 +265,81 @@ body{
 	height: 100%;
 }
 
+/* Login page*/
+.login-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.login-input, .search-input { /* Combined both classes */
+    font-size: 90%;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 10px;
+    border: 0px solid;
+    border-color: #1D385C;
+    padding: 3%;
+    margin: 3% 4%;
+    background-color: rgba(216, 221, 229, 0.932);
+    box-sizing: border-box;
+    width: 90%;
+}
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-button {
+    background-color: #1D385C;
+	border: 2px solid #1D385C;
+	font-family: 'Ubuntu', sans-serif;
+    color: #FFFF;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 10px;
+	margin-top: 20px;
+    font-size: 90%;
+    cursor: pointer;
+}
+
+.remember-me {
+    color: #1D385C;
+    font-size: small;
+	margin-bottom: 2px;
+}
+
+
+.forgot-password {
+    cursor: pointer;
+    color: #1D385C;
+    font-size: smaller;
+    text-decoration: underline;
+	
+}
+
+.account-info {
+    margin-top: 20px;
+    font-size: small;
+	color: #1D385C;
+}
+
+
+.modal-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
 /* NewsCard and NewsCardContainer formatting */
 .in-line{
 	display: flex;
@@ -237,8 +387,7 @@ body{
 	border-radius: 15px;
 	box-sizing: border-box;
 	overflow-y: auto;
-    /*box-shadow: 0 15px 25px rgba(0,0,0,0.3);*/
-	height: 50%;
+	height: 43%;
 }
 
 .container-container{
@@ -372,7 +521,7 @@ border-bottom: none;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+	background-color: rgba(0, 0, 0, 0.5); 
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -391,34 +540,39 @@ border-bottom: none;
 
 .modal-close-button {
     position: absolute;
-    top: 2%; /* Adjust as needed */
-    right: 2%; /* Adjust as needed */
-    background: transparent; /* Transparent background */
+    top: 2%; 
+    right: 2%; 
+    background: transparent; 
     border: none;
     padding: 0;
-    cursor: pointer; /* Changes the cursor on hover */
+    cursor: pointer; 
+	margin: 1% 1% 0% 0%;
 }
 
 .modal-close-button svg {
-    fill: #012657; /* Change color as needed */
-    width: 24px; /* Adjust size as needed */
-    height: 24px; /* Adjust size as needed */
+    fill: #012657; 
+    width: 24px; 
+    height: 24px; 
+	background: rgba(111, 128, 155, 0.75);
+	border-radius: 50%;
+	padding: 10%;
 }
-.modal-image {
+
+.modal-image img {
 	max-height: 60vh;
-	max-width: fit-content;
-  }
+	width: fit-content;
+ }
 
 /*Images in chat*/
 .message-image-container {
-	margin-top: 10px; /* Add space above the image */
+	margin-top: 10px; 
   }
   
 .message-image {
 	max-width: 50%; /* Ensure the image does not overflow the chat card */
-	height: auto; /* Maintain aspect ratio */
-	border-radius: 5px; /* Optional: if you want rounded corners */
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow for depth */
+	height: auto; 
+	border-radius: 5px; /* Rounded corners */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   }
 
   
@@ -448,7 +602,7 @@ border-bottom: none;
 	padding: 0.5%;
 	padding-top: 0.5%;
 	height: 73%;
-	/* Hide scrollbar for IE, Edge and Firefox */
+	/* Hide scrollbar  for IE, Edge and Firefox */
 	-ms-overflow-style: none;  /* IE and Edge */
 	scrollbar-width: none;  /* Firefox */
 }
@@ -463,7 +617,7 @@ border-bottom: none;
 	box-sizing: border-box;
 	padding: 0.5%;
 	padding-top: 0.5%;
-	height: 33%;
+	height: 23%;
 }
 
 .scrollbar-hidden {
@@ -483,12 +637,10 @@ border-bottom: none;
 
 .message-card-container{
 	margin: 0.5%;
-	background-color:rgba(216, 221, 229);
 	box-sizing: border-box;
 	display: block;
-	border-radius: 10px;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Adjust shadow as needed */
-
+	/* line at bottom of card */
+	border-bottom: 0.5px solid #b6b3b3; 
 }
 
 form {
@@ -504,8 +656,7 @@ form {
     border-color: #1D385C;
     padding: 2%;
     margin: 0% 4%; 
-    /*background-color: rgba(216, 221, 229, 0.847);*/
-    background-color: rgba(216, 221, 229, 0.932);
+    background-color: rgba(216, 221, 229, 0.8);
     box-sizing: border-box;
     width: 92%;
 }
@@ -625,21 +776,19 @@ label {
 	background-color: #b3251b; /* Red color to indicate deletion */
 	color: white;
 	font-family: 'Ubuntu', sans-serif;
-	font-size: 16px; /* Adjust the font size if needed */
-	padding: 10px 20px; /* Adjust the padding to match the size of the button to other buttons */
-	border-radius: 10px; /* Rounded corners as the other buttons */
+	font-size: 16px; 
+	padding: 10px 20px; 
+	border-radius: 10px; /* Rounded corners*/
 	border: none;
 	cursor: pointer;
-	font-weight: 400; /* Match the font weight to other buttons */
+	font-weight: 400; 
 	margin-left: 25px;
-	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2); /* Optional: adds a slight shadow for depth */
-	transition: background-color 0.3s; /* Optional: smooth background color transition on hover */
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2); 
+	transition: background-color 0.3s; 
 	width: fit-content !important;
 	}
 	
-	.delete-image-button:hover {
-	background-color: #9e1e15; /* A darker red on hover for better user experience */
-	}
+
 	  
 
 
@@ -649,28 +798,27 @@ textarea {
 	width: 100%; 
 	padding: 10px;
 	border-radius: 10px;
-	margin: 0; /* Reset the margin to prevent overflow */
-	box-sizing: border-box; /* Ensure padding is included in width */
+	margin: 0;
+	box-sizing: border-box; 
 	overflow-y: scroll;
 	height: 100%;
-	resize: none; /* Remove this if you want the user to resize the textarea */
+	resize: none; 
 	color: #1D385C;
 	font-size: 90%;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
 	background-color:rgba(216, 221, 229, 0.847);
-	border-color: #1D385C;
   }
 
 /* Add space below the text input */
 .textarea .search-input[type="text"] {
-	margin-top: 5%; /* Adjust as needed */
-    margin-bottom: 2%; /* Adjust as needed */
+	margin-top: 5%; 
+    margin-bottom: 2%;
 }
 
 /* Or add space above the password input */
 .textarea .search-input[type="password"] {
-    margin-top: 2%; /* Adjust as needed */
+    margin-top: 2%; 
 	margin-bottom: 2%;
 }
   
@@ -725,7 +873,8 @@ html, body {
   }
   
 .chatlist-card-title{
-	justify-content: space-between; /* Align children at each end of the container */
+	/* Align children at each end of the container */
+	justify-content: space-between; 
 	width: 100%;
   }
   
@@ -766,13 +915,13 @@ html, body {
   }
 
   .chatlist-card-unread-count {
-    color: rgba(216, 221, 229, 1); /* Updated font color */
-    font-size: 70%; /* Unchanged */
-    font-family: 'Source Sans Pro', sans-serif; /* Unchanged */ 
-    font-weight: 400; /* Unchanged */
-    order: 1; /* Unchanged */
-    margin: 3% 0% 0% 0%; /* Updated margin */
-    background-color: #012657; /* New background color */
+    color: rgba(216, 221, 229, 1); 
+    font-size: 70%; 
+    font-family: 'Source Sans Pro', sans-serif; 
+    font-weight: 400; 
+    order: 1; 
+    margin: 3% 0% 0% 0%; 
+    background-color: #012657; 
     border-radius: 50%; /* Makes the background a circle */
     display: inline-flex; /* Changed to inline-flex for better centering */
     justify-content: center; /* Horizontally centers the content */
@@ -781,4 +930,10 @@ html, body {
     height: 1.5em; /* Fixed height */
     min-width: 1.5em; /* Ensures the circle shape even with single digit */
 }
+
+.image-container-logo img {
+	max-width: 250px;
+	opacity: 0.8; }
+
+
 

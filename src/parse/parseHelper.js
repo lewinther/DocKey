@@ -39,7 +39,7 @@ export async function getUnreadMessagesCount(userId, chatPartnerId) {
   const query = new Parse.Query("Message");
   query.equalTo(_receiver_user_id, userId);
   query.equalTo(_sender_user_id, chatPartnerId);
-  query.equalTo(_unread, true);
+  query.equalTo(_unread, true); 
   return query.count();
 }
 
@@ -124,25 +124,31 @@ export async function uploadImage(file) {
   try {
     await parseFile.save();
     const ImageObject = new Parse.Object("Image");
-    ImageObject.set("Image_File", parseFile);
+    ImageObject.set('Image_File', parseFile);
     await ImageObject.save();
     return ImageObject;
   } catch (error) {
-    console.error("Error while uploading image:", error);
+    console.error('Error while uploading image:', error);
     throw error; // Re-throw the error to be handled by the caller
   }
 }
 
-export async function markMessageAsRead(messageId) {
+export async function markMessagesAsRead(chatPartnerID, userID) {
   const Message = Parse.Object.extend("Message");
   const query = new Parse.Query(Message);
+  query.equalTo(_receiver_user_id, userID);
+  query.equalTo(_sender_user_id, chatPartnerID);
+  query.equalTo(_unread, true);
+
   try {
-    const message = await query.get(messageId);
-    message.set(_unread, false);
-    await message.save();
+      const messages = await query.find();
+      messages.forEach(message => {
+          message.set(_unread, false); 
+      });
+      await Parse.Object.saveAll(messages); 
   } catch (error) {
-    console.error("Error while marking message as read:", error);
-    throw error;
+      console.error('Error while marking all messages as read:', error);
+      throw error;
   }
 }
 

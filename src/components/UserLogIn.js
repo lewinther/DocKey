@@ -1,61 +1,101 @@
-import React, { useEffect, useState} from "react";
-
-// Stores (has to be first)
+import React, { Fragment, useEffect, useState } from "react";
 import useUserStore from "../stores/UserStore";
-
-// CSS import
 import "../../src/styles.css";
+import CloseButton from "../assets/IconCloseButton"; 
+import logo5 from "../assets/logo5.png";
 
-export default () => {
-	const [dockNumber, setDockNumber] = useState('');
-	const [password, setPassword] = useState('');
-	const doLogin = useUserStore((state) => state.doLogin);
-	const user = useUserStore((state) => state.user);
-	const dockNumberError = useUserStore((state) => state.dockNumberError);
-	const passwordError = useUserStore((state) => state.passwordError);
 
-	// Watcher that clears fields on successful login 
-	useEffect(() => {
-		if(user) {
-			setDockNumber("");
-			setPassword("");
-		} 
-	}, [user])
+export default function UserLogin() {
+    const [dockNumber, setDockNumber] = useState('');
+    const [password, setPassword] = useState('');
+    const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
-	return(
-		<div>
-		<div className="in-column">
-		  <h1>Log into your account</h1>
-		  <div className="textarea">
-			<input
-			  className="search-input"
-			  type="text"
-			  placeholder="Dock Number"
-			  value={dockNumber}
-			  onChange={(e) => setDockNumber(e.target.value.toLocaleUpperCase())}
-       		 />
-       		{dockNumberError && <p style={{ color: 'red' }}>{dockNumberError}</p>}
-			
-			<input
-			  className="search-input"
-			  type="password"
-			  placeholder="Password"
-			  value={password}
-			  onChange={(e) => setPassword(e.target.value)}
-       	 	/>
-        	{passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
-		  
-		</div>
-  
-		<div className="button-container">
-		  <div className="button-group">
-		  	<button className="attach-button" onClick={async () => await doLogin(dockNumber, password)}>
-  			Log in
-			</button>
-		  </div>
-		</div>
-	  </div>
-	  </div>
-  );
-};
+    const doLogin = useUserStore((state) => state.doLogin);
+    const user = useUserStore((state) => state.user);
+    const dockNumberError = useUserStore((state) => state.dockNumberError);
+    const passwordError = useUserStore((state) => state.passwordError);
 
+    useEffect(() => {
+        if (user) {
+            setDockNumber("");
+            setPassword("");
+        } else {
+            const storedDockNumber = localStorage.getItem('dockNumber');
+            const storedPassword = localStorage.getItem('password');
+            if (storedDockNumber && storedPassword) {
+                setDockNumber(storedDockNumber);
+                setPassword(storedPassword);
+            }
+        }
+    }, [user]);
+
+    const handleLogin = async () => {
+        await doLogin(dockNumber, password);
+    };
+
+    const renderForgotPasswordModal = () => {
+        if (!showForgotPasswordModal) return null;
+
+        return (
+            <div className="modal-overlay">
+                <div className="modal-content">
+                    <button className="modal-close-button" onClick={() => setShowForgotPasswordModal(false)}>
+                        <CloseButton />
+                    </button>
+                    <p className="modal-title">Forgot Password?</p>
+                    <p>Please contact your Harbor Office at:</p>
+                    <p>Phone: XXXXXXXXXX</p>
+                    <p>Email: XXXXXXXXXX</p>
+                </div>
+            </div>
+        );
+    };
+
+    return (
+        <Fragment>
+            <div className="login-container">
+                <h1>Welcome to Dockey</h1>
+                <div className="image-container-logo">
+                    <img src={logo5} alt="Logo" />
+                </div>
+
+                <div className="login-fields-container">
+					<input
+						className="login-input"
+						type="text"
+						placeholder="Dock Number"
+						value={dockNumber}
+						onChange={(e) => setDockNumber(e.target.value.toUpperCase())}
+					/>
+
+					<input
+						className="login-input"
+						type="password"
+						placeholder="Password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+					{passwordError && <p className="error-messages">{"*" + passwordError}</p>}
+				</div>
+
+                <div className="button-container">
+					<button className="login-button" onClick={handleLogin}>
+						Log in
+					</button>
+				</div>
+
+                <div className="login-options">
+                    <p className="forgot-password" onClick={() => setShowForgotPasswordModal(true)}>
+                        Forgot Password?
+                    </p>
+                </div>
+
+                <div className="account-info">
+                    <strong>Don’t have an account?</strong><br />
+                    This page is for boat owners only, contact your harbor administration if in doubt.
+                </div>
+            </div>
+            {renderForgotPasswordModal()}
+        </Fragment>
+    );
+}

@@ -8,6 +8,7 @@ import "../../src/styles.css";
 
 //components import
 import ChatCard from "./ChatCard";
+import CloseButton from "../assets/IconCloseButton";
 
 export default function ChatContainer({ currentUserID, chatPartnerID }) {
   const { doGetMessagesForThread } = useChatStore();
@@ -52,14 +53,16 @@ export default function ChatContainer({ currentUserID, chatPartnerID }) {
           <button 
             className="modal-close-button" 
             onClick={() => 
-            setSelectedImage(null)}>x
+            setSelectedImage(null)}> <CloseButton/>
           </button>
-          <div className="modal-image">
+  
+        <div className="modal-image">
           {image && 
             <img 
             src={image} 
             style={{ maxWidth: '40vh', height: 'auto' }}
-            />
+            alt={selectedImage.get('Message_Text')}
+          />
           }
           </div>
         </div>
@@ -73,7 +76,7 @@ export default function ChatContainer({ currentUserID, chatPartnerID }) {
       {messages.map((message, index) => (
         <ChatCard
           onClick={() => setSelectedImage(message)}
-          key={index}
+          key={message.objectId || index}
           messageSenderNo={message.get("Sender_User_ID").id}
           messageRecieverNo={message.get("Receiver_User_ID").id}
           messageDate={getMessageDate(message)}

@@ -29,29 +29,27 @@ export default create ((set, get) => ({
 		set((state) => ({user: currentUser === null ? undefined : currentUser}));
 		await get().collectProfileData();
 	},
-	doLogin: async (username, password) => {
-		try {
-			// Clear previous errors
-			set((state) => ({ dockNumberError: null, passwordError: null }));
-	  
-			const loggedInUser = await Parse.User.logIn(username, password);
-			set((state) => ({ user: loggedInUser, loginError: null }));
+doLogin: async (username, password) => {
+  try {
+    // Clear previous errors
+    set((state) => ({ dockNumberError: null, passwordError: null }));
+  
+    const loggedInUser = await Parse.User.logIn(username, password);
+    set((state) => ({ user: loggedInUser, loginError: null }));
 			await get().collectProfileData();
-		  } catch (error) {
-			// Set errors based on the type of error
-			if (error.code === 101) {
-			  // Incorrect username/password
-			  set((state) => ({ dockNumberError: "Invalid username", passwordError: "Invalid password" }));
-			} else {
-			  set((state) => ({ loginError: error.message }));
-			}
-		  }
-		},
+  } catch (error) {
+    // Set a generic error message for invalid username or password
+    set((state) => ({ dockNumberError: "Invalid username or password", passwordError: "Invalid username or password" }));
+  }
+},
+	
 	doLogout: async () => {
 		try {
 			await Parse.User.logOut();
 			// To verify that current user is now empty, currentAsync can be used
 			const currentUser = await Parse.User.current();
+			localStorage.removeItem('newsArticles');
+			localStorage.removeItem('lastFetchTime');
 			if (currentUser === null) {
 				set((state) => ({user: undefined}));
 			}

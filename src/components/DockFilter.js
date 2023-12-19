@@ -15,7 +15,7 @@ const DockFilter = ({ onDockSelect, dockNumbers }) => {
 
   return (
     <form className="dock-select-form" onSubmit={(e) => e.preventDefault()}>
-      <label for="dock-select" className="dock-select-label">
+      <label htmlFor="dock-select" className="dock-select-label">
         <select
           id="dock-select"
           value={dockNumber}

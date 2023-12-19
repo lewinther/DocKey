@@ -16,12 +16,10 @@ export default function NewsCardContainer() {
         if (!selectedArticle) return null;
 
         // Extract data from selected article
-        const newsTitle = selectedArticle.get('News_Title');
-        const newsDate = selectedArticle.get('News_Date').toLocaleDateString();
-        const newsContent = selectedArticle.get('News_Text');
-        // Retrieve the Parse.File from the Image object
-        const imageFile = selectedArticle.get('News_Img') ? selectedArticle.get('News_Img').get('Image_File') : null;
-        const newsImg = imageFile ? imageFile.url() : null;
+        const newsTitle = selectedArticle.News_Title;
+        const newsDate = selectedArticle.News_Date;
+        const newsContent = selectedArticle.News_Text;
+        const newsImg = selectedArticle.News_Img; 
 
         return (
             <div className="modal-overlay">
@@ -44,7 +42,7 @@ export default function NewsCardContainer() {
             <section className="news-card-container scrollbar-hidden">
                 {newsArticles.map((article, index) => (
                     <NewsCard
-                        key={article.id}
+                        key={article.objectId}
                         newsData={article}
                         isFeatured={index === 0} // isFeatured prop based on index - first article is featured
                         onClick={() => setSelectedArticle(article)}

@@ -8,7 +8,8 @@ export default function ChatCard({
   chatPreviewText,
   onClick,
   chatUnreadMessages,
-  chatCountUnreadMessages
+  chatCountUnreadMessages,
+  userID
 }) {
   return (
     <Fragment>
