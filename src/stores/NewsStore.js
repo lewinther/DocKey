@@ -24,7 +24,7 @@ export default create((set, get) => ({
             const PARSE_REST_API_KEY = "xGP7JLxEVdOsdPX4pfJXik7nN3NHxz86Tdj9GUDP";
             const PARSE_HOST_URL = "https://parseapi.back4app.com/";
 
-            const response = await fetch(`${PARSE_HOST_URL}classes/News?include=News_Img`, {
+            const response = await fetch(`${PARSE_HOST_URL}classes/News?include=News_Img&order=-createdAt&limit=3`, {
                 method: 'GET',
                 headers: {
                     'X-Parse-Application-Id': PARSE_APPLICATION_ID,
