@@ -88,11 +88,10 @@ export async function fetchDockNumbers(currentUserId) {
   export async function sendMessage(receiverId, senderId, messageContent, imageObject) {
     const Message = Parse.Object.extend("Message");
 
-  
     // Creating pointers for sender and receiver
     const senderPointer = Parse.Object.extend('_User').createWithoutData(senderId);
     const receiverPointer = Parse.Object.extend('_User').createWithoutData(receiverId);
-  
+
     // Creating a new message object
     const message = new Message();
     message.set(_messageFields.text, messageContent);
@@ -100,19 +99,27 @@ export async function fetchDockNumbers(currentUserId) {
     message.set(_messageFields.receiverId, receiverPointer);
     message.set(_messageFields.date, new Date());
     message.set(_messageFields.unread, true);
-  
+
     if (imageObject) {
       message.set(_messageFields.img, imageObject); // Adding image pointer if image is provided
     }
-  
+
+    // Setting ACL for each message - can only be read by sender and receiver, can only be written by sender 
+    const acl = new Parse.ACL();
+    acl.setReadAccess(senderId, true);
+    acl.setReadAccess(receiverId, true);
+    acl.setWriteAccess(senderId, true); // Sender can modify message
+    acl.setPublicReadAccess(false); // but stops public access
+    message.setACL(acl);
+
     try {
       await message.save();
+      return "message sent successfully";
     } catch (error) {
       console.error('Error while sending message:', error);
       throw error; // Re-throw the error to be handled by the caller
     }
-    return "message sent successfully";
-  }
+}
 
   export async function uploadImage(file) {
     const parseFile = new Parse.File(file.name, file);

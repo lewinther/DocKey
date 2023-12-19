@@ -8,7 +8,6 @@ import logo5 from "../assets/logo5.png";
 export default function UserLogin() {
     const [dockNumber, setDockNumber] = useState('');
     const [password, setPassword] = useState('');
-    const [rememberMe, setRememberMe] = useState(false);
     const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
     const doLogin = useUserStore((state) => state.doLogin);
@@ -26,20 +25,12 @@ export default function UserLogin() {
             if (storedDockNumber && storedPassword) {
                 setDockNumber(storedDockNumber);
                 setPassword(storedPassword);
-                setRememberMe(true);
             }
         }
     }, [user]);
 
     const handleLogin = async () => {
         await doLogin(dockNumber, password);
-        if (rememberMe) {
-            localStorage.setItem('dockNumber', dockNumber);
-            localStorage.setItem('password', password);
-        } else {
-            localStorage.removeItem('dockNumber');
-            localStorage.removeItem('password');
-        }
     };
 
     const renderForgotPasswordModal = () => {
@@ -89,14 +80,6 @@ export default function UserLogin() {
 				</div>
 
                 <div className="login-options">
-                    <label className="remember-me">
-                        <input 
-                            type="checkbox" 
-                            checked={rememberMe}
-                            onChange={(e) => setRememberMe(e.target.checked)} 
-                        />
-                        Remember Me
-                    </label>
                     <p className="forgot-password" onClick={() => setShowForgotPasswordModal(true)}>
                         Forgot Password?
                     </p>
