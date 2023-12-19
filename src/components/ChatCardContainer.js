@@ -48,6 +48,7 @@ const renderModal = () => {
           <img 
           src={image} 
           style={{ maxWidth: '40vh', height: 'auto' }}
+          alt={selectedImage.get('Message_Text')}
           />
         }
         </div>
@@ -62,7 +63,7 @@ const renderModal = () => {
       {messages.map((message, index) => (
         <ChatCard
           onClick={() => setSelectedImage(message)}
-          key={index}
+          key={message.objectId || index}
           messageSenderNo={message.get("Sender_User_ID").id}
           messageRecieverNo={message.get("Receiver_User_ID").id}
           messageDate={message.get("Message_Date").toLocaleString()}
