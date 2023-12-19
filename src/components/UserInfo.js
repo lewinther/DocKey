@@ -62,11 +62,15 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
     setChangePhoto(false);
   };
 
+  function refresh(){
+    window.location.reload("Refresh")
+  }
+
   async function handleSaveClick() {
-    //await setProfileImage(user, imageFile.file);
-    console.log(user, await setProfileImage(user, imageFile.file));
-    console.log(imageFile.file);
-    console.log('you tried to save a new picture');
+    if (imageFile) {
+      await setProfileImage(user, imageFile.file);
+        if('Profile image updated successfully!') {refresh();}
+    };
   }
 
   return (

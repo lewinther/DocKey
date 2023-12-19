@@ -155,7 +155,6 @@ export async function setProfileImage(user, file){
     const parseFile = new Parse.File(fileName, file);
     await parseFile.save();
     await user.save('profile_image', parseFile);
-
     return 'Profile image updated successfully!';
   }
   catch (error) {
