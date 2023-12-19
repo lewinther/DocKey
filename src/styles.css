@@ -3,65 +3,146 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
 
 
+/* TEXT */
 /* Welcome Flemming */
 h1 {
-	color: #FFFF;
-	font-size: 130%;
-	font-family: 'Ubuntu', sans-serif;
-	font-weight: 400;
-	text-align: center;
+    color: #FFFF;
+    font-size: 130%;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+    text-align: center;
 }
 
 /* buttons */
 h2 { 
-	color: #FFFF;
-	font-size: 16px;
-	font-family: 'Ubuntu', sans-serif;
-	font-weight: 400;
+    color: #FFFF;
+    font-size: 16px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
 }
 
 /* h3 */
 h3 { 
-	color: #FFFF;
-	font-size: 90%;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400;
+    color: #FFFF;
+    font-size: 90%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
 }
 
 .h3-home { 
-	color: #FFFF;
-	font-size: 90%;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400;
-	display: inline-block;
-	margin: 2% 4% ;
+    color: #FFFF;
+    font-size: 90%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    display: inline-block;
+    margin: 2% 4% ;
 }
 
 /* dock number in picture */
 h4 {
-	color: #FFFF;
-	font-size: 20px;
-	font-family: 'Source Sans Variable', sans-serif;
-	font-weight: 400;
+    color: #FFFF;
+    font-size: 20px;
+    font-family: 'Source Sans Variable', sans-serif;
+    font-weight: 400;
 }
 
 /* date in message */
 h5 {
-	color: #919191;
-	font-size: 11px;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400;
-	text-align: right;
-	padding-left: 20px;
+    color: #919191;
+    font-size: 11px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    text-align: right;
+    padding-left: 20px;
 }
 
 /* meta text (in messages etc.) */
 p {
-	color: #012657;
-	font-size: 90%;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 400;
+    color: #012657;
+    font-size: 90%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
 }
+
+/* p in bold */
+.bold {
+    font-weight: 800;
+}
+
+/* No underlining in a link */
+.link{
+    text-decoration: none;
+}
+
+.forgot-password {
+    cursor: pointer;
+    color: #1D385C;
+    font-size: smaller;
+    text-decoration: underline;
+    margin-left: 70px;
+}
+
+
+
+
+
+
+
+
+
+
+/* BUTTONS */
+.button-large{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 90%;
+    font-weight: 400;
+    text-align: center;
+}
+
+.button-small{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 90%;
+    font-weight: 400;
+    text-align: center;
+    width: 40%;
+    margin: 2% 4%;
+    padding: 2%;
+    border-radius: 10px;
+}
+
+.blue-button{
+    background-color: #1D385C;
+    border: 2px solid #1D385C;
+    color: #FFFF;
+
+}
+
+.white-button{
+    background-color:rgba(216, 221, 229, 0.847);
+    border: 2px solid #1D385C;
+    color: #1D385C;
+}
+
+.delete-image-button:hover {
+	background-color: #9e1e15; /* A darker red on hover for better user experience */
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .news-content {
 	margin-bottom: 10px; 
@@ -78,15 +159,7 @@ p {
 	font-weight: bold;
 }
 
-/* p in bold */
-.bold {
-	font-weight: 800;
-}
 
-/* No underlining in a link */
-.link{
-	text-decoration: none;
-}
 
 /*wrapper with margins2% 4%*/
 .wrapper{
@@ -654,9 +727,7 @@ label {
 	width: fit-content !important;
 	}
 	
-	.delete-image-button:hover {
-	background-color: #9e1e15; /* A darker red on hover for better user experience */
-	}
+
 	  
 
 
