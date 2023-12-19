@@ -24,7 +24,7 @@ export default create((set, get) => ({
             const PARSE_REST_API_KEY = "xGP7JLxEVdOsdPX4pfJXik7nN3NHxz86Tdj9GUDP";
             const PARSE_HOST_URL = "https://parseapi.back4app.com/";
 
-            const response = await fetch(`${PARSE_HOST_URL}classes/News`, {
+            const response = await fetch(`${PARSE_HOST_URL}classes/News?include=News_Img`, {
                 method: 'GET',
                 headers: {
                     'X-Parse-Application-Id': PARSE_APPLICATION_ID,
@@ -39,13 +39,23 @@ export default create((set, get) => ({
             const newsData = responseData.results; // Parse typically wraps results in a "results" array
 
             const adjustedResults = newsData.map(article => {
-                // Format the date
-                const newsDate = new Date(article.News_Date);
+                console.log("Date.object:", article.News_Date);
+                // Use the iso property for date formatting
+                const newsDateIso = article.News_Date ? article.News_Date.iso : null;
+                const newsDate = newsDateIso ? new Date(newsDateIso) : null;
                 const formattedDate = newsDate ? newsDate.toLocaleDateString() : 'Unknown Date';
+
+                // Extract the Image URL
+                const imageUrl = article.News_Img && article.News_Img.Image_File 
+                ? article.News_Img.Image_File.url 
+                : null;
         
                 return {
                     ...article, 
-                    News_Date: formattedDate
+                    // Store only the URL
+                    News_Img: imageUrl,
+                    // Store the formatted date  
+                    News_Date: formattedDate 
                 };
             });
 
