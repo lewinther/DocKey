@@ -26,36 +26,49 @@ export default function ChatContainer({ currentUserID, chatPartnerID }) {
     fetchMessages();
   }, [currentUserID, chatPartnerID]);
 
-const renderModal = () => {
-  if (!selectedImage) return null;
+  function getMessageDate(msg){
+    let date = msg.get("Message_Date").toLocaleDateString();
+    let dateList = date.split('/');
+    let finalDate = dateList[0] + '/' + dateList[1];
+    return finalDate;
+  };
+  function getMessageTime(msg){
+    let time = msg.get("Message_Date").toLocaleTimeString();
+    let timeList = time.split('.');
+    let finalTime = timeList[0] + ':' + timeList[1];
+    return finalTime;
+  };
 
-  const imageFile = 
-  selectedImage.get('Image') ? 
-  selectedImage.get('Image').get('Image_File') : null;
-  const image = imageFile ? imageFile.url() : null;
+  const renderModal = () => {
+    if (!selectedImage) return null;
 
-  return(
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button 
-          className="modal-close-button" 
-          onClick={() => 
-          setSelectedImage(null)}> <CloseButton/>
-        </button>
+    const imageFile = 
+    selectedImage.get('Image') ? 
+    selectedImage.get('Image').get('Image_File') : null;
+    const image = imageFile ? imageFile.url() : null;
 
+    return(
+      <div className="modal-overlay">
+        <div className="modal-content">
+          <button 
+            className="modal-close-button" 
+            onClick={() => 
+            setSelectedImage(null)}> <CloseButton/>
+          </button>
+  
         <div className="modal-image">
-        {image && 
-          <img 
-          src={image} 
-          style={{ maxWidth: '40vh', height: 'auto' }}
-          alt={selectedImage.get('Message_Text')}
+          {image && 
+            <img 
+            src={image} 
+            style={{ maxWidth: '40vh', height: 'auto' }}
+            alt={selectedImage.get('Message_Text')}
           />
-        }
+          }
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
   return (
     <Fragment>
@@ -66,7 +79,8 @@ const renderModal = () => {
           key={message.objectId || index}
           messageSenderNo={message.get("Sender_User_ID").id}
           messageRecieverNo={message.get("Receiver_User_ID").id}
-          messageDate={message.get("Message_Date").toLocaleString()}
+          messageDate={getMessageDate(message)}
+          messageTime={getMessageTime(message)}
           messageText={message.get("Message_Text")}
           messageImagePointer={message.get("Image")}
         />
