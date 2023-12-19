@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import Parse from 'parse';
 
 export default create((set, get) => ({
     newsArticles: [],
@@ -21,25 +20,37 @@ export default create((set, get) => ({
             }
     
             // Fetch from server if not in local storage or data is old
-            const News = Parse.Object.extend("News");
-            const query = new Parse.Query(News);
-            query.include('News_Img');
-            query.descending("createdAt");
-            query.limit(3);
-    
-            const results = await query.find();
-            const adjustedResults = results.map(article => {
-                // Format the date
-                const newsDate = article.get('News_Date');
+            const PARSE_APPLICATION_ID = "l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ";
+            const PARSE_REST_API_KEY = "xGP7JLxEVdOsdPX4pfJXik7nN3NHxz86Tdj9GUDP";
+            const PARSE_HOST_URL = "https://parseapi.back4app.com/";
+
+            const response = await fetch(`${PARSE_HOST_URL}classes/News?include=News_Img`, {
+                method: 'GET',
+                headers: {
+                    'X-Parse-Application-Id': PARSE_APPLICATION_ID,
+                    'X-Parse-REST-API-Key': PARSE_REST_API_KEY
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const responseData = await response.json();
+            const newsData = responseData.results; // Parse typically wraps results in a "results" array
+
+            const adjustedResults = newsData.map(article => {
+                // Use the iso property for date formatting
+                const newsDateIso = article.News_Date ? article.News_Date.iso : null;
+                const newsDate = newsDateIso ? new Date(newsDateIso) : null;
                 const formattedDate = newsDate ? newsDate.toLocaleDateString() : 'Unknown Date';
-        
-                // Format the Image object into a URL
-                const imageObject = article.get('News_Img');
-                const imageUrl = imageObject ? imageObject.get('Image_File').url() : null;
+
+                // Extract the Image URL
+                const imageUrl = article.News_Img && article.News_Img.Image_File 
+                ? article.News_Img.Image_File.url 
+                : null;
         
                 return {
-                    // Convert Parse object to plain object
-                    ...article.toJSON(), 
+                    ...article, 
                     // Store only the URL
                     News_Img: imageUrl,
                     // Store the formatted date  
@@ -57,7 +68,6 @@ export default create((set, get) => ({
         }
     },
     
-
     setSelectedArticle: (article) => {
         set({ selectedArticle: article });
     },
