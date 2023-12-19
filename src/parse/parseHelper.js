@@ -136,18 +136,26 @@ export async function fetchDockNumbers(currentUserId) {
     }
   }
   
-  export async function markMessageAsRead(messageId) {
-    const Message = Parse.Object.extend("Message");
-    const query = new Parse.Query(Message);
-    try {
-        const message = await query.get(messageId);
-        message.set(_unread, false);
-        await message.save();
-    } catch (error) {
-        console.error('Error while marking message as read:', error);
-        throw error;
-    }
+
+export async function markMessagesAsRead(chatPartnerID, userID) {
+  const Message = Parse.Object.extend("Message");
+  const query = new Parse.Query(Message);
+  query.equalTo(_receiver_user_id, userID);
+  query.equalTo(_sender_user_id, chatPartnerID);
+  query.equalTo(_unread, true);
+
+  try {
+      const messages = await query.find();
+      messages.forEach(message => {
+          message.set(_unread, false); 
+      });
+      await Parse.Object.saveAll(messages); 
+  } catch (error) {
+      console.error('Error while marking all messages as read:', error);
+      throw error;
+  }
 }
+
 
 export async function getProfileImage(userId) {
   const userQuery = new Parse.Query(Parse.User);
