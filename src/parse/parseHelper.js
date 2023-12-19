@@ -147,6 +147,22 @@ export async function getProfileImage(userId) {
   return result.get(_profile_image);
 }
 
+export async function setProfileImage(user, file){
+  if(!user) return 'Please provide a user';
+  if(!file) return 'Please provide a file';
+  try {
+    const fileName = user.id+'-profile.jpg';
+    const parseFile = new Parse.File(fileName, file);
+    await parseFile.save();
+    await user.save('profile_image', parseFile);
+
+    return 'Profile image updated successfully!';
+  }
+  catch (error) {
+    return ('Error updating profile image:', error);
+  }
+}
+
 export async function collectProfileData(userId) {
   const userQuery = new Parse.Query(Parse.User);
     userQuery.equalTo('objectId', userId);
