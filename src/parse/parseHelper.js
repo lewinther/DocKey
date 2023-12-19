@@ -109,7 +109,7 @@ export async function fetchDockNumbers(currentUserId) {
     acl.setReadAccess(senderId, true);
     acl.setReadAccess(receiverId, true);
     acl.setWriteAccess(senderId, true); // Sender can modify message
-    acl.setWriteAccess(receiverId, true);
+    acl.setWriteAccess(receiverId, true); // need to keep this in so user can mark message as read
     acl.setPublicReadAccess(false); // but stops public access
     message.setACL(acl);
 
