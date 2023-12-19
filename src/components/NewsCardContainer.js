@@ -42,7 +42,7 @@ export default function NewsCardContainer() {
             <section className="news-card-container scrollbar-hidden">
                 {newsArticles.map((article, index) => (
                     <NewsCard
-                        key={article.id}
+                        key={article.objectId}
                         newsData={article}
                         isFeatured={index === 0} // isFeatured prop based on index - first article is featured
                         onClick={() => setSelectedArticle(article)}
