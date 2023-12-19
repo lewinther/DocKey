@@ -78,17 +78,17 @@ export default function UserLogin() {
 					{passwordError && <p className="error-messages">{"*" + passwordError}</p>}
 				</div>
 
-                <div className="login-options">
-                    <p className="forgot-password" onClick={() => setShowForgotPasswordModal(true)}>
-                        Forgot Password?
-                    </p>
-                </div>
-
                 <div className="button-container">
 					<button className="login-button" onClick={handleLogin}>
 						Log in
 					</button>
 				</div>
+
+                <div className="login-options">
+                    <p className="forgot-password" onClick={() => setShowForgotPasswordModal(true)}>
+                        Forgot Password?
+                    </p>
+                </div>
 
                 <div className="account-info">
                     <strong>Don’t have an account?</strong><br />
