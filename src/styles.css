@@ -48,7 +48,7 @@ h4 {
 /* date in message */
 h5 {
 	color: #919191;
-	font-size: 11px;
+	font-size: 9px;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
 	text-align: right;
@@ -338,11 +338,10 @@ border-bottom: none;
 }
 
 .chat-card-body{
-	padding: 5px;
+	padding: 2%;
 }
 
 .chats {
-	padding-top: 2px;
 	max-width: 40vh;
 	align-self: self-start;
 	background-color: #FFFFFF;
