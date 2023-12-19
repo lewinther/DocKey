@@ -25,11 +25,9 @@ import {
 
 export default create((set, get) => ({
 
-    markMessageAsRead: async (messageId) => {
+    markMessageAsRead: async (ChatPartnerID, userID) => {
         try {
-            // Call parseHelper function to update the message
-            await markMessageAsRead(messageId);
-            // Optionally, update any relevant state in ChatStore
+            await markMessageAsRead(ChatPartnerID, userID);
         } catch (error) {
             console.error('Error updating message read status:', error);
         }

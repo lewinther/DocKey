@@ -22,8 +22,8 @@ export default function ChatListInbox({ searchTerm, activePage }) {
   // Determine the CSS class based on the activePage
   const chatListCSS = activePage === "Home" ? "message-list-small" : "message-list";
 
-  const handleChatClick = async (chatPartnerID, messageId) => {
-      await markMessageAsRead(messageId);
+  const handleChatClick = async (chatPartnerID, userID) => {
+      await markMessageAsRead(chatPartnerID, userID);
       // Navigate to the chat view
       const userId = user.id;
       navigate(`/Chat`, { state: { chatPartnerID, userId } });
@@ -60,6 +60,7 @@ return (
       const chatMessageId = msg.messageId;
       const chatPartnerProfileImage = msg.profileImage;
       const chatUnreadMessagesCount = msg.unreadMessagesCount;
+      const userID = msg.userId;
 
       return (
         <ChatCard
@@ -74,6 +75,7 @@ return (
           onClick={() => handleChatClick(chatPartnerID, chatMessageId)}
           chatUnreadMessages={chatPartnerIsSender ? "" : chatUnreadMessages ? true : false}
           chatCountUnreadMessages={chatUnreadMessagesCount}
+          userID={userID}
         />
       );
     })}
