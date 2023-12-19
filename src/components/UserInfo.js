@@ -7,7 +7,11 @@ import editProfileIcon from "../assets/Icon-edit-profile.png";
 export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
   const fileInputRef = useRef(null);
 
-  function editProfile() {}
+  function editProfile() {
+    let thisHello = 'Hello';
+    console.log(thisHello);
+    return thisHello;
+  }
 
   function onDeleteImage() {}
 

@@ -28,7 +28,7 @@ export default function ChatCard({
           >
             <div className="chat-card-body">
               <div className="meta-text">
-                <p>{messageText}</p>
+                <p style={{padding: '0%'}}>{messageText}</p>
               </div>
               {/* for rendering the image if there is one */}
               {imageUrl && (
