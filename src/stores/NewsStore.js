@@ -39,7 +39,6 @@ export default create((set, get) => ({
             const newsData = responseData.results; // Parse typically wraps results in a "results" array
 
             const adjustedResults = newsData.map(article => {
-                console.log("Date.object:", article.News_Date);
                 // Use the iso property for date formatting
                 const newsDateIso = article.News_Date ? article.News_Date.iso : null;
                 const newsDate = newsDateIso ? new Date(newsDateIso) : null;
