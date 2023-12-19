@@ -66,6 +66,6 @@ export default create ((set, get) => ({
 	collectProfileData: async () => {
 		let profile = await collectProfileData(get().user.id);
 		set((state) => ({profile: profile}));
-	}
+	},
 
 }));
