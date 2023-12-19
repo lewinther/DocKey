@@ -295,28 +295,12 @@ body{
 	border: 2px solid #1D385C;
 	font-family: 'Ubuntu', sans-serif;
     color: #FFFF;
-    padding: 10px 30px;
+    padding: 10px 40px;
     border: none;
     border-radius: 10px;
 	margin-top: 20px;
     font-size: 90%;
     cursor: pointer;
-}
-
-.send-button{
-	background-color: #1D385C;
-	border: 2px solid #1D385C;
-	color: #FFFF;
-	font-family: 'Ubuntu', sans-serif;
-	font-size: 90%;
-	font-weight: 400;
-	width: 40%;
-	padding: 2%;
-	border-radius: 10px;
-	display: inline-block;
-	right: 0%;
-	position: fixed;
-	margin: 2% 4%;
 }
 
 .remember-me {
