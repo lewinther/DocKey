@@ -13,7 +13,7 @@ import {
   getMessageDate,
   getMessageText,
   isMessageUnread,
-  markMessageAsRead,
+  markMessagesAsRead,
   getProfileImage,
   getUnreadMessagesCount
 } from "../parse/parseHelper";
@@ -25,9 +25,9 @@ import {
 
 export default create((set, get) => ({
 
-    markMessageAsRead: async (ChatPartnerID, userID) => {
+    markMessagesAsRead: async (ChatPartnerID, userID) => {
         try {
-            await markMessageAsRead(ChatPartnerID, userID);
+            await markMessagesAsRead(ChatPartnerID, userID);
         } catch (error) {
             console.error('Error updating message read status:', error);
         }

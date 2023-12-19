@@ -18,12 +18,12 @@ export default function ChatListInbox({ searchTerm, activePage }) {
   const {user} = useUserStore();
   const {doGetLatestMessageInEachUniqueThread, filterLatestMessageInThreadsBySearchTerm} = useChatStore();
   // Function to handle chat card click
-  const { markMessageAsRead } = useChatStore();
+  const { markMessagesAsRead } = useChatStore();
   // Determine the CSS class based on the activePage
   const chatListCSS = activePage === "Home" ? "message-list-small" : "message-list";
 
   const handleChatClick = async (chatPartnerID, userID) => {
-      await markMessageAsRead(chatPartnerID, userID);
+      await markMessagesAsRead(chatPartnerID, userID);
       // Navigate to the chat view
       const userId = user.id;
       navigate(`/Chat`, { state: { chatPartnerID, userId } });
@@ -72,7 +72,7 @@ return (
           chatPreviewText={chatPreviewText}
           // if msg.isSender is False and chatUnreadMessages is True, then the message is unread and chatTextStyle is bold else chatTextStyle is empty
           chatTextStyle={chatPartnerIsSender ? "" : chatUnreadMessages ? "bold" : ""}
-          onClick={() => handleChatClick(chatPartnerID, chatMessageId)}
+          onClick={() => handleChatClick(chatPartnerID, userID)}
           chatUnreadMessages={chatPartnerIsSender ? "" : chatUnreadMessages ? true : false}
           chatCountUnreadMessages={chatUnreadMessagesCount}
           userID={userID}

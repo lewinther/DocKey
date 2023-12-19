@@ -137,7 +137,7 @@ export async function fetchDockNumbers(currentUserId) {
   }
   
 
-export async function markMessageAsRead(chatPartnerID, userID) {
+export async function markMessagesAsRead(chatPartnerID, userID) {
   const Message = Parse.Object.extend("Message");
   const query = new Parse.Query(Message);
   query.equalTo(_receiver_user_id, userID);
