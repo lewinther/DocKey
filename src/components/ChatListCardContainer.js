@@ -13,7 +13,6 @@ import "../../src/styles.css";
 
 export default function ChatListInbox({ searchTerm, activePage }) {
   const [chats, setChats] = useState([]);
-  // Hook for programmatically navigating
   const navigate = useNavigate();
   const {user} = useUserStore();
   const {doGetLatestMessageInEachUniqueThread, filterLatestMessageInThreadsBySearchTerm} = useChatStore();
@@ -33,13 +32,13 @@ export default function ChatListInbox({ searchTerm, activePage }) {
   useEffect(() => {
     if(!user) return;
     async function updateViewData() {
-      // try {
+      try {
         await doGetLatestMessageInEachUniqueThread(user.id);
         setChats(filterLatestMessageInThreadsBySearchTerm(searchTerm.toLowerCase()));
-      // }
-      // catch(error) {
-      //   console.error('Error fetching chat partners or messages: ', error);
-      // }
+      }
+      catch(error) {
+        console.error('Error fetching chat partners or messages: ', error);
+      }
     }
     (async () => {
       await updateViewData();

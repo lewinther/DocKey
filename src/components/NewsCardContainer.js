@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from "react";
-import useNewsStore from "../stores/NewsStore"; // Adjust the import path to your NewsStore
+import useNewsStore from "../stores/NewsStore"; 
 import NewsCard from "./NewsCard";
 import CloseButton from "../assets/IconCloseButton";
 
@@ -15,7 +15,6 @@ export default function NewsCardContainer() {
     const renderModal = () => {
         if (!selectedArticle) return null;
 
-        // Extract data from selected article
         const newsTitle = selectedArticle.News_Title;
         const newsDate = selectedArticle.News_Date;
         const newsContent = selectedArticle.News_Text;

@@ -52,7 +52,6 @@ export async function GetAllMessagesByFieldId(fieldId, userId) {
   query.ascending("Message_Date");
   query.include("Image");
   
-  // Example: Fetch messages for a specific user
   query.equalTo(
     fieldId,
     Parse.Object.extend("_User").createWithoutData(userId)

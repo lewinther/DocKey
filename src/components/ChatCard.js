@@ -30,7 +30,6 @@ export default function ChatCard({
               <div className="meta-text">
                 <p style={{padding: '0%'}}>{messageText}</p>
               </div>
-              {/* for rendering the image if there is one */}
               {imageUrl && (
                 <img
                   onClick={onClick}

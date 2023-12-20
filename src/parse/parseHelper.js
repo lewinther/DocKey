@@ -80,7 +80,7 @@ export async function fetchDockNumbers(currentUserId) {
     return { docks, dockToUserId };
   } catch (error) {
     console.error("Error while fetching dock numbers", error);
-    throw error; // Re-throw the error to be handled by the caller
+    throw error; 
   }
 }
 
@@ -117,7 +117,7 @@ export async function sendMessage(receiverId, senderId, messageContent, imageObj
     return "message sent successfully";
   } catch (error) {
     console.error('Error while sending message:', error);
-    throw error; // Re-throw the error to be handled by the caller
+    throw error; 
   }
 }
 
@@ -131,7 +131,7 @@ export async function uploadImage(file) {
     return ImageObject;
   } catch (error) {
     console.error('Error while uploading image:', error);
-    throw error; // Re-throw the error to be handled by the caller
+    throw error; 
   }
 }
 

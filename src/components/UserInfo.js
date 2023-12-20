@@ -17,7 +17,6 @@ Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
 Parse.serverURL = PARSE_HOST_URL;
 
 export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
-  //const {imageFile, setImageFile} = useUserStore();
   const { user } = useUserStore();
   const fileInputRef = useRef(null);
   const [editProfile, setEditProfile] = useState(false);

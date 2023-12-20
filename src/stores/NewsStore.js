@@ -10,10 +10,9 @@ export default create((set, get) => ({
             const lastFetchTime = localStorage.getItem('lastFetchTime');
     
             const currentTime = new Date().getTime();
-            // 24 hours in milliseconds
             const twentyFourHours = 24 * 60 * 60 * 1000; 
     
-            // Check if stored news is valid and not older than 24 hours
+            // Check if stored news is valid
             if (storedNews && lastFetchTime && (currentTime - lastFetchTime < twentyFourHours)) {
                 set({ newsArticles: JSON.parse(storedNews) });
                 return;
@@ -36,31 +35,26 @@ export default create((set, get) => ({
                 throw new Error('Network response was not ok');
             }
             const responseData = await response.json();
-            const newsData = responseData.results; // Parse typically wraps results in a "results" array
+            const newsData = responseData.results; 
 
             const adjustedResults = newsData.map(article => {
-                // Use the iso property for date formatting
                 const newsDateIso = article.News_Date ? article.News_Date.iso : null;
                 const newsDate = newsDateIso ? new Date(newsDateIso) : null;
                 const formattedDate = newsDate ? newsDate.toLocaleDateString() : 'Unknown Date';
 
-                // Extract the Image URL
                 const imageUrl = article.News_Img && article.News_Img.Image_File 
                 ? article.News_Img.Image_File.url 
                 : null;
         
                 return {
                     ...article, 
-                    // Store only the URL
                     News_Img: imageUrl,
-                    // Store the formatted date  
                     News_Date: formattedDate 
                 };
             });
 
             set({ newsArticles: adjustedResults });
     
-            // Store the fetched news and current timestamp in local storage
             localStorage.setItem('newsArticles', JSON.stringify(adjustedResults));
             localStorage.setItem('lastFetchTime', currentTime.toString());
         } catch (error) {
