@@ -28,16 +28,10 @@ export default function ChatContainer({ currentUserID, chatPartnerID }) {
 
   function getMessageDate(msg){
     let date = msg.get("Message_Date").toLocaleDateString([], {day:'numeric', month: 'numeric'});
-    // let dateList = date.split('/');
-    // let finalDate = dateList[0] + '/' + dateList[1];
-    // return finalDate;
     return date;
   };
   function getMessageTime(msg){
     let time = msg.get("Message_Date").toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    // let timeList = time.split('.');
-    // let finalTime = timeList[0] + ':' + timeList[1];
-    // return finalTime;
     return time;
   };
 
