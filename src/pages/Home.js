@@ -20,7 +20,7 @@ export default function Home() {
 		  {user === undefined && (
 			<UserLogin/>
 		  )} 
-      <div className="in-column">
+      <div className="in-column height-100-percent">
         {user && (
           <>
           <h1>Welcome, {user.get('first_name')}! </h1>

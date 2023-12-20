@@ -17,7 +17,7 @@ export default function MyInbox() {
 
   return (
     <Fragment>
-      <div className="in-column">
+      <div className="in-column height-100-percent">
         <h1>Inbox</h1>
         <SearchBar onSearch={handleSearch} />
         <ChatListInbox searchTerm={searchTerm} activePage={"Inbox"} />
