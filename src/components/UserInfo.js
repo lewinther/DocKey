@@ -28,6 +28,9 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
   const [passwordText, setPasswordText] = useState("");
   const [secondPasswordText, setSecondPasswordText] = useState("");
   const [displayPasswordFieldsUnequal, setdisplayPasswordFieldsUnequal] = useState(false);
+  const [passwordFormValidation, setPasswordFormValidation] = useState(false);
+  const regPassword = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/);
+
   let imagePreview = imageFile ? imageFile.previewUrl : null;
 
   function handleClickEditProfile() {
@@ -93,9 +96,14 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
 
   async function handleSavePasswordClick() {
     if (passwordText === secondPasswordText) {
+      if(!regPassword.test(passwordText)){
+        setPasswordFormValidation(true)
+      }
+      else {
       await setNewPassword(user, passwordText);
       if ("Password updated successfully!") {
         refresh();
+      }
       }
     } 
     else {
@@ -194,6 +202,12 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
               </div>
                   {displayPasswordFieldsUnequal === true && (
                     <p className="error-messages">Passwords are not the same </p>
+                  )}
+                  {passwordFormValidation === true && (
+                    <p className="error-messages"
+                    style={{textAlign:'center'}}>
+                      Please enter a valid password. <br /> 
+                      Your password must contain at least one capital letter, one number and the length of eight characters </p>
                   )}
               <div
                 style={{
