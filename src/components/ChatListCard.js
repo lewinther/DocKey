@@ -21,7 +21,7 @@ export default function ChatCard({
               {chatPartnerImg && (
                 <div className='profile-img-container'>
                   <img
-                    className="news-card-img min-height-45-px"
+                    className="news-card-img height-45-px"
                     src={chatPartnerImg}
                     alt={chatPartnerUsername + " image"}
                   />
