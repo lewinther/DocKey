@@ -42,7 +42,7 @@ const useNewMessageStore = create((set,get) => ({
       set({ imageFile: null }); // Reset the image file state after sending
     } catch (error) {
       console.error('Error while sending message:', error);
-      alert(`Failed to send message: ${error.message}`);
+      return(`Failed to send message: ${error.message}`);
     }
   },
 
