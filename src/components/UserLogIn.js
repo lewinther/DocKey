@@ -18,7 +18,6 @@ export default function UserLogin() {
 
     const doLogin = useUserStore((state) => state.doLogin);
     const user = useUserStore((state) => state.user);
-    const dockNumberError = useUserStore((state) => state.dockNumberError);
     const passwordError = useUserStore((state) => state.passwordError);
 
     useEffect(() => {
