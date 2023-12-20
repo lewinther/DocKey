@@ -20,14 +20,12 @@ const useNewMessageStore = create((set,get) => ({
   handleSendMessage: async (selectedDock, messageContent, user) => {
     try {
       if (!selectedDock || !messageContent) {
-        alert("Ensure a dock number has been selected or enter a message");
-        return;
+        return("Ensure a dock number has been selected or enter a message");
       }
     
       const receiverId = get().dockNumberToUserIdMapping[selectedDock];
       if (!receiverId) {
-        alert("Invalid dock number selected");
-        return;
+        return("Invalid dock number selected");
       }
 
       let ImageObject;

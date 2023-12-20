@@ -89,8 +89,7 @@ export default function NewMessage() {
     if (receiverId) {
         navigate(`/Chat`, { state: { chatPartnerID: receiverId, userId: user.id } });
     } else {
-        console.error("Invalid dock number or mapping not found for selectedDock:", selectedDock);
-        // Handle the error case appropriately
+        return("Invalid dock number or mapping not found for selectedDock:", selectedDock);
     }
 };
 

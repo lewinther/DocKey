@@ -25,8 +25,9 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
   const [changePhoto, setChangePhoto] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
   const [imageFile, setImageFile] = useState(null);
-  const [passwordText, setPasswordText] = React.useState("");
-  const [secondPasswordText, setSecondPasswordText] = React.useState("");
+  const [passwordText, setPasswordText] = useState("");
+  const [secondPasswordText, setSecondPasswordText] = useState("");
+  const [displayPasswordFieldsUnequal, setdisplayPasswordFieldsUnequal] = useState(false);
   let imagePreview = imageFile ? imageFile.previewUrl : null;
 
   function handleClickEditProfile() {
@@ -96,9 +97,10 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
       if ("Password updated successfully!") {
         refresh();
       }
-    } else {
+    } 
+    else {
+      setdisplayPasswordFieldsUnequal(true);
     }
-    console.log("handleSavePasswordClick");
   }
 
   return (
@@ -190,6 +192,9 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
                   placeholder="Repeat new password"
                 />
               </div>
+                  {displayPasswordFieldsUnequal === true && (
+                    <p className="error-messages">Passwords are not the same </p>
+                  )}
               <div
                 style={{
                   display: "flex",
