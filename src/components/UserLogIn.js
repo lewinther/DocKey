@@ -1,6 +1,12 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+
+//import store
 import useUserStore from "../stores/UserStore";
+
+//import style
 import "../../src/styles.css";
+
+//import assets
 import CloseButton from "../assets/IconCloseButton"; 
 import logo5 from "../assets/logo5.png";
 

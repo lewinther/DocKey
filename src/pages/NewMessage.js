@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Parse from "parse";
 import {
@@ -40,8 +40,8 @@ export default function NewMessage() {
     imageFile
   } = useNewMessageStore();
 
-  const [selectedDock, setSelectedDock] = React.useState("");
-  const [messageContent, setMessageContent] = React.useState("");
+  const [selectedDock, setSelectedDock] = useState("");
+  const [messageContent, setMessageContent] = useState("");
   const fileInputRef = useRef(null);
   // Hook for programmatically navigating
   const navigate = useNavigate();

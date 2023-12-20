@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import useNewsStore from "../stores/NewsStore"; // Adjust the import path to your NewsStore
 import NewsCard from "./NewsCard";
 import CloseButton from "../assets/IconCloseButton";
@@ -37,7 +37,7 @@ export default function NewsCardContainer() {
     };
 
     return (
-        <React.Fragment>
+        <Fragment>
             <h3 className="h3-home">Harbor News</h3>
             <section className="news-card-container scrollbar-hidden">
                 {newsArticles.map((article, index) => (
@@ -50,6 +50,6 @@ export default function NewsCardContainer() {
                 ))}
             </section>
             {renderModal()}
-        </React.Fragment>
+        </Fragment>
     );
 }

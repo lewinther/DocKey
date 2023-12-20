@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Parse from "parse";
 import { getUserName } from "../parse/parseHelper";
@@ -29,9 +29,9 @@ export default function Chat() {
   const location = useLocation();
   // Retrieve the user ID and chat partner ID from the navigation state
   const { chatPartnerID } = location.state || {};
-  const [ userName, setUserName ] = React.useState("");
+  const [ userName, setUserName ] = useState("");
   
-  const [messageText, setMessageContent] = React.useState("");
+  const [messageText, setMessageContent] = useState("");
   const fileInputRef = useRef(null);
 
   useEffect(() => {

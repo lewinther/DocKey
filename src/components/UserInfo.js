@@ -1,7 +1,6 @@
 import { Fragment, useRef, useState } from "react";
 import Parse from "parse";
 import { setProfileImage, setNewPassword } from "../parse/parseHelper";
-import React from "react";
 
 // stores
 import useUserStore from "../stores/UserStore";

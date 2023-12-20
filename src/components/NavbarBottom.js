@@ -1,4 +1,3 @@
-import React from "react";
 import { Fragment } from "react";
 import IconHome from "../assets/IconHome";
 import IconInbox from "../assets/IconInbox";
