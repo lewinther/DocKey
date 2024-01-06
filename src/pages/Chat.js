@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from "react";
+// necessary to access the state passed from navigation
 import { useLocation } from "react-router-dom";
 import Parse from "parse";
 import { getUserName } from "../parse/parseHelper";
@@ -73,10 +74,12 @@ export default function Chat() {
     setMessageContent(""); // Reset message content after sending
   };
 
+  // refresh page
   function refresh(){
     window.location.reload("Refresh")
   }
 
+  // click on send button to send message and refresh page
   async function clickOnSendMessage(){
       await onSendMessage();
       if (onSendMessage){
@@ -117,7 +120,6 @@ export default function Chat() {
               </div>
             </div>
           </div>
-
         <NavbarBottom activeItem={"Inbox"} />
       </Fragment>
     );
