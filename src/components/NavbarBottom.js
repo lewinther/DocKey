@@ -1,11 +1,22 @@
 import { Fragment } from "react";
+// SVG icons
 import IconHome from "../assets/IconHome";
 import IconInbox from "../assets/IconInbox";
 import IconNewMessage from "../assets/IconNewMessage";
 import IconProfile from "../assets/IconProfile";
+// Link component: used to navigate between pages
+// react-router-dom: library handles routing in React
 import { Link } from "react-router-dom";
 
+// Navbar takes one prop: activeItem
+// activeItem is a string that determines which icon is active and highlighted
 function NavbarBottom({ activeItem }) {
+
+  // 4 icons, each with a link to a different page
+  // dynamic class name: 
+  // if activeItem/prop is equal to the icon's name, 
+  // add "active" class
+  // active class: highlight icon in dark blue
 
   return (
     <Fragment>
