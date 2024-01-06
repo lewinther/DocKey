@@ -65,9 +65,13 @@ export default function NewMessage() {
     fileInputRef.current.click();
   };
 
+  // event object passed in by the browser when the user selects a file
+  //  event.target.files contains the list of files selected by the user
   const handleImageChange = (event) => {
     if (event.target.files[0]) {
       const file = event.target.files[0];
+      // Create a preview URL for the image
+      // web API method that creates a temporary URL
       const previewUrl = URL.createObjectURL(file);
       setImageFile({ file, previewUrl });
       event.target.value = null;
@@ -85,13 +89,14 @@ export default function NewMessage() {
     await handleSendMessage(selectedDock, messageContent, user);
     setMessageContent(""); // Reset message content after sending
 
+    // Navigate to chat page after message is sent
     const receiverId = dockNumberToUserIdMapping[selectedDock];
     if (receiverId) {
         navigate(`/Chat`, { state: { chatPartnerID: receiverId, userId: user.id } });
     } else {
         return("Invalid dock number or mapping not found for selectedDock:", selectedDock);
     }
-};
+  };
 
   return (
     <Fragment>

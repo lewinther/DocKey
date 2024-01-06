@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+// useNavigate: hook to navigate to a different page
+// in scenarios where navigation needs to occur as a result of some action, 
+// such as after a form submission, in response to an API call, or inside an event handler.
 import { useNavigate } from "react-router-dom";
 
 //import stores
@@ -21,14 +24,18 @@ export default function ChatListInbox({ searchTerm, activePage }) {
   // Determine the CSS class based on the activePage
   const chatListCSS = activePage === "Home" ? "message-list-small" : "message-list";
 
+  // when a chat card is clicked, mark all messages in the chat as read
   const handleChatClick = async (chatPartnerID, userID) => {
       await markMessagesAsRead(chatPartnerID, userID);
       // Navigate to the chat view
       const userId = user.id;
+      // navigate to the chat view and pass the chatPartnerID and userId as state
       navigate(`/Chat`, { state: { chatPartnerID, userId } });
+
   };
 
-
+  // useEffect to fetch the latest message in each unique thread
+  // and filter the threads by the search term
   useEffect(() => {
     if(!user) return;
     async function updateViewData() {
@@ -46,7 +53,7 @@ export default function ChatListInbox({ searchTerm, activePage }) {
 
     }, [searchTerm, user]); 
 
-
+// returns the chat list
 return (
   <div className={chatListCSS + " scrollbar-hidden"}>
     {chats.map((msg, index) => {
