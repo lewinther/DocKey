@@ -1,6 +1,21 @@
+// Fragment
+// Wrap elements in <Fragment> to group them together in situations where you need a single element
+// useful because grouping elements with a Fragment has no effect on layout or styles, instead of adding a div element to the DOM
+
+// everything with use is a hook
+
+// useEffect Hook
+// Effects let you run some code after rendering so that you can synchronize your component with some system outside of React
+
+// useState Hook
+// useState is a Hook that lets you add state variables to components
+// state is a way to preserve values between function calls
+// component-specific memory is called state
+// use state when component needs to remember something between renderings
 import { Fragment, useEffect, useState } from "react";
 
 //import store
+// works because we made an default export in UserStore.js (useUserStore never mentioned in UserStore.js)
 import useUserStore from "../stores/UserStore";
 
 //import style
@@ -12,32 +27,45 @@ import logo5 from "../assets/logo5.png";
 
 
 export default function UserLogin() {
+    // dockNumber, password, ... are state variables
+    // setDockNumber and setPassword are setter functions for the state variables
     const [dockNumber, setDockNumber] = useState('');
     const [password, setPassword] = useState('');
     const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
-
+    
+    // useUserStore returns the global state and the setter functions
     const doLogin = useUserStore((state) => state.doLogin);
     const user = useUserStore((state) => state.user);
     const passwordError = useUserStore((state) => state.passwordError);
 
     useEffect(() => {
         if (user) {
+            // if user is logged in
+            // clear the state variables
             setDockNumber("");
             setPassword("");
         } else {
+            // if user is not logged in
+            // check if there is a stored dockNumber and password in local storage
             const storedDockNumber = localStorage.getItem('dockNumber');
             const storedPassword = localStorage.getItem('password');
+            // if there is a stored dockNumber and password, 
+            // set the state variables to the stored values
             if (storedDockNumber && storedPassword) {
                 setDockNumber(storedDockNumber);
                 setPassword(storedPassword);
             }
         }
-    }, [user]);
+    }, [user]); // only run this effect when user changes
 
+
+    // EVENT HANDLERS
+    // calls doLogin from UserStore.js with the state variables as arguments
     const handleLogin = async () => {
         await doLogin(dockNumber, password);
     };
 
+    // if showForgotPasswordModal is true, returns a modal (= window/dialog box)
     const renderForgotPasswordModal = () => {
         if (!showForgotPasswordModal) return null;
 
@@ -82,7 +110,7 @@ export default function UserLogin() {
 					/>
 					{passwordError && <p className="error-messages">{"*" + passwordError}</p>}
 				</div>
-
+                
                 <div className="button-container">
 					<button className="login-button" onClick={handleLogin}>
 						Log in
