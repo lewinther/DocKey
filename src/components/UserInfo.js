@@ -149,12 +149,12 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
             flexDirection: "column",
             width: "100%",
             alignItems: "center",
-            paddingBottom: "2%",
+            padding: "2%",
           }}
         >
-          <p className="bold" onClick={handleClickChangePassword}>
+          <button className="blue-button link" onClick={handleClickChangePassword}>
             Change password
-          </p>
+          </button>
           {changePassword === true && (
             <>
               <div
