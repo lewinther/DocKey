@@ -256,7 +256,7 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
               >
                 <button
                   className="blue-button"
-                  style={{ marginBottom: "2%", width: "20vh" }}
+                  style={{ margin: "2%", width: "20vh" }}
                   onClick={handleClickChangePhoto}
                 >
                   Change photo
