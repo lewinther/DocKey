@@ -150,6 +150,7 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
             width: "100%",
             alignItems: "center",
             padding: "2%",
+            margin: "2%",
           }}
         >
           <button className="blue-button link" onClick={handleClickChangePassword}>
