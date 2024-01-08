@@ -19,12 +19,12 @@ export default function ChatCard({
 
   function sortData() {
     let sortedData = [];
+    const keySuffix = messageSenderNo + messageRecieverNo + messageDate;
     if (messageSenderNo === user.id) {
       sortedData.push(
-        <Fragment>
+        <Fragment key={"sender-" + keySuffix}>
           <div
             className="chat-card chats right"
-            id={messageSenderNo + messageRecieverNo}
           >
             <div className="chat-card-body">
               <div className="meta-text">
@@ -53,7 +53,7 @@ export default function ChatCard({
     }
     if (messageSenderNo !== user.id) {
       sortedData.push(
-        <Fragment>
+        <Fragment key={"sender-" + keySuffix}>
           <div
             className="chat-card chats"
             id={messageSenderNo + messageRecieverNo}
