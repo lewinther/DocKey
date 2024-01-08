@@ -100,9 +100,14 @@ export default create ((set, get) => ({
 
 	// calls collectProfileData function from parseHelper.js
 	collectProfileData: async () => {
-		let profile = await collectProfileData(get().user.id);
-		// updates profile state in global state
+		const user = get().user;
+		if (!user || !user.id) {
+			console.error("User is not logged in");
+			return;
+		}
+		let profile = await collectProfileData(user.id);
 		set((state) => ({profile: profile}));
 	},
+	
 
 }));
