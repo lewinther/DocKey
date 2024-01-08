@@ -130,10 +130,10 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
               Name: <br /> <b>{fullName}</b>
             </p>
             <p>
-              Phone: <br /> <b>{phoneNr}</b>
+              Phone No.: <br /> <b>{phoneNr}</b>
             </p>
             <p>
-              E-mail: <br /> <b>{eMail}</b>
+              E-Mail: <br /> <b>{eMail}</b>
             </p>
           </div>
           <img
@@ -153,7 +153,7 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
           }}
         >
           <button className="blue-button link" onClick={handleClickChangePassword}>
-            Change password
+            Change Password
           </button>
           {changePassword === true && (
             <>
@@ -162,19 +162,21 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
                   display: "flex",
                   flexDirection: "row",
                   width: "95%",
-                  paddingBottom: "2%",
+                  paddingBottom: "0%",
                 }}
               >
                 <input
                   type={"password"}
+                  className="search-input"
                   style={{
                     height: "6vh",
                     textAlign: "center",
                     fontSize: "90%",
                     width: "50%",
-                    marginLeft: "2%",
+                    margin: "2%",
                     borderRadius: '10px',
-                    border:'none'
+                    color: "#012657",
+                    
                   }}
                   id="password"
                   onChange={handlePassWordTextChange}
@@ -183,14 +185,14 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
                 />
                 <input
                   type={"password"}
+                  className="search-input"
                   style={{
                     height: "6vh",
                     textAlign: "center",
                     fontSize: "90%",
                     width: "50%",
-                    marginLeft: "2%",
-                    borderRadius: '10px',
-                    border:'none'
+                    margin: "2%",
+                    borderRadius: '10px'
                   }}
                   id="password"
                   onChange={handleSecondPassWordTextChange}
@@ -199,7 +201,7 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
                 />
               </div>
                   {displayPasswordFieldsUnequal === true && (
-                    <p className="error-messages">Passwords are not the same </p>
+                    <p className="error-messages">Passwords are not the same! </p>
                   )}
                   {passwordFormValidation === true && (
                     <p className="error-messages"
@@ -225,7 +227,7 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
                   }}
                   onClick={handleSavePasswordClick}
                 >
-                  Save password
+                  Save Password
                 </button>
                 <button
                   className="blue-button"

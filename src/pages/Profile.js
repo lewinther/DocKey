@@ -25,10 +25,9 @@ export default function Profile() {
 
   return (
     <>
-    <div  style={{ alignContent: "center", marginTop: "6%" }}>
       {user && (
-        <div className="">
-          <h1>Contact information</h1>
+        <div>
+          <h1>Contact Information</h1>
           <div style={{ margin: "8% 0%" }}>
             <UserInfo
               profileImage={profile.profileImage}
@@ -38,9 +37,7 @@ export default function Profile() {
               eMail={profile.email}
             />
           </div>
-        </div>
-      )}
-      <div style={{ alignSelf:'self-end' }}>
+          <div style={{ alignSelf:'self-end' }}>
         <div className="button-container">
           <Link
             to="/"
@@ -48,7 +45,7 @@ export default function Profile() {
             style={{ padding: "2% 8%" }}
             onClick={clickDoLogout}
           >
-            Log out
+            Logout
           </Link>
         </div>
         <div>
@@ -67,6 +64,10 @@ export default function Profile() {
         </div>
       </div>
       </div>
+      )}
+
+      
+      
       <NavbarBottom activeItem={"Profile"} />
     </>
   );
