@@ -65,6 +65,11 @@ export async function fetchDockNumbers(currentUserId) {
   const query = new Parse.Query(Parse.User);
   try {
     const results = await query.find();
+    results.sort((a, b) => {
+      const numA = parseInt(a.get("username").substring(1));
+      const numB = parseInt(b.get("username").substring(1));
+      return numA - numB;
+    });
     const docks = [];
     const dockToUserId = {};
 
@@ -75,6 +80,7 @@ export async function fetchDockNumbers(currentUserId) {
         docks.push(dock);
         dockToUserId[dock] = userId;
       }
+      
     }
 
     return { docks, dockToUserId };
