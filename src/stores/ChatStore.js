@@ -123,24 +123,15 @@ async function createChatPartnerMapping(results, userId) {
     // Promise all is used to wait for all of the promises returned by the map operation to resolve. 
     // This means all the asynchronous operations (fetching names, images, and unread message counts) are executed concurrently, 
     // and the next step in the code will wait until all of these operations are complete
-    
-    // Get the partner ID
-    const _partner_id = message.isSender ? _receiver_user_id : _sender_user_id;
+    const partnerName = await getUserName(message.partnerId);
   
-    // Fetch partner name
-    let partnerName = message.message.get(_partner_id).get(_username);
-    if (!partnerName) {
-      partnerName = await getUserName(message.partnerId);
-    }
     // Fetch partner profile image
     const profileImage = await getProfileImage(message.partnerId);
 
-    // Fetch count of unread messages
-    let unreadMessagesCount = message.unreadMessagesCount;
-    if (!unreadMessagesCount) {
-      unreadMessagesCount = await getUnreadMessagesCount(message.userId, message.partnerId);
-    }
-    
+    // Fetch unread messages count
+    const unreadMessagesCount = await getUnreadMessagesCount(message.userId, message.partnerId);
+  
+  
     // Update message object
     message.partnerName = partnerName;
     message.profileImage = profileImage ? (typeof profileImage.url === 'function' ? profileImage.url() : null) : null;
