@@ -573,14 +573,11 @@ border-bottom: none;
     margin: 2% 4%;
 	border-radius: 15px;
     background-color: rgba(216, 221, 229, 0.847);
-    overflow-y: hidden; 
+    overflow-y: auto; 
 	box-sizing: border-box;
 	padding: 0.5%;
 	padding-top: 0.5%;
 	height: 73%;
-	/* Hide scrollbar  for IE, Edge and Firefox */
-	-ms-overflow-style: none;  
-	scrollbar-width: none;  
 }
 
 .message-list-small {
