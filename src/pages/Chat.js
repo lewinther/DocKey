@@ -25,8 +25,8 @@ Parse.serverURL = PARSE_HOST_URL;
 
 export default function Chat() {
   const { user } = useUserStore();
-  // Hook to access the current location object
   const { handleSendMessage_Lena, setImageFile, imageFile } = useNewMessageStore();
+    // Hook to access the current location object
   const location = useLocation();
   // Retrieve the user ID and chat partner ID from the navigation state
   const { chatPartnerID } = location.state || {};
