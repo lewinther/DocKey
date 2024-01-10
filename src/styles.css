@@ -449,7 +449,6 @@ border-bottom: none;
 	margin-top: 10px;
 	background-color:rgba(216, 221, 229, 0.847);
 	border-radius: 15px;
-    box-shadow: 0 15px 25px rgba(0,0,0,0.3);
 	/* Hide scrollbar for IE, Edge and Firefox */
 	-ms-overflow-style: none;  
 	scrollbar-width: none;  
