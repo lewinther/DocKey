@@ -77,8 +77,8 @@ export default function UserLogin() {
                     </button>
                     <p className="modal-title">Forgot Password?</p>
                     <p>Please contact your Harbor Office at:</p>
-                    <p>Phone: XXXXXXXXXX</p>
-                    <p>Email: XXXXXXXXXX</p>
+                    <p>Phone: +45 1234 5678</p>
+                    <p>Email: harboroffice@itu.dk</p>
                 </div>
             </div>
         );
