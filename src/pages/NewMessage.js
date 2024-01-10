@@ -17,7 +17,7 @@ import useNewMessageStore from '../stores/NewMessageStore';
 import "../../src/styles.css";
 
 // Components
-import NewMessageCardContainer from "../components/ChatCardNew";
+import NewMessageCardContainer from "../components/ChatCardCreateNewLarge";
 import DockFilter from "../components/DockFilter";
 import NavbarBottom from '../components/NavbarBottom';
 
