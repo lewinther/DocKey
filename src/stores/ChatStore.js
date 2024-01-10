@@ -42,9 +42,7 @@ export default create((set, get) => ({
         const results = await combinedQuery.find();
         // Map the most recent message for each chat partner.
         // Ensure you have messages and that Message_Date is defined before setting state.
-        const messages = 
-        (await createChatPartnerMapping(results, userId))
-        .filter(msg => msg.message && msg.message.get(_message_date));
+        const messages = (await createChatPartnerMapping(results, userId))
         set({ latestMessageInThreads: messages });
     },
     // Search function
