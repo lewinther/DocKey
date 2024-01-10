@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 
 const SearchBar = ({ onSearch }) => {
+  // onSearch is a function passed from the parent
   const [search, setSearch] = useState("");
 
   const handleChange = (e) => {
@@ -8,14 +9,9 @@ const SearchBar = ({ onSearch }) => {
     onSearch(e.target.value); // updates the search term on each change in input
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSearch(search);
-  };
-
   return (
     <Fragment>
-    <form onSubmit={handleSubmit}>
+    <form>
       <input
         type="text"
         value={search}
