@@ -86,8 +86,10 @@ export default function NewMessage() {
   };
 
   const onSendMessage = async () => {
-    await handleSendMessage(selectedDock, messageContent, user);
-    setMessageContent(""); // Reset message content after sending
+    let _messageContent = messageContent;
+    setMessageContent("");
+    await handleSendMessage(selectedDock, _messageContent, user);
+     // Reset message content after sending
 
     // Navigate to chat page after message is sent
     const receiverId = dockNumberToUserIdMapping[selectedDock];
