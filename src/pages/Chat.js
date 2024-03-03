@@ -1,11 +1,9 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Parse from "parse";
-import { getUserName } from "../parse/parseHelper";
 
 //import stores
+import useChatStore from "../stores/ChatStore";
 import useUserStore from "../stores/UserStore";
-import useNewMessageStore from "../stores/NewMessageStore";
 
 // CSS import
 import "../../src/styles.css";
@@ -15,32 +13,31 @@ import ChatContainer from "../components/ChatCardContainer";
 import NavbarBottom from "../components/NavbarBottom";
 import ChatCardCreate from "../components/ChatCardCreateNew";
 
-// Your Parse initialization configuration
-const PARSE_APPLICATION_ID = "l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ";
-const PARSE_JAVASCRIPT_KEY = "h9PTAAitCJFul7XadjhQbXFaK1N8VGZdJodYl5Tx";
-const PARSE_HOST_URL = "https://parseapi.back4app.com/";
-Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
-Parse.serverURL = PARSE_HOST_URL;
-
 export default function Chat() {
   const { user } = useUserStore();
+  const {fetchChatPartnerProfile, doGetMessagesForThread, handleSendMessage, setImageFile, imageFile} = useChatStore();
   // Hook to access the current location object
-  const { handleSendMessage_Lena, setImageFile, imageFile } = useNewMessageStore();
   const location = useLocation();
   // Retrieve the user ID and chat partner ID from the navigation state
   const { chatPartnerID } = location.state || {};
-  const [ userName, setUserName ] = useState("");
-  
+  const [ chatPartner, setChatPartner ] = useState("");
+  const [ messages, setMessages] = useState(undefined);
+
   const [messageText, setMessageContent] = useState("");
   const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (!chatPartnerID) return;
-    async function updateUserName(){
-      setUserName(await getUserName(chatPartnerID));
+    async function updateViewData(){
+      setChatPartner(await fetchChatPartnerProfile(chatPartnerID));
+      let tmpMessages = await doGetMessagesForThread(
+              chatPartnerID,
+              user.id
+      );
+      setMessages(tmpMessages);
     }
     (async () => {
-      await updateUserName();
+      await updateViewData();
     })();
   }, [chatPartnerID]);
 
@@ -69,7 +66,7 @@ export default function Chat() {
   };
 
   async function onSendMessage() {
-    await handleSendMessage_Lena(user.id, chatPartnerID, messageText);
+    await handleSendMessage(user.id, chatPartnerID, messageText);
     setMessageContent(""); // Reset message content after sending
   };
 
@@ -87,10 +84,10 @@ export default function Chat() {
   if(user) {
     return (
       <Fragment>
-          {userName && (
-          <h1>Conversation with {userName}</h1>
+          {chatPartner && (
+          <h1>Conversation with {chatPartner.userDockNumber}</h1>
         )}
-          <ChatContainer chatPartnerID={chatPartnerID} currentUserID={user.id} />
+          <ChatContainer messages={messages} currentUserId={user.id} />
           <div className="ChatCardNew-chat">
             <ChatCardCreate
               messageText={messageText}

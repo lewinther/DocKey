@@ -1,17 +1,9 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Parse from "parse";
-import {
-    //parse DB fields
-  _sender_user_id, 
-  _receiver_user_id,
-  _username,
-  _messageFields,
-} from "../parse/parseHelper";
 
 // stores
 import useUserStore from "../stores/UserStore";
-import useNewMessageStore from '../stores/NewMessageStore';
+import useChatStore from '../stores/ChatStore';
 
 // CSS import
 import "../../src/styles.css";
@@ -21,41 +13,25 @@ import NewMessageCardContainer from "../components/ChatCardNew";
 import DockFilter from "../components/DockFilter";
 import NavbarBottom from '../components/NavbarBottom';
 
-// Parse initialization configuration goes here
-const PARSE_APPLICATION_ID = 'l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ';
-const PARSE_JAVASCRIPT_KEY = 'h9PTAAitCJFul7XadjhQbXFaK1N8VGZdJodYl5Tx';
-const PARSE_HOST_URL = 'https://parseapi.back4app.com/';
-Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
-Parse.serverURL = PARSE_HOST_URL;
-
-
 export default function NewMessage() {
   const { user } = useUserStore();
   const {
-    dockNumbers,
-    fetchAndSetDockNumbers,
+    chatPartners,
+    fetchPotentialChatPartners,
     handleSendMessage,
-    dockNumberToUserIdMapping,
     setImageFile,
     imageFile
-  } = useNewMessageStore();
+  } = useChatStore();
 
   const [selectedDock, setSelectedDock] = useState("");
   const [messageContent, setMessageContent] = useState("");
   const fileInputRef = useRef(null);
-  // Hook for programmatically navigating
   const navigate = useNavigate();
 
 
   useEffect(() => {
-    if (user) {
-    fetchAndSetDockNumbers(user.id);
-    }
-  }, [user]);
-
-  const handleDockSelection = (selectedDockNumber) => {
-    setSelectedDock(selectedDockNumber);
-  };
+      fetchPotentialChatPartners();
+  }, []);
 
   const handleMessageContentChange = (content) => {
     setMessageContent(content);
@@ -83,9 +59,9 @@ export default function NewMessage() {
 
   const onSendMessage = async () => {
     await handleSendMessage(selectedDock, messageContent, user);
-    setMessageContent(""); // Reset message content after sending
+    setMessageContent("");
 
-    const receiverId = dockNumberToUserIdMapping[selectedDock];
+    const receiverId = selectedDock.userId;
     if (receiverId) {
         navigate(`/Chat`, { state: { chatPartnerID: receiverId, userId: user.id } });
     } else {
@@ -96,7 +72,7 @@ export default function NewMessage() {
   return (
     <Fragment>
       <h1>New Message</h1>
-      <DockFilter onDockSelect={handleDockSelection} dockNumbers={dockNumbers} />
+      <DockFilter onDockSelect={setSelectedDock} dockNumbers={chatPartners} />
       <NewMessageCardContainer
         messageContent={messageContent}
         imagePreview={imageFile ? imageFile.previewUrl : null}
