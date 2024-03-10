@@ -49,8 +49,8 @@ export async function doRestoreSession() {
     const storedUserID = localStorage.getItem("userId");
     const storedProfile =  JSON.parse(localStorage.getItem("profile"));
     const session  = {storedUserID, storedProfile};
-    console.log(session);
-    return session;
+    if(storedUserID && storedProfile) return session;
+    return undefined;
 }
 
 export async function setSession(profile, userId) {

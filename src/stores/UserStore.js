@@ -10,7 +10,8 @@ import {
 import {
 	signIn, 
 	signOut,
-	isUserLoggedIn
+	isUserLoggedIn,
+	changePassword
 } from "../api/connections/auth";
 
 export default create ((set, get) => ({
@@ -20,9 +21,8 @@ export default create ((set, get) => ({
 	signIn: async (username, password) => {
 		const result = await signIn(username, password);
 		if(result === true) {
-			const profile = await fetchUserProfile();
-			set({user:{id:profile.id}, profile, passwordError: null});
-			setSession(profile, profile.id);
+			const session = createUserSession();
+			set({user:session.user, profile: session.profile, passwordError: null});
 		}else {
 			set({passwordError: result});
 		}
@@ -37,7 +37,10 @@ export default create ((set, get) => ({
 	doRestoreSession: async () => {	
 		if(await isUserLoggedIn()) {
 			const session = await doRestoreSession();
-			set({user:{id:session.storedUserID}, profile: session.storedProfile});
+			if(!session)
+				createUserSession();
+			else
+				set({user:{id:session.storedUserID}, profile: session.storedProfile});
 		} else await signOut();
 	},
 	getFullName: () => {
@@ -49,7 +52,13 @@ export default create ((set, get) => ({
 	setProfileImage: async() => {
 		throw Error("should store image in supabase storage, and connect it to the user profile by URL");
 	},
-	setNewPassword: async () => {
-		throw Error("should set new password for user");
+	setNewPassword: async (password) => {
+		return await changePassword(password);
 	}
 }));
+
+async function createUserSession() {
+	const profile = await fetchUserProfile();
+	setSession(profile, profile.id);
+	return {user:{id:profile.id}, profile};
+}

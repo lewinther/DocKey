@@ -76,8 +76,7 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail, setPr
 
   async function handleSaveClick() {
     if (imageFile) {
-      await setProfileImage(user, imageFile.file);
-      if ("Profile image updated successfully!") {
+      if (await setProfileImage(user, imageFile.file)) {
         refresh();
       }
     }
@@ -89,10 +88,12 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail, setPr
         setPasswordFormValidation(true)
       }
       else {
-      await setNewPassword(user, passwordText);
-      if ("Password updated successfully!") {
-        refresh();
-      }
+        if (await setNewPassword(passwordText)) {
+          setPasswordText('');
+          setSecondPasswordText('');
+          setChangePassword(false);
+          setPasswordFormValidation(false);
+        }
       }
     } 
     else {

@@ -27,3 +27,11 @@ export async function isUserLoggedIn() {
     if(data.session === null) return false;
     return true;
 }
+
+export async function changePassword(password) {
+    const { user, error } = await supabase.auth.updateUser({
+        password,
+    });
+    if(error) return false;
+    return true;
+}
