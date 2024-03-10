@@ -18,31 +18,27 @@ export async function fetchUserProfile(){
 	};
 }
 
-export async function fetchChatPartnerProfile(chatPartner) {
-    return Promise.resolve ([
-        {
-            id: chatPartner,
-            image: '',
-            username: ''
-        }
-    ]);
-}
-
 export async function fetchPotentialChatPartners() {
-    return Promise.resolve ([
-        {
-            username:'p1',
-            userId:'user-A'
-        },
-        {
-            username:'p2',
-            userId:'user-B'
-        },
-        {
-            username:'p3',
-            userId:'user-C'
+    const {data, error} = await supabase
+    .from('public_profiles')
+    .select();
+
+    if(error){
+        console.log(error.message);
+        throw new error(error);
+    }
+
+    const partners = [];
+    data.map(x => {
+        partners.push(
+            {
+                username:x.username,
+                userId:x.user_id,
+                image: x.image
+            });
         }
-    ])
+    );
+    return partners;
 }
 
 export async function doRestoreSession() {

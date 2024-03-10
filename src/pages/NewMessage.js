@@ -25,14 +25,25 @@ export default function NewMessage() {
     imageFile
   } = useChatStore();
 
+  const [usernames, setUsernames] = useState([]);
   const [selectedDock, setSelectedDock] = useState("");
   const [messageContent, setMessageContent] = useState("");
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    fetchPotentialChatPartners();
+    if(!user) return;
+    async function updateViewData(){
+      await fetchPotentialChatPartners(user.id);
+      let partners = chatPartners.filter(x => {
+        if(x.userId !== user.id) return x;
+      })
+      partners = partners.map(x => x.username);
+      setUsernames(partners);
+    }
+    (async () => {
+      await updateViewData();
+    })();
   }, []);
 
   const handleMessageContentChange = (content) => {
@@ -74,7 +85,7 @@ export default function NewMessage() {
   return (
     <Fragment>
       <h1>New Message</h1>
-      <DockFilter onDockSelect={setSelectedDock} dockNumbers={chatPartners} />
+      <DockFilter onDockSelect={setSelectedDock} usernames={usernames} />
       <NewMessageCardContainer
         messageContent={messageContent}
         imagePreview={imageFile ? imageFile.previewUrl : null}

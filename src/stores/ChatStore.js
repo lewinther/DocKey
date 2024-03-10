@@ -1,10 +1,10 @@
 import { create } from "zustand";
 import {getAllMessages, markMessagesAsRead, sendMessage} from "../api/connections/chats";
-import {fetchChatPartnerProfile, fetchPotentialChatPartners} from "../api/connections/users";
+import {fetchPotentialChatPartners} from "../api/connections/users";
 export default create((set, get) => ({
 
     chats:[],
-    chatPartners: [],
+    chatPartners: undefined,
     latestMessageInThreads:[],
     imageFile: null,
     fetchAllMessagesAndStoreAsChats: async(userId) => {
@@ -57,16 +57,15 @@ export default create((set, get) => ({
       return filteredChats;
     },
     fetchPotentialChatPartners: async () => {
-      return await fetchPotentialChatPartners();
+      let chatPartners = await fetchPotentialChatPartners();
+      set({chatPartners});
     },
     fetchChatPartnerProfile: async(chatPartnerID) => {
-      const chatPartners = get().chatPartners;
-      let partner = chatPartners.find(x => x.id);
-      if(!partner) {
-        partner = await fetchChatPartnerProfile(chatPartnerID);
-        chatPartners.push(partner);
-      }
-      return partner;
+      if(!get().chatPartners) await get().fetchPotentialChatPartners();
+      let partner = get().chatPartners.find(x => x.userId == chatPartnerID);
+      if(partner)
+        return partner;
+      throw new Error("No partner with id: "+chatPartnerID);
     },
     //sender = chatpartner
     //reciever = viewing user

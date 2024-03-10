@@ -2,7 +2,6 @@ import { create
 } from "zustand";
 import { 
 	fetchUserProfile, 
-	fetchChatPartnerProfile, 
 	doRestoreSession,
 	releaseSession,
 	setSession
@@ -45,9 +44,6 @@ export default create ((set, get) => ({
 	},
 	getFullName: () => {
 		return get().profile.firstName + ' ' + get().profile.lastName;
-	},
-	fetchChatPartnerProfile: async (chatPartner) => {
-		return await fetchChatPartnerProfile(chatPartner);
 	},
 	setProfileImage: async() => {
 		throw Error("should store image in supabase storage, and connect it to the user profile by URL");

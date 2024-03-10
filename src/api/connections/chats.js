@@ -1,21 +1,34 @@
+import {supabase} from '../supabase/supabaseClient';
+
 export async function markMessagesAsRead(messageIdsToUpdate) {
     //send a list of messageIds to the server. for each entry, set message.isRead true.
 }
 
 export async function getAllMessages() {
-    return Promise.resolve(
-        [ //messages
+    const {data, error} = 
+    await supabase.from('messages').select();
+
+    if(error){
+        console.log(error.message);
+        throw new error(error);
+    }
+
+    const messages = [];
+    data.map(x => {
+        messages.push(
             {
-              id:'0',
-              sender:'',
-              receiver:'',
-              text:'asdasd',
-              image:'http://tinyurl.com/m8eeusct',
-              isRead:false,
-              date: Date(),
-            }
-        ]
+                id: x.id,
+                sender: x.sender_id,
+                receiver: x.receiver_id,
+                text: x.message_content,
+                image: x.image,
+                isRead: x.isRead,
+                date: new Date()//x.created_at,
+              }
+            );
+        }
     );
+    return messages;
 }
 
 export async function sendMessage(receiver, sender, text, imageFile) {

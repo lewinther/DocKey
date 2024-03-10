@@ -34,7 +34,6 @@ export default function Chat() {
               chatPartnerID,
               user.id
       );
-      console.log(tmpMessages);
       setMessages(tmpMessages);
     }
     (async () => {
@@ -82,13 +81,13 @@ export default function Chat() {
       }
   };
 
-  if(user) {
+  if(user && messages) {
     return (
       <Fragment>
           {chatPartner && (
-          <h1>Conversation with {chatPartner.userDockNumber}</h1>
-        )}
-          <ChatContainer messages={messages} currentUserId={user.id} />
+            <h1>Conversation with {chatPartner.username}</h1>
+          )}
+          <ChatContainer messages={messages.messages} currentUserId={user.id} />
           <div className="ChatCardNew-chat">
             <ChatCardCreate
               messageText={messageText}

@@ -48,19 +48,19 @@ export default function ChatContainer({ messages, currentUserId }) {
   return (
     <Fragment>
     <div className="chat-container scrollbar-hidden">
-      {messages.map((message, index) => (
-        <ChatCard
-          currentUserId={currentUserId}
+      {messages.map((message, index) => {
+        return <ChatCard
+          isShownRight={message.sender === currentUserId}
           onClick={() => setSelectedImage(message.image)}
-          key={message.objectId || index}
+          key={message.id || index}
           senderId={message.sender}
-          recieverId={message.reciever}
+          recieverId={message.receiver}
           date={getMessageDate(message)}
           time={getMessageTime(message)}
           text={message.text}
           image={message.image}
         />
-      ))}
+    })}
     </div>
     {renderModal()}
     </Fragment>

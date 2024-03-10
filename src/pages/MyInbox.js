@@ -15,12 +15,13 @@ import ChatListCardContainer from "../components/ChatListCardContainer";
 import NavbarBottom from '../components/NavbarBottom';
 
 export default function MyInbox() {
-  const {user, fetchChatPartnerProfile} = useUserStore();
-  const {countUnreadMessagesForThread, markThreadAsRead, filterLatestMessageInThreadsBySearchTerm, fetchAllMessagesAndStoreAsChats} = useChatStore();
+  const {user} = useUserStore();
+  const {countUnreadMessagesForThread, markThreadAsRead, filterLatestMessageInThreadsBySearchTerm, fetchAllMessagesAndStoreAsChats, fetchChatPartnerProfile} = useChatStore();
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
+    if(!user) return;
     async function updateViewData(){
       await fetchAllMessagesAndStoreAsChats(user.id);
     }
