@@ -10,8 +10,8 @@ export default create((set, get) => ({
     },
     getArticleExcerpt(id) {
         const article = get().newsArticles.find(x => x.id === id);
-        if(article) return get().article.text.length > 100 ? article.substring(0, 100) : article.text;
-        return undefined;
+        if(article) return article.text.length > 100 ? article.text.substring(0, 100) : article.text;
+        return 'undefined';
     },
     setSelectedArticle: (article) => {
         set({ selectedArticle: article });

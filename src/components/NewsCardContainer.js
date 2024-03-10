@@ -12,10 +12,10 @@ export default function NewsCardContainer() {
         getArticleExcerpt 
     } = useNewsStore();
 
-
     useEffect(() => {
         async function updateViewData(){
             await fetchNewsArticles();
+
         }
         (async () => {
           await updateViewData();
@@ -47,13 +47,13 @@ export default function NewsCardContainer() {
 
     return (
         <Fragment>
-            {newsArticles === undefined && (
+            {newsArticles && (
             <div>
                 <h3 className="h3-home">Harbor News</h3>
                 <section className="news-card-container scrollbar-hidden">
                     {newsArticles.map((article, index) => (
                         <NewsCard
-                            key={article.objectId}
+                            key={article.id}
                             newsData={article}
                             excerpt={getArticleExcerpt(article.id)}
                             isFeatured={index === 0} // isFeatured prop based on index - first article is featured
