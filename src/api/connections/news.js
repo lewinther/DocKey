@@ -13,7 +13,6 @@ export async function fetchNewsArticles() {
         Image: 'http://tinyurl.com/m8eeusct', 
         Text: 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups',
     },
-    ,
     {
         Id: 2,
         Title:'Lorem ipsum is cool',

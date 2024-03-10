@@ -34,6 +34,7 @@ export default function Chat() {
               chatPartnerID,
               user.id
       );
+      console.log(tmpMessages);
       setMessages(tmpMessages);
     }
     (async () => {

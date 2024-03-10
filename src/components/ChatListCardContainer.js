@@ -23,7 +23,6 @@ return (
     {chats.map((thread, index) => {
       const chatPartnerID = thread.chatPartner;
       const msg = thread.messages;
-      console.log(msg);
       const chatDate = msg.date;
       let chatPreviewText = '';
       if(msg.text)

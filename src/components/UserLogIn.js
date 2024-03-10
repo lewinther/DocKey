@@ -22,14 +22,16 @@ export default function UserLogin() {
         if (user) {
             setUsername("");
             setPassword("");
-        } else {
-            const storedUsername = localStorage.getItem('username');
-            const storedPassword = localStorage.getItem('password');
-            if (storedUsername && storedPassword) {
-                setUsername(storedUsername);
-                setPassword(storedPassword);
-            }
-        }
+        } 
+        //TODO: should we really keep this in local storage?
+        // else {
+        //     const storedUsername = localStorage.getItem('username');
+        //     const storedPassword = localStorage.getItem('password');
+        //     if (storedUsername && storedPassword) {
+        //         setUsername(storedUsername);
+        //         setPassword(storedPassword);
+        //     }
+        // }
     }, [user]);
 
     const handleLogin = async () => {
@@ -68,7 +70,7 @@ export default function UserLogin() {
 						type="text"
 						placeholder="Dock Number"
 						value={username}
-						onChange={(e) => setUsername(e.target.value.toUpperCase())}
+						onChange={(e) => setUsername(e.target.value)}
 					/>
 
 					<input
@@ -95,7 +97,8 @@ export default function UserLogin() {
 
                 <div className="account-info">
                     <strong>Don’t have an account?</strong><br />
-                    This page is for boat owners only, contact your harbor administration if in doubt.
+                    This page is for boat owners only
+                    <br/>contact your harbor administration with questions
                 </div>
             </div>
             {renderForgotPasswordModal()}

@@ -14,7 +14,9 @@ import DockFilter from "../components/DockFilter";
 import NavbarBottom from '../components/NavbarBottom';
 
 export default function NewMessage() {
+  
   const { user } = useUserStore();
+
   const {
     chatPartners,
     fetchPotentialChatPartners,
@@ -30,7 +32,7 @@ export default function NewMessage() {
 
 
   useEffect(() => {
-      fetchPotentialChatPartners();
+    fetchPotentialChatPartners();
   }, []);
 
   const handleMessageContentChange = (content) => {

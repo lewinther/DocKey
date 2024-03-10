@@ -20,7 +20,7 @@ export default function App() {
   	useEffect(() => {
       async function onMounted() {
         if(!user) {
-          doRestoreSession();
+          await doRestoreSession();
         } 
       }
       (async () => {

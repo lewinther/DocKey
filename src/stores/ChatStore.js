@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import {getAllMessages, markMessagesAsRead, sendMessage} from "../api/connections/chats";
-import {fetchChatPartnerProfile} from "../api/connections/users";
+import {fetchChatPartnerProfile, fetchPotentialChatPartners} from "../api/connections/users";
 export default create((set, get) => ({
 
     chats:[],
@@ -11,7 +11,6 @@ export default create((set, get) => ({
       const messages = await getAllMessages();
       //Sort all messages into list of threads
       const distinctChats = [];
-      console.log(messages);
       messages.forEach(message => {
         //if user is sender, then we only have to consider the reciever.
         if(userId === message.sender) {
@@ -56,6 +55,9 @@ export default create((set, get) => ({
       : threads;
 
       return filteredChats;
+    },
+    fetchPotentialChatPartners: async () => {
+      return await fetchPotentialChatPartners();
     },
     fetchChatPartnerProfile: async(chatPartnerID) => {
       const chatPartners = get().chatPartners;

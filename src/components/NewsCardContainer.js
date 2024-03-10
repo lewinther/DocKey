@@ -16,7 +16,6 @@ export default function NewsCardContainer() {
     useEffect(() => {
         async function updateViewData(){
             await fetchNewsArticles();
-            console.log(newsArticles);
         }
         (async () => {
           await updateViewData();

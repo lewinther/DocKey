@@ -7,7 +7,7 @@ import useUserStore from "../stores/UserStore";
 import defaultProfileImage from "../assets/logo6.png";
 import editProfileIcon from "../assets/Icon-edit-profile.png";
 
-export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
+export default function UserInfo({ profileImage, fullName, phoneNr, eMail, setProfileImage, setNewPassword }) {
   const { user } = useUserStore();
   const fileInputRef = useRef(null);
   const [editProfile, setEditProfile] = useState(false);

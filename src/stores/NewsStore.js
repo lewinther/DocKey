@@ -6,11 +6,10 @@ export default create((set, get) => ({
     selectedArticle: null,
     fetchNewsArticles: async () => {
         const newsArticles = await fetchNewsArticles();
-        console.log(newsArticles);
         set({ newsArticles });
     },
     getArticleExcerpt(id) {
-        const article = get().newsArticles.find(x => x.id == id);
+        const article = get().newsArticles.find(x => x.id === id);
         if(article) return get().article.text.length > 100 ? article.substring(0, 100) : article.text;
         return undefined;
     },

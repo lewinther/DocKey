@@ -40,7 +40,7 @@ export default function Home() {
 			<UserLogin/>
 		  )} 
       <div className="in-column height-100-percent">
-        {user && (
+        {(user && profile) && (
           <>
           <h1>Welcome, {profile.firstName}! </h1>
           <NewsCardContainer />
