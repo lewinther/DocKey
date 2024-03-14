@@ -23,15 +23,6 @@ export default function UserLogin() {
             setUsername("");
             setPassword("");
         } 
-        //TODO: should we really keep this in local storage?
-        // else {
-        //     const storedUsername = localStorage.getItem('username');
-        //     const storedPassword = localStorage.getItem('password');
-        //     if (storedUsername && storedPassword) {
-        //         setUsername(storedUsername);
-        //         setPassword(storedPassword);
-        //     }
-        // }
     }, [user]);
 
     const handleLogin = async () => {

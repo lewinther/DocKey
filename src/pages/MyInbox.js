@@ -16,7 +16,13 @@ import NavbarBottom from '../components/NavbarBottom';
 
 export default function MyInbox() {
   const {user} = useUserStore();
-  const {countUnreadMessagesForThread, markThreadAsRead, filterLatestMessageInThreadsBySearchTerm, fetchAllMessagesAndStoreAsChats, fetchChatPartnerProfile} = useChatStore();
+  const {
+    countUnreadMessagesForThread, 
+    markThreadAsRead, 
+    filterLatestMessageInThreadsBySearchTerm, 
+    fetchAllMessagesAndStoreAsChats, 
+    fetchChatPartnerProfile,
+    fetchPotentialChatPartners} = useChatStore();
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
@@ -24,6 +30,7 @@ export default function MyInbox() {
     if(!user) return;
     async function updateViewData(){
       await fetchAllMessagesAndStoreAsChats(user.id);
+      await fetchPotentialChatPartners();
     }
     (async () => {
       await updateViewData();
@@ -50,7 +57,7 @@ export default function MyInbox() {
           user={user}
           navigateToChat={handleChatClick}
           countUnreadMessagesForThread={countUnreadMessagesForThread}
-          getChatPartnerProfileById={fetchChatPartnerProfile}
+          fetchChatPartnerProfile={fetchChatPartnerProfile}
         />
         <NavbarBottom activeItem={"Inbox"} />
       </div>

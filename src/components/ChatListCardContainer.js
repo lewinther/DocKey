@@ -12,12 +12,9 @@ export default function ChatListInbox({
   user, 
   navigateToChat, 
   countUnreadMessagesForThread,
-  getChatPartnerProfileById
+  fetchChatPartnerProfile
 }) {
   const chatListCSS = compact ? "message-list-small" : "message-list";
-  const getChatPartnerProfile = async (chatPartnerID) => {
-    return await getChatPartnerProfileById(chatPartnerID);
-  }
 return (
   <div className={chatListCSS + " scrollbar-hidden"}>
     {chats.map((thread, index) => {
@@ -31,7 +28,7 @@ return (
       const chatUnreadMessagesCount = countUnreadMessagesForThread(chatPartnerID);
       const chatUnreadMessages = chatUnreadMessagesCount > 0;
 
-      const chatPartnerProfile = getChatPartnerProfile(chatPartnerID);
+      const chatPartnerProfile = fetchChatPartnerProfile(chatPartnerID);
 
       return (
         <ChatCard

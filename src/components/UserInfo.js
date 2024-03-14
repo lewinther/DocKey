@@ -70,15 +70,10 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail, setPr
     setChangePhoto(false);
   }
 
-  function refresh() {
-    window.location.reload("Refresh");
-  }
-
   async function handleSaveClick() {
     if (imageFile) {
-      if (await setProfileImage(user, imageFile.file)) {
-        refresh();
-      }
+      await setProfileImage(imageFile);
+      onDeleteImage();
     }
   }
 

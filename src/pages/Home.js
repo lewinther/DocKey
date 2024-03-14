@@ -21,7 +21,9 @@ export default function Home() {
     chats, 
     fetchAllMessagesAndStoreAsChats, 
     markThreadAsRead, 
-    fetchChatPartnerProfile
+    fetchChatPartnerProfile,
+    fetchPotentialChatPartners,
+    chatPartners
   } = useChatStore();
   const navigate = useNavigate();
 
@@ -29,6 +31,7 @@ export default function Home() {
     if(!user) return;
     async function updateViewData(){
       await fetchAllMessagesAndStoreAsChats(user.id);
+      await fetchPotentialChatPartners();
     }
     (async () => {
       await updateViewData();
@@ -39,6 +42,9 @@ export default function Home() {
     await markThreadAsRead(chatPartnerID);
     navigate(`/Chat`, { state: { chatPartnerID, userId: user.id } });
   };
+
+  if(!chatPartners)
+    return (<div></div>);
 
   return (
     <Fragment>
@@ -59,7 +65,7 @@ export default function Home() {
             user={user}
             navigateToChat={handleChatClick}
             countUnreadMessagesForThread={countUnreadMessagesForThread}
-            getChatPartnerProfileById={fetchChatPartnerProfile}  
+            fetchChatPartnerProfile={fetchChatPartnerProfile}  
           />
           <NavbarBottom activeItem={"Home"} />
           </>

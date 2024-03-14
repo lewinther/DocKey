@@ -59,8 +59,8 @@ export default create((set, get) => ({
       let chatPartners = await fetchPotentialChatPartners();
       set({chatPartners});
     },
-    fetchChatPartnerProfile: async(chatPartnerID) => {
-      if(!get().chatPartners) await get().fetchPotentialChatPartners();
+    fetchChatPartnerProfile: (chatPartnerID) => {
+      // if(!get().chatPartners) await get().fetchPotentialChatPartners();
       let partner = get().chatPartners.find(x => x.userId == chatPartnerID);
       if(partner)
         return partner;

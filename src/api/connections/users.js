@@ -1,4 +1,5 @@
 import {supabase} from "../supabase/supabaseClient";
+import { uploadImage, getPublicUrl} from './images';
 
 export async function fetchUserProfile(){
     const {data, error} = await supabase.from('profiles').select();
@@ -57,4 +58,39 @@ export async function setSession(profile, userId) {
 export async function releaseSession() {
     localStorage.removeItem("userId");
     localStorage.removeItem("profile");
+}
+
+export async function setProfileImage(userId, imageFile) {
+    const bucket = 'avatars';
+    const path = "profiles/"+userId+"/"+imageFile.file.name;
+    const image = await uploadImage(path, bucket, imageFile.file);
+    const public_url = (await getPublicUrl(bucket, image.path)).publicUrl;
+
+    const {data, error} = await supabase
+    .from('profiles')
+    .update({'image': public_url})
+    .eq('user_id', userId)
+    .select();
+
+    await supabase
+    .from('public_profiles')
+    .update({'image': public_url})
+    .eq('user_id', userId)
+    .select();
+
+    if(error){
+        console.log(error.message);
+        throw error;
+    }
+
+    const p = data[0];
+    return {
+		id: p.user_id,
+		image: p.image,
+		firstName: p.first_name,
+		lastName: p.last_name,
+		phoneNumber: p.phone_number,
+		email: p.email,
+		username: p.username,
+	};
 }

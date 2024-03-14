@@ -4,7 +4,8 @@ import {
 	fetchUserProfile, 
 	doRestoreSession,
 	releaseSession,
-	setSession
+	setSession,
+	setProfileImage
 } from "../api/connections/users";
 import {
 	signIn, 
@@ -20,7 +21,7 @@ export default create ((set, get) => ({
 	signIn: async (username, password) => {
 		const result = await signIn(username, password);
 		if(result === true) {
-			const session = createUserSession();
+			const session = await createUserSession();
 			set({user:session.user, profile: session.profile, passwordError: null});
 		}else {
 			set({passwordError: result});
@@ -33,7 +34,7 @@ export default create ((set, get) => ({
 			releaseSession();
 		}
 	},
-	doRestoreSession: async () => {	
+	doRestoreSession: async () => {
 		if(await isUserLoggedIn()) {
 			const session = await doRestoreSession();
 			if(!session)
@@ -45,8 +46,10 @@ export default create ((set, get) => ({
 	getFullName: () => {
 		return get().profile.firstName + ' ' + get().profile.lastName;
 	},
-	setProfileImage: async() => {
-		throw Error("should store image in supabase storage, and connect it to the user profile by URL");
+	setProfileImage: async(imageFile) => {
+		const profile = await setProfileImage(get().user.id, imageFile);
+		const session = await updateUserSession(profile);
+		set({user:session.user, profile: session.profile});
 	},
 	setNewPassword: async (password) => {
 		return await changePassword(password);
@@ -55,6 +58,10 @@ export default create ((set, get) => ({
 
 async function createUserSession() {
 	const profile = await fetchUserProfile();
+	return await updateUserSession(profile);
+}
+
+async function updateUserSession(profile) {
 	setSession(profile, profile.id);
 	return {user:{id:profile.id}, profile};
 }
