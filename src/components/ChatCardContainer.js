@@ -49,6 +49,7 @@ export default function ChatContainer({ messages, currentUserId }) {
     <Fragment>
     <div className="chat-container scrollbar-hidden">
       {messages.map((message, index) => {
+        console.log(message.image);
         return <ChatCard
           isShownRight={message.sender === currentUserId}
           onClick={() => setSelectedImage(message.image)}

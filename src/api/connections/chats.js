@@ -1,5 +1,5 @@
 import {supabase} from '../supabase/supabaseClient';
-
+import { uploadImage, getPublicUrl} from './images';
 export async function markMessagesAsRead(messageIdsToUpdate) {
     //send a list of messageIds to the server. for each entry, set message.isRead true.
 }
@@ -32,7 +32,11 @@ export async function getAllMessages() {
 }
 
 export async function sendMessage(receiver, sender, text, imageFile) {
-    console.log("hello!")
+    console.log(imageFile.file.name);
+    const bucket = 'messages';
+    const path = "messages/"+sender+"/"+imageFile.file.lastModified+"_"+imageFile.file.name;
+    const image = await uploadImage(path, bucket, imageFile.file);
+    const public_url = await getPublicUrl(bucket, image.path);
     const { data, error } = await supabase
     .from('messages')
     .insert([
@@ -40,6 +44,7 @@ export async function sendMessage(receiver, sender, text, imageFile) {
             sender_id: sender,
             receiver_id: receiver,
             message_content: text,
+            image:public_url.publicUrl
         }
     ])
     .select();
@@ -48,12 +53,6 @@ export async function sendMessage(receiver, sender, text, imageFile) {
         console.log(error.message);
         throw new error(error);
     }
-        
-    console.log(data);
-   // const imageUrl = uploadImage(imageFile);
-    //send object to database
-}
 
-async function uploadImage(imageFile) {
-    //send image to storage, retrieve link, return URL.
+    return data;
 }

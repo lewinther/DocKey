@@ -16,7 +16,13 @@ import UserLogin from "../components/UserLogIn";
 
 export default function Home() {
   const {user, profile} = useUserStore();
-  const {countUnreadMessagesForThread, chats, fetchAllMessagesAndStoreAsChats, markThreadAsRead, fetchChatPartnerProfile} = useChatStore();
+  const {
+    countUnreadMessagesForThread, 
+    chats, 
+    fetchAllMessagesAndStoreAsChats, 
+    markThreadAsRead, 
+    fetchChatPartnerProfile
+  } = useChatStore();
   const navigate = useNavigate();
 
   useEffect(() => {
