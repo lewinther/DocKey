@@ -67,7 +67,7 @@ export default function Chat() {
 
   async function onSendMessage() {
     await handleSendMessage(user.id, chatPartnerID, messageText);
-    setMessageContent(""); // Reset message content after sending
+    setMessageContent(""); 
   };
 
   function refresh(){

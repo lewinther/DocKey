@@ -32,7 +32,25 @@ export async function getAllMessages() {
 }
 
 export async function sendMessage(receiver, sender, text, imageFile) {
-    const imageUrl = uploadImage(imageFile);
+    console.log("hello!")
+    const { data, error } = await supabase
+    .from('messages')
+    .insert([
+        { 
+            sender_id: sender,
+            receiver_id: receiver,
+            message_content: text,
+        }
+    ])
+    .select();
+
+    if(error){
+        console.log(error.message);
+        throw new error(error);
+    }
+        
+    console.log(data);
+   // const imageUrl = uploadImage(imageFile);
     //send object to database
 }
 

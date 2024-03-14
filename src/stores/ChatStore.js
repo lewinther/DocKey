@@ -27,7 +27,7 @@ export default create((set, get) => ({
         //Sort messages to get the newest to oldest
         chat.messages = chat.messages.sort((a,b) => a.message_date - b.message_date);
         //Save the latest message of each thread
-        latestMessageInThreads.push({chatPartner:chat.chatPartner, messages: chat.messages[0]});
+        latestMessageInThreads.push({chatPartner:chat.chatPartner, messages: [chat.messages[0]]});
         //Reverse messages to get the latest to oldest
         chat.messages = chat.messages.reverse();
       });
@@ -53,7 +53,6 @@ export default create((set, get) => ({
           thread.message.text.toLowerCase().includes(searchTerm.toLowerCase())
         )
       : threads;
-
       return filteredChats;
     },
     fetchPotentialChatPartners: async () => {
@@ -91,6 +90,7 @@ export default create((set, get) => ({
         }
 
         const { imageFile } = get();
+        console.log("hello from handle send message");
         let result = await sendMessage(receiver_id, sender_id, messageContent, imageFile);
         set({ imageFile: null }); // Reset the image file state after sending
         return result;

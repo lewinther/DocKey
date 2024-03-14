@@ -26,7 +26,7 @@ export default function NewMessage() {
   } = useChatStore();
 
   const [usernames, setUsernames] = useState([]);
-  const [selectedDock, setSelectedDock] = useState("");
+  const [selectedReceiver, setSelectedReceiver] = useState("");
   const [messageContent, setMessageContent] = useState("");
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
@@ -71,21 +71,21 @@ export default function NewMessage() {
   };
 
   const onSendMessage = async () => {
-    await handleSendMessage(selectedDock, messageContent, user);
+    const receiverId = chatPartners.find(x => x.username == selectedReceiver).userId;
+    await handleSendMessage(user.id, receiverId, messageContent);
     setMessageContent("");
 
-    const receiverId = selectedDock.userId;
     if (receiverId) {
         navigate(`/Chat`, { state: { chatPartnerID: receiverId, userId: user.id } });
     } else {
-        return("Invalid dock number or mapping not found for selectedDock:", selectedDock);
+        return("Invalid dock number or mapping not found for selectedReceiver:", selectedReceiver);
     }
 };
 
   return (
     <Fragment>
       <h1>New Message</h1>
-      <DockFilter onDockSelect={setSelectedDock} usernames={usernames} />
+      <DockFilter onDockSelect={setSelectedReceiver} usernames={usernames} />
       <NewMessageCardContainer
         messageContent={messageContent}
         imagePreview={imageFile ? imageFile.previewUrl : null}
