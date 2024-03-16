@@ -34,7 +34,10 @@ export default function NewMessage() {
   useEffect(() => {
     if(!user) return;
     async function updateViewData(){
-      await fetchPotentialChatPartners(user.id);
+      if(!chatPartners) {
+        await fetchPotentialChatPartners();
+        return;
+      }
       let partners = chatPartners.filter(x => {
         if(x.userId !== user.id) return x;
       })
@@ -44,7 +47,7 @@ export default function NewMessage() {
     (async () => {
       await updateViewData();
     })();
-  }, []);
+  }, [user, chatPartners]);
 
   const handleMessageContentChange = (content) => {
     setMessageContent(content);

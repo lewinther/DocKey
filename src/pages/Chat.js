@@ -15,7 +15,7 @@ import ChatCardCreate from "../components/ChatCardCreateNew";
 
 export default function Chat() {
   const { user } = useUserStore();
-  const {fetchChatPartnerProfile, doGetMessagesForThread, handleSendMessage, setImageFile, imageFile} = useChatStore();
+  const {fetchChatPartnerProfile, doGetMessagesForThread, handleSendMessage, setImageFile, imageFile, chatPartners, fetchPotentialChatPartners} = useChatStore();
   // Hook to access the current location object
   const location = useLocation();
   // Retrieve the user ID and chat partner ID from the navigation state
@@ -29,17 +29,20 @@ export default function Chat() {
   useEffect(() => {
     if (!chatPartnerID) return;
     async function updateViewData(){
-      setChatPartner(await fetchChatPartnerProfile(chatPartnerID));
-      let tmpMessages = await doGetMessagesForThread(
-              chatPartnerID,
-              user.id
-      );
-      setMessages(tmpMessages);
+      if(chatPartners) {
+        setChatPartner(await fetchChatPartnerProfile(chatPartnerID));
+        let tmpMessages = await doGetMessagesForThread(
+                chatPartnerID,
+                user.id
+        );
+        setMessages(tmpMessages);
+      }
+      else await fetchPotentialChatPartners();
     }
     (async () => {
       await updateViewData();
     })();
-  }, [chatPartnerID]);
+  }, [chatPartnerID, chatPartners]);
 
   function handleMessageContentChange(content){
     setMessageContent(content);
