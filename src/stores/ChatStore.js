@@ -58,6 +58,7 @@ export default create((set, get) => ({
     fetchPotentialChatPartners: async () => {
       let chatPartners = await fetchPotentialChatPartners();
       set({chatPartners});
+      console.log(get().chatPartners)
     },
     fetchChatPartnerProfile: (chatPartnerID) => {
       // if(!get().chatPartners) await get().fetchPotentialChatPartners();

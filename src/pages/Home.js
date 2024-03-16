@@ -12,7 +12,6 @@ import "../../src/styles.css";
 import NewsCardContainer from "../components/NewsCardContainer";
 import ChatListCardContainer from "../components/ChatListCardContainer";
 import NavbarBottom from '../components/NavbarBottom';
-import UserLogin from "../components/UserLogIn";
 
 export default function Home() {
   const {user, profile} = useUserStore();
@@ -48,9 +47,6 @@ export default function Home() {
 
   return (
     <Fragment>
-		  {user === undefined && (
-			<UserLogin/>
-		  )} 
       <div className="in-column height-100-percent">
         {(user && profile) && (
           <>

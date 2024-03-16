@@ -22,7 +22,9 @@ export default function MyInbox() {
     filterLatestMessageInThreadsBySearchTerm, 
     fetchAllMessagesAndStoreAsChats, 
     fetchChatPartnerProfile,
-    fetchPotentialChatPartners} = useChatStore();
+    fetchPotentialChatPartners,
+    chatPartners
+  } = useChatStore();
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
@@ -30,12 +32,13 @@ export default function MyInbox() {
     if(!user) return;
     async function updateViewData(){
       await fetchAllMessagesAndStoreAsChats(user.id);
-      await fetchPotentialChatPartners();
+      if(!chatPartners)
+        await fetchPotentialChatPartners();
     }
     (async () => {
       await updateViewData();
     })();
-  }, []);
+  }, [user, chatPartners]);
 
   const handleSearch = (term) => {
     setSearchTerm(term);
@@ -45,6 +48,9 @@ export default function MyInbox() {
     await markThreadAsRead(chatPartnerID);
     navigate(`/Chat`, { state: { chatPartnerID, userId: user.id } });
   };
+
+  if(!chatPartners)
+    return(<div></div>);
 
   return (
     <Fragment>
