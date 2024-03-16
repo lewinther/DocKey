@@ -12,30 +12,21 @@ import logo5 from "../assets/logo5.png";
 
 
 export default function UserLogin() {
-    const [dockNumber, setDockNumber] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
-    const doLogin = useUserStore((state) => state.doLogin);
-    const user = useUserStore((state) => state.user);
-    const passwordError = useUserStore((state) => state.passwordError);
+    const {user, signIn, passwordError} = useUserStore();
 
     useEffect(() => {
         if (user) {
-            setDockNumber("");
+            setUsername("");
             setPassword("");
-        } else {
-            const storedDockNumber = localStorage.getItem('dockNumber');
-            const storedPassword = localStorage.getItem('password');
-            if (storedDockNumber && storedPassword) {
-                setDockNumber(storedDockNumber);
-                setPassword(storedPassword);
-            }
-        }
+        } 
     }, [user]);
 
     const handleLogin = async () => {
-        await doLogin(dockNumber, password);
+        await signIn(username, password);
     };
 
     const renderForgotPasswordModal = () => {
@@ -69,8 +60,8 @@ export default function UserLogin() {
 						className="login-input"
 						type="text"
 						placeholder="Dock Number"
-						value={dockNumber}
-						onChange={(e) => setDockNumber(e.target.value.toUpperCase())}
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
 					/>
 
 					<input
@@ -97,7 +88,8 @@ export default function UserLogin() {
 
                 <div className="account-info">
                     <strong>Don’t have an account?</strong><br />
-                    This page is for boat owners only, contact your harbor administration if in doubt.
+                    This page is for boat owners only
+                    <br/>contact your harbor administration with questions
                 </div>
             </div>
             {renderForgotPasswordModal()}

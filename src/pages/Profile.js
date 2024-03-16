@@ -11,13 +11,12 @@ import UserInfo from "../components/UserInfo";
 import NavbarBottom from "../components/NavbarBottom";
 
 export default function Profile() {
-  const { user, profile, getFullName } = useUserStore();
-  const doLogout = useUserStore((state) => state.doLogout);
+  const { user, profile, getFullName, setProfileImage, signOut, setNewPassword } = useUserStore();
   const navigate = useNavigate();
 
   async function clickDoLogout() {
     try {
-      await doLogout();
+      await signOut();
     } finally {
       navigate("/");
     }
@@ -31,11 +30,13 @@ export default function Profile() {
           <h1>Contact information</h1>
           <div style={{ margin: "8% 0%" }}>
             <UserInfo
-              profileImage={profile.profileImage}
-              dockNr={profile.dockNr}
+              profileImage={profile.image}
+              dockNr={profile.username}
               fullName={getFullName()}
-              phoneNr={profile.phoneNr}
+              phoneNr={profile.phoneNumber}
               eMail={profile.email}
+              setProfileImage={setProfileImage}
+              setNewPassword={setNewPassword}
             />
           </div>
         </div>

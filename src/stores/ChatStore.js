@@ -1,129 +1,115 @@
 import { create } from "zustand";
-import {
-  //parse DB fields
-  _sender_user_id, 
-  _receiver_user_id,
-  _message_date,
-  _message,
-  _message_text,
-  _username,
-  _profile_image,
-  //functions
-  getUserName,
-  getMessageDate,
-  getMessageText,
-  isMessageUnread,
-  markMessagesAsRead,
-  getProfileImage,
-  getUnreadMessagesCount
-} from "../parse/parseHelper";
-
-import {
-  createCombinedMessagesQueryInDescendingOrder, 
-  GetAllMessagesByFieldId
-} from '../parse/queryBuilder';
-
+import {getAllMessages, markMessagesAsRead, sendMessage} from "../api/connections/chats";
+import {fetchPotentialChatPartners} from "../api/connections/users";
 export default create((set, get) => ({
 
-    markMessagesAsRead: async (ChatPartnerID, userID) => {
-        try {
-            await markMessagesAsRead(ChatPartnerID, userID);
-        } catch (error) {
-            console.error('Error updating message read status:', error);
-        }
-    },
+    chats:[],
+    chatPartners: undefined,
     latestMessageInThreads:[],
-    doGetLatestMessageInEachUniqueThread: async (userId) => {
-        // Combined query for either sent or received messages.
-        const combinedQuery = createCombinedMessagesQueryInDescendingOrder(userId);
-        const results = await combinedQuery.find();
-        // Map the most recent message for each chat partner.
-        // Ensure you have messages and that Message_Date is defined before setting state.
-        const messages = 
-        (await createChatPartnerMapping(results, userId))
-        .filter(msg => msg.message && msg.message.get(_message_date));
-        set({ latestMessageInThreads: messages });
+    imageFile: null,
+    fetchAllMessagesAndStoreAsChats: async(userId) => {
+      const messages = await getAllMessages();
+      //Sort all messages into list of threads
+      const distinctChats = [];
+      messages.forEach(message => {
+        //if user is sender, then we only have to consider the reciever.
+        if(userId === message.sender) {
+          AddMessageToThread(message.receiver, message, distinctChats);
+        }
+        else if(userId === message.receiver) {
+          AddMessageToThread(message.sender, message, distinctChats);
+        }
+      });
+
+      //Sort and store latest messages
+      const latestMessageInThreads = [];
+      distinctChats.forEach(chat => {
+        //Sort messages to get the newest to oldest
+        chat.messages = chat.messages.sort((a,b) => a.message_date - b.message_date);
+        //Save the latest message of each thread
+        latestMessageInThreads.push({chatPartner:chat.chatPartner, messages: [chat.messages[0]]});
+        //Reverse messages to get the latest to oldest
+        chat.messages = chat.messages.reverse();
+      });
+
+      //store in zustand
+      set({ chats: distinctChats, latestMessageInThreads: latestMessageInThreads });
+    },
+    markThreadAsRead: async(chatPartner) => {
+      const thread = get().chats.find(x => x.chatPartner === chatPartner);
+      const unreadMessages = thread.messages.filter(message => {
+        if(!message.isRead) return message.id;
+      })
+      if(unreadMessages.length > 0)
+        markMessagesAsRead(unreadMessages);
+      //TODO: either re-collect all messages, or setup realtime connection to messages table.
     },
     filterLatestMessageInThreadsBySearchTerm(searchTerm) {
-      const messages = get().latestMessageInThreads;
+      const threads = get().latestMessageInThreads;
       const filteredChats = searchTerm
-      ? messages.filter((msg) =>
-          msg.partnerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          msg.chatText.toLowerCase().includes(searchTerm.toLowerCase())
+      ? threads.filter((thread) =>
+          thread.message.sender.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          thread.message.receiver.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          thread.message.text.toLowerCase().includes(searchTerm.toLowerCase())
         )
-      : messages;
-
+      : threads;
       return filteredChats;
+    },
+    fetchPotentialChatPartners: async () => {
+      let chatPartners = await fetchPotentialChatPartners();
+      set({chatPartners});
+      console.log(get().chatPartners)
+    },
+    fetchChatPartnerProfile: (chatPartnerID) => {
+      // if(!get().chatPartners) await get().fetchPotentialChatPartners();
+      let partner = get().chatPartners.find(x => x.userId == chatPartnerID);
+      if(partner)
+        return partner;
+      throw new Error("No partner with id: "+chatPartnerID);
     },
     //sender = chatpartner
     //reciever = viewing user
-    doGetMessagesForThread: async (senderId, receiverId) => {
-      let received = await GetAllMessagesByFieldId('Receiver_User_ID', receiverId);
-      received = received.filter(
-        (x) => x.get("Sender_User_ID").id == senderId);
-      let sent = await GetAllMessagesByFieldId('Sender_User_ID', receiverId);
-      sent = sent.filter((x) => x.get("Receiver_User_ID").id == senderId);
-      let tmpMessages = [...received, ...sent];
-      return tmpMessages.sort((a,b) => a.get("Message_Date") - b.get("Message_Date")).reverse();
+    doGetMessagesForThread: async (chatPartnerId, currentUserId) => {
+      await get().fetchAllMessagesAndStoreAsChats(currentUserId);
+      const thread = get().chats.find(x => x.chatPartner === chatPartnerId);
+      return thread;
+    },
+    countUnreadMessagesForThread: (chatPartner) => {
+      const thread = get().chats.find(x => x.chatPartner === chatPartner);
+      return thread.messages.filter(x => x.isRead === false).length;
+    },
+    handleSendMessage: async (sender_id, receiver_id, messageContent) => {
+      try {
+        if (!receiver_id){
+          return "Receiver is null";
+        }
+        if (!messageContent){
+          return "Message is null";
+        }
+        if (!sender_id){
+          return "Sender is null";
+        }
+
+        const { imageFile } = get();
+        console.log("hello from handle send message");
+        let result = await sendMessage(receiver_id, sender_id, messageContent, imageFile);
+        set({ imageFile: null }); // Reset the image file state after sending
+        return result;
+      }
+      catch (error) {
+        console.error('Error while sending message:', error);
+        return `Failed to send message: ${error.message}`;
+      }
+    },
+    setImageFile: (file) => {
+      set({ imageFile: file });
     },
 }));
 
-async function createChatPartnerMapping(results, userId) {
-  const chatPartnersMap = [];
-
-  for (const message of results) {
-    const senderId = message.get(_sender_user_id).id;
-    const receiverId = message.get(_receiver_user_id).id;
-    const isSender = senderId === userId;
-    const partnerId = isSender ? receiverId : senderId;
-
-    const existingMessageIndex = chatPartnersMap.findIndex(msgObj => msgObj.partnerId === partnerId);
-    const existingMessage = existingMessageIndex !== -1;
-
-    if (!existingMessage || message.get(_message_date) > chatPartnersMap[existingMessageIndex].message.get(_message_date)) {
-      const messageObject = {
-        messageId: message.id,
-        isSender,
-        partnerId,
-        chatDate: getMessageDate(message),
-        chatText: getMessageText(message),
-        message,
-        unread: isMessageUnread(message),
-        userId
-      };
-
-      if (!existingMessage)
-        chatPartnersMap.push(messageObject);
-      else
-        chatPartnersMap[existingMessageIndex] = messageObject;
-    }
-  }
-
-  await Promise.all(chatPartnersMap.map(async (message) => {
-    const _partner_id = message.isSender ? _receiver_user_id : _sender_user_id;
-  
-    // Fetch partner name
-    let partnerName = message.message.get(_partner_id).get(_username);
-    if (!partnerName) {
-      partnerName = await getUserName(message.partnerId);
-    }
-    const profileImage = await getProfileImage(message.partnerId);
-
-        // Fetch count of unread messages
-    let unreadMessagesCount = message.unreadMessagesCount;
-    if (!unreadMessagesCount) {
-      unreadMessagesCount = await getUnreadMessagesCount(message.userId, message.partnerId);
-    }
-    
-    // Update message object
-    message.partnerName = partnerName;
-    message.profileImage = profileImage ? (typeof profileImage.url === 'function' ? profileImage.url() : null) : null;
-    message.unreadMessagesCount = unreadMessagesCount;
-    message.partnerName = partnerName;
-    message.profileImage = profileImage ? (typeof profileImage.url === 'function' ? profileImage.url() : null) : null;
-    message.unreadMessagesCount = unreadMessagesCount;
-  }));
-  
-
-  return chatPartnersMap;
+function AddMessageToThread(chatPartner, message, distinctChats) {
+  const idx = distinctChats.findIndex(distinctChat => distinctChat.chatPartner === chatPartner);
+  if(idx === -1)
+    distinctChats.push({chatPartner:chatPartner, messages:[message]});
+  else 
+    distinctChats[idx].messages.push(message);
 }

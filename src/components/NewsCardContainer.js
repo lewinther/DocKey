@@ -4,21 +4,31 @@ import NewsCard from "./NewsCard";
 import CloseButton from "../assets/IconCloseButton";
 
 export default function NewsCardContainer() {
-    const { newsArticles, fetchNewsArticles, setSelectedArticle, selectedArticle } = useNewsStore();
+    const { 
+        newsArticles, 
+        fetchNewsArticles, 
+        setSelectedArticle, 
+        selectedArticle, 
+        getArticleExcerpt 
+    } = useNewsStore();
 
     useEffect(() => {
-        if (newsArticles.length === 0) {
-            fetchNewsArticles();
+        async function updateViewData(){
+            await fetchNewsArticles();
+
         }
-    }, [newsArticles.length, fetchNewsArticles]);
+        (async () => {
+          await updateViewData();
+        })();
+      }, []);
 
     const renderModal = () => {
         if (!selectedArticle) return null;
 
-        const newsTitle = selectedArticle.News_Title;
-        const newsDate = selectedArticle.News_Date;
-        const newsContent = selectedArticle.News_Text;
-        const newsImg = selectedArticle.News_Img; 
+        const newsTitle = selectedArticle.title;
+        const newsDate = selectedArticle.date;
+        const newsContent = selectedArticle.text;
+        const newsImg = selectedArticle.image; 
 
         return (
             <div className="modal-overlay">
@@ -37,18 +47,23 @@ export default function NewsCardContainer() {
 
     return (
         <Fragment>
-            <h3 className="h3-home">Harbor News</h3>
-            <section className="news-card-container scrollbar-hidden">
-                {newsArticles.map((article, index) => (
-                    <NewsCard
-                        key={article.objectId}
-                        newsData={article}
-                        isFeatured={index === 0} // isFeatured prop based on index - first article is featured
-                        onClick={() => setSelectedArticle(article)}
-                    />
-                ))}
-            </section>
-            {renderModal()}
+            {newsArticles && (
+            <div>
+                <h3 className="h3-home">Harbor News</h3>
+                <section className="news-card-container scrollbar-hidden">
+                    {newsArticles.map((article, index) => (
+                        <NewsCard
+                            key={article.id}
+                            newsData={article}
+                            excerpt={getArticleExcerpt(article.id)}
+                            isFeatured={index === 0} // isFeatured prop based on index - first article is featured
+                            onClick={() => setSelectedArticle(article)}
+                        />
+                    ))}
+                </section>
+                {renderModal()}
+            </div>
+            )} 
         </Fragment>
     );
 }

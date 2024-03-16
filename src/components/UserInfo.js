@@ -1,6 +1,4 @@
 import { Fragment, useRef, useState } from "react";
-import Parse from "parse";
-import { setProfileImage, setNewPassword } from "../parse/parseHelper";
 
 // stores
 import useUserStore from "../stores/UserStore";
@@ -9,14 +7,7 @@ import useUserStore from "../stores/UserStore";
 import defaultProfileImage from "../assets/logo6.png";
 import editProfileIcon from "../assets/Icon-edit-profile.png";
 
-// Parse initialization configuration goes here
-const PARSE_APPLICATION_ID = "l3GQPvwNSbOEWclaYe7G7zfmdh2lQP2kHquXOGbJ";
-const PARSE_JAVASCRIPT_KEY = "h9PTAAitCJFul7XadjhQbXFaK1N8VGZdJodYl5Tx";
-const PARSE_HOST_URL = "https://parseapi.back4app.com/";
-Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
-Parse.serverURL = PARSE_HOST_URL;
-
-export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
+export default function UserInfo({ profileImage, fullName, phoneNr, eMail, setProfileImage, setNewPassword }) {
   const { user } = useUserStore();
   const fileInputRef = useRef(null);
   const [editProfile, setEditProfile] = useState(false);
@@ -79,16 +70,10 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
     setChangePhoto(false);
   }
 
-  function refresh() {
-    window.location.reload("Refresh");
-  }
-
   async function handleSaveClick() {
     if (imageFile) {
-      await setProfileImage(user, imageFile.file);
-      if ("Profile image updated successfully!") {
-        refresh();
-      }
+      await setProfileImage(imageFile);
+      onDeleteImage();
     }
   }
 
@@ -98,10 +83,12 @@ export default function UserInfo({ profileImage, fullName, phoneNr, eMail }) {
         setPasswordFormValidation(true)
       }
       else {
-      await setNewPassword(user, passwordText);
-      if ("Password updated successfully!") {
-        refresh();
-      }
+        if (await setNewPassword(passwordText)) {
+          setPasswordText('');
+          setSecondPasswordText('');
+          setChangePassword(false);
+          setPasswordFormValidation(false);
+        }
       }
     } 
     else {

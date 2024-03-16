@@ -1,11 +1,10 @@
 import { Fragment } from "react";
 
-export default function NewsCard({ newsData, isFeatured, onClick }) {
-  const newsImg = newsData.News_Img; 
-  const newsTitle = newsData.News_Title;
-  const newsDate = newsData.News_Date;
-  const newsText = newsData.News_Text;
-  const newsPreview = newsText.length > 100 ? `${newsText.substring(0, 100)}...` : newsText;
+export default function NewsCard({ newsData, excerpt, isFeatured, onClick }) {
+  const newsTitle = newsData.title;
+  const newsDate = newsData.date;
+  const newsImg = newsData.image; 
+  const newsPreview = excerpt
   const imageContainerClass = isFeatured ? "news-image-container featured" : "news-image-container";
 
   return (

@@ -1,9 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-
-//import stores
-import useUserStore from "../stores/UserStore";
-import useChatStore from "../stores/ChatStore";
+import React from 'react';
 
 //Import components
 import ChatCard from "./ChatListCard";
@@ -11,70 +6,44 @@ import ChatCard from "./ChatListCard";
 //CSS import
 import "../../src/styles.css";
 
-export default function ChatListInbox({ searchTerm, activePage }) {
-  const [chats, setChats] = useState([]);
-  const navigate = useNavigate();
-  const {user} = useUserStore();
-  const {doGetLatestMessageInEachUniqueThread, filterLatestMessageInThreadsBySearchTerm} = useChatStore();
-  // Function to handle chat card click
-  const { markMessagesAsRead } = useChatStore();
-  // Determine the CSS class based on the activePage
-  const chatListCSS = activePage === "Home" ? "message-list-small" : "message-list";
-
-  const handleChatClick = async (chatPartnerID, userID) => {
-      await markMessagesAsRead(chatPartnerID, userID);
-      // Navigate to the chat view
-      const userId = user.id;
-      navigate(`/Chat`, { state: { chatPartnerID, userId } });
-  };
-
-
-  useEffect(() => {
-    if(!user) return;
-    async function updateViewData() {
-      try {
-        await doGetLatestMessageInEachUniqueThread(user.id);
-        setChats(filterLatestMessageInThreadsBySearchTerm(searchTerm.toLowerCase()));
-      }
-      catch(error) {
-        console.error('Error fetching chat partners or messages: ', error);
-      }
-    }
-    (async () => {
-      await updateViewData();
-    })();
-
-    }, [searchTerm, user]); 
-
-
+export default function ChatListInbox({ 
+  chats, 
+  compact, 
+  user, 
+  navigateToChat, 
+  countUnreadMessagesForThread,
+  fetchChatPartnerProfile
+}) {
+  const chatListCSS = compact ? "message-list-small" : "message-list";
 return (
   <div className={chatListCSS + " scrollbar-hidden"}>
-    {chats.map((msg, index) => {
-      const chatPartnerID = msg.partnerId;
-      const chatDate = msg.chatDate;
-      const chatPreviewText = msg.chatText.length > 60 ? `${msg.chatText.substring(0, 60)}...` : msg.chatText;
-      const chatPartnerUsername = msg.partnerName;
-      const chatUnreadMessages = msg.unread;
-      const chatPartnerIsSender = msg.isSender;
-      const chatMessageId = msg.messageId;
-      const chatPartnerProfileImage = msg.profileImage;
-      const chatUnreadMessagesCount = msg.unreadMessagesCount;
-      const userID = msg.userId;
+    {chats.map((thread, index) => {
+      const chatPartnerID = thread.chatPartner;
+      const msg = thread.messages;
+      const chatDate = msg.date;
+      let chatPreviewText = '';
+      if(msg.text)
+        chatPreviewText = msg.text.length > 60 ? `${msg.text.substring(0, 60)}...` : msg.text;
+      const chatPartnerIsSender = msg.sender === chatPartnerID;
+      const chatUnreadMessagesCount = countUnreadMessagesForThread(chatPartnerID);
+      const chatUnreadMessages = chatUnreadMessagesCount > 0;
+
+      const chatPartnerProfile = fetchChatPartnerProfile(chatPartnerID);
 
       return (
         <ChatCard
           key={index}
           chatPartnerID={chatPartnerID}
-          chatPartnerUsername={chatPartnerUsername}
+          chatPartnerUsername={chatPartnerProfile.username}
           chatDate={chatDate}
-          chatPartnerImg={chatPartnerProfileImage}
+          chatPartnerImg={chatPartnerProfile.image}
           chatPreviewText={chatPreviewText}
           // if msg.isSender is False and chatUnreadMessages is True, then the message is unread and chatTextStyle is bold else chatTextStyle is empty
           chatTextStyle={chatPartnerIsSender ? "" : chatUnreadMessages ? "bold" : ""}
-          onClick={() => handleChatClick(chatPartnerID, userID)}
+          onClick={() => navigateToChat(chatPartnerID, user.id)}
           chatUnreadMessages={chatPartnerIsSender ? "" : chatUnreadMessages ? true : false}
           chatCountUnreadMessages={chatUnreadMessagesCount}
-          userID={userID}
+          userID={user.id}
         />
       );
     })}
