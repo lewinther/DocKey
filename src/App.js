@@ -20,7 +20,6 @@ export default function App() {
   const {user, doRestoreSession} = useUserStore();
   	useEffect(() => {
       async function onMounted() {
-        console.log('hello from app js');
         if(!user) {
           await doRestoreSession();
         } 
